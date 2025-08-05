@@ -24,7 +24,7 @@ public class AtorRequest extends CommonsAttributes {
     private String nickname;
 
     @Column(name = "date_of_birth", length = 10)
-    @Past
+    //@Past
     @NotNull(message = "A data de nascimento é obrigatória")
     private LocalDate dateOfBirth;
 
@@ -90,7 +90,7 @@ public class AtorRequest extends CommonsAttributes {
 
     private String company;
 
-    private String contat;
+    private String contact;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
@@ -297,11 +297,11 @@ public class AtorRequest extends CommonsAttributes {
         this.company = company;
     }
 
-    public String getContat() {
-        return contat;
+    public String getContact() {
+        return contact;
     }
 
-    public void setContat(String contat) {
-        this.contat = contat;
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 }

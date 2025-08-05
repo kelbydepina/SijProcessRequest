@@ -1,4 +1,4 @@
-package cv.pn.processmanagement.business.atorRequest.controller;
+/*package cv.pn.processmanagement.business.atorRequest.controller;
 
 
 import cv.pn.processmanagement.business.atorRequest.CreateAtorRequestDto;
@@ -22,7 +22,8 @@ public class AtorRequestController {
     @PostMapping("/criar")
     public ResponseEntity<APIResponse> criarAtor(@RequestBody CreateAtorRequestDto dto) {
         APIResponse response = iAtorRequestService.saveAtorRequestStep(dto);
-        return ResponseEntity.status(response.isStatus()? 200 : 400).body(response);
+       // return ResponseEntity.status(response.isStatus()? 200 : 400).body(response);
+       return ResponseEntity.ok(response);
     }
 
     @Operation(summary = "Get All Actor")
@@ -31,4 +32,6 @@ public class AtorRequestController {
         APIResponse response = iAtorRequestService.getAllAtor();
         return ResponseEntity.ok(response);
     }
-}
+}*/
+
+

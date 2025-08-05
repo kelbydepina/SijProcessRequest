@@ -29,26 +29,31 @@ public class AtorRequestService implements IAtorRequestService {
 
     @Override
     public APIResponse saveAtorRequestStep(CreateAtorRequestDto dto) {
+
         try {
-            ProcessRequest process = processRepository.findById(dto.getProcessId())
-                    .orElseThrow(() -> new RuntimeException("Processo não encontrado"));
 
-            AtorRequest ator = new AtorRequest();
-            BeanUtils.copyProperties(dto, ator);
-            ator.setProcessRequest(process);
+                ProcessRequest process = processRepository.findById(dto.getProcessId())
+                        .orElseThrow(() -> new RuntimeException("Processo não encontrado"));
 
-            atorRequestRepository.save(ator);
+                AtorRequest ator = new AtorRequest();
 
-            return new APIResponse.buildAPIResponse()
-                    .setStatus(true)
-                    .setStatusText(MessageState.SUCESSO)
-                    .builder();
+                BeanUtils.copyProperties(dto, ator);
+
+                ator.setProcessRequest(process);
+
+                atorRequestRepository.save(ator);
+
+                return new APIResponse.buildAPIResponse()
+                        .setStatus(true)
+                        .setStatusText(MessageState.SUCESSO)
+                        .builder();
 
         } catch (Exception e) {
+            e.printStackTrace(); // MOSTRAR erro real no console
             return new APIResponse.buildAPIResponse()
                     .setStatus(false)
                     .setStatusText(MessageState.ERRO)
-                    .setDetails(Collections.singletonList(e.getMessage()))
+                    .setDetails(Collections.singletonList("Erro ao salvar ator: " + e.getMessage()))
                     .builder();
         }
     }

@@ -11,3 +11,4 @@ public interface FileRequestRepository extends JpaRepository<FileRequest, String
     List<FileRequest> findAllByProcessRequestId(String relationTable);
 
 }
+

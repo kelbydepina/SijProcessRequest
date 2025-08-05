@@ -99,7 +99,10 @@ public class FileRequestService implements IFileRequestService {
                     .setDetails(objects)
                     .builder();
         } catch (Exception e) {
-            return new APIResponse.buildAPIResponse().setStatus(false).setStatusText(MessageState.ERRO).setDetails(Collections.singletonList(e.getMessage())).builder();
+            return new APIResponse.buildAPIResponse().setStatus(false)
+                    .setStatusText(MessageState.ERRO)
+                    .setDetails(Collections.singletonList(e.getMessage()))
+                    .builder();
         }
     }
 

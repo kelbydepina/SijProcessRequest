@@ -6,6 +6,9 @@ import cv.pn.processmanagement.business.fileRequest.FileRequest;
 import cv.pn.processmanagement.commons.CommonsAttributes;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,10 +18,11 @@ import java.util.List;
 
 @Entity
 @Table(name = "SIGO_PROCESS")
-public class ProcessRequest extends CommonsAttributes {
+public class  ProcessRequest extends CommonsAttributes {
 
 
-    @Column(name = "crime_type", length = 100)
+    @Column(name = "crime_type", length = 150, nullable = false)
+    @NotBlank(message = "Tipo de crime é obrigatório")
     private String crimeType;  // tipoDeCrime
 
     @Column(name = "observation", length = 512)
@@ -36,7 +40,9 @@ public class ProcessRequest extends CommonsAttributes {
     @Column(name = "auto_number", length = 100)
     private String autoNumber;  // numeroDeAuto
 
-    @Column(name = "process_number", length = 100)
+    @JsonIgnore
+    @Column(name = "process_number", nullable = false)
+    @NotBlank(message = "numero de processo obrigatorio ")
     private String processNumber;  // numeroDoProcesso
 
     @Column(name = "complaint_origin", length = 100)
@@ -64,31 +70,40 @@ public class ProcessRequest extends CommonsAttributes {
     private LocalDate externalExaminationDeadline;  // Prazo do exame externo
 
     @Column(name = "dm_organic_description", nullable = false)
+    @NotBlank(message = "Código da unidade orgânica description  é obrigatório")
     private String organicDescription; //Unidade orgânica
 
     @Column(name = "dm_organic_code", nullable = false)
+    @NotBlank(message = "Código da unidade orgânica é obrigatório")
     private String organicCode; //Unidade orgânica
 
 
     @Column(name = "dm_communication_area_description", length = 50, nullable = false)
+    @NotBlank(message = "Código da área de description é obrigatório")
     private String communicationAreaDescription; //Área de comunicação
 
     @Column(name = "dm_communication_area_code", length = 10, nullable = false)
+   @NotBlank(message = "Código da área de comunicação é obrigatório")
     private String communicationAreaCode; //Área de comunicação
 
-    @Column(name = "dm_command_code", length = 50) // ajuste o tamanho conforme o banco
+    @Column(name = "dm_command_code", length = 50, nullable = false)
+    @NotBlank(message = "Código da comando é obrigatório")
     private String commandCode;
 
-    @Column(name = "dm_command_description", length = 50) // ajuste o tamanho conforme o banco
+    @Column(name = "dm_command_description", length = 50, nullable = false)
+    @NotBlank(message = "Código de descriçao de comando é obrigatório")
     private String commandDescription;
 
-    @Column(name = "dm_process_type_description")
+    @Column(name = "dm_process_type_description", nullable = false)
+    @NotBlank(message = "O código de desciçao do tipo de processo é obrigatório")
     private String processTypeDescription; //Tipo do processo
 
-    @Column(name = "dm_process_type_code")
+    @Column(name = "dm_process_type_code", nullable = false)
+    @NotBlank(message = "O código do tipo de processo é obrigatório")
     private String processTypeCode; //Tipo do processo
 
     @Column(name = "identifier",length = 50, unique = true, updatable = false) //nullable = false)
+    @NotBlank(message = "Identificador do processo é obrigatório")
     private String identifierProcess; //Identificador técnico do processo
 
     @Column(name = "reference_process", length = 50)
@@ -109,10 +124,12 @@ public class ProcessRequest extends CommonsAttributes {
     @Column(name = "observations", length = 512)
     private String observations;
 
-    @Column(name = "subCrimeType_Code")
+    @Column(name = "subCrimeType_Code", nullable = false)
+    @NotBlank(message = "Código subcrime é obrigatório")
     private String subCrimeTypeCode;
 
-    @Column(name = "subCrimeType_description")
+    @Column(name = "subCrimeType_description", nullable = false)
+    @NotBlank(message = "Código de discriçao de subcrime é obrigatório")
     private String subCrimeTypeDescription;
 
     @Column(name = "priority_Code")
@@ -122,24 +139,32 @@ public class ProcessRequest extends CommonsAttributes {
     private String priorityDescription; //Prioridade do processo
 
     @Column(name = "presence_fact", length = 5, nullable = false)
+    @NotNull(message = "Indicação de presença do fato é obrigatória")
     private Boolean presenceOfTheFact;
 
     @Column(name = "moved_and_detected", length = 5, nullable = false)
+    @NotNull(message = "Indicação de movimentação/detecção é obrigatória")
     private Boolean movedAndDetected;
 
     @Column(name = "dm_means_communication_description", length = 50, nullable = false) //nullable = false)
+    @NotBlank(message = "Código do meio de comunicação description é obrigatório")
     private String meansOfCommunicationDescription; //Meio de comunicação
 
     @Column(name = "dm_means_communication_code", length = 10, nullable = false)
+    @NotBlank(message = "Código do meio de comunicação é obrigatório")
     private String meansOfCommunicationCode; //Meio de comunicação
 
     @Column(name = "dm_communication_by_description", length = 50, nullable = false)
+    @NotBlank(message = "Código de discriçao quem comunicou é obrigatório")
     private String communicationByDescription; //Comunicação feita por quem
 
     @Column(name = "dm_communication_by_code", length = 10, nullable = false)
+    @NotBlank(message = "Código de quem comunicou é obrigatório")
     private String communicationByCode; //Comunicação feita por quem
 
     @Column(name = "communication_date", nullable = false)
+    @NotNull(message = "Data da comunicação é obrigatória")
+    @PastOrPresent(message = "Data da comunicação não pode ser futura")
     private LocalDateTime communicationDate; // Data de C omunicaçao
 
     @Column(name = "court")

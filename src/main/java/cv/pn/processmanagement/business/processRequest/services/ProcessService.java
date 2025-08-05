@@ -18,7 +18,6 @@ public class ProcessService implements IProcessService {
     private final ProcessRepository processRepository;
 
 
-
     public ProcessService(ProcessRepository processRepository) {
         this.processRepository = processRepository;
 
@@ -26,20 +25,21 @@ public class ProcessService implements IProcessService {
 
 
     @Override
-    public APIResponse saveProcessStep(CreateProcessDto dto) { //Salvar um novo processo (ProcessIntruction) a partir dos dados fornecidos por CreateProcessDto.
+    public APIResponse saveProcessStep(CreateProcessDto dto) {
         try {
-            ProcessRequest processIntruction = new ProcessRequest(); //Cria uma nova instância de ProcessIntruction
+                ProcessRequest processIntruction = new ProcessRequest();
 
-            BeanUtils.copyProperties(dto, processIntruction); //Copia propriedades do DTO para a entidade usando BeanUtils.copyProperties
-            processRepository.save(processIntruction); //Salva a entidade no repositório
+                BeanUtils.copyProperties(dto, processIntruction);
 
-            return new APIResponse.buildAPIResponse() //Retorna uma resposta de sucesso encapsulada em APIResponse
+                processRepository.save(processIntruction);
+
+            return new APIResponse.buildAPIResponse()
                     .setStatus(true)
                     .setDetails(Collections.singletonList(processIntruction))
                     .setStatusText(MessageState.SUCESSO)
                     .builder();
         } catch (Exception e) {
-            return new APIResponse.buildAPIResponse()  //Retorna uma resposta de erro encapsulada em APIResponse
+            return new APIResponse.buildAPIResponse()
                     .setStatus(false)
                     .setStatusText(MessageState.ERRO)
                     .setDetails(Collections.singletonList(e.getMessage()))
@@ -50,16 +50,16 @@ public class ProcessService implements IProcessService {
 
 
     @Override
-    public APIResponse getAllProcessIntruction() { //Recuperar todos os registros de ProcessIntruction do banco de dados e convertê-los em DTOs.
+    public APIResponse getAllProcessIntruction() {
 
         try {
-            List<ProcessRequest> entities = processRepository.findAll(); //Busca todas as entidades/lista no repositório
+                List<ProcessRequest> entities = processRepository.findAll();
 
-            List<ProcessResponseDtos> dtos = entities.stream()//Converte cada entidade para DTO usando o métudo auxiliar mappingProcessIntruction
-                    .map(this::mappingProcessIntruction)
-                    .collect(Collectors.toList());
+                List<ProcessResponseDtos> dtos = entities.stream()
+                        .map(this::mappingProcessIntruction)
+                        .collect(Collectors.toList());
 
-            return new APIResponse.buildAPIResponse() //Retorna a lista de DTOs encapsulada em APIResponse
+            return new APIResponse.buildAPIResponse()
                     .setStatus(true)
                     .setStatusText(MessageState.SUCESSO)
                     .setDetails(Collections.singletonList(dtos))

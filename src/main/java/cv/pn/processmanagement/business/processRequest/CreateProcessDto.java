@@ -1,5 +1,6 @@
 package cv.pn.processmanagement.business.processRequest;
 
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -27,6 +28,7 @@ public class CreateProcessDto { //é um DTO de entrada, ou seja, ele encapsula t
     private LocalDate examinationDeadline;
     private String externalExaminationDeadline;
     private String processTypeDescription;
+    private String processTypeCode;
     //Identificadores únicos e referencias internas ou externas para rastreio.
     private String identifierProcess;
     private String referenceProcess;
@@ -197,6 +199,14 @@ public class CreateProcessDto { //é um DTO de entrada, ou seja, ele encapsula t
 
     public void setProcessTypeDescription(String processTypeDescription) {
         this.processTypeDescription = processTypeDescription;
+    }
+
+    public String getProcessTypeCode() {
+        return processTypeCode;
+    }
+
+    public void setProcessTypeCode(String processTypeCode) {
+        this.processTypeCode = processTypeCode;
     }
 
     public String getIdentifierProcess() {
