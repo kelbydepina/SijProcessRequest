@@ -27,16 +27,16 @@ public class FileRequestService implements IFileRequestService {
 
 
     @Override
-    public APIResponse saveAndUpdateFile(CreateFileRequestDto dto) {
+    public APIResponse saveAndUpdateFile(List<FileRequestDto> dto, String processRequest) {
         try {
 
 
             // Obter o processo associado
-            ProcessRequest processIntruction = processRepository.findById(dto.getProcessId())
-                    .orElseThrow(() -> new RecordNotFoundException("Processo não encontrado com o ID: " + dto.getProcessId()));
+            ProcessRequest processIntruction = processRepository.findById(processRequest)
+                    .orElseThrow(() -> new RecordNotFoundException("Processo não encontrado com o ID: " + processRequest));
 
 
-            List<FileRequestDto> files = dto.getFiles()
+            List<FileRequestDto> files = dto
                     .stream()
                     .map(fileDto -> {
 
@@ -44,21 +44,20 @@ public class FileRequestService implements IFileRequestService {
 
                         file.setType(fileDto.getType());
                         file.setName(fileDto.getName());
-                        file.setUserCreate(dto.getUserCreate());
                         file.setProcessRequest(processIntruction);
+                        file.setUserCreate("SYSTEM");
                        byte [] content = fileDto.getContent().getBytes();
                        file.setContent(content);
                         fileRequestRepository.saveAndFlush(file);
 
-                        return mappingResponseFileStatic(file);
+                        return fileDto;
 
                     }).collect(Collectors.toList());
 
             CreateFileRequestDto createFileDto = new CreateFileRequestDto();
 
-            createFileDto.setFiles(files);
-            createFileDto.setUserCreate(dto.getUserCreate());
-            createFileDto.setProcessId(dto.getProcessId());
+
+                  createFileDto.setFiles(dto);
 
 
             return new APIResponse.buildAPIResponse().setStatus(true)

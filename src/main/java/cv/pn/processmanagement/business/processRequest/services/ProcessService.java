@@ -30,7 +30,7 @@ public class ProcessService implements IProcessService {
                 ProcessRequest processIntruction = new ProcessRequest();
 
                 BeanUtils.copyProperties(dto, processIntruction);
-
+                processIntruction.setStatus("Sij process save");
                 processRepository.save(processIntruction);
 
             return new APIResponse.buildAPIResponse()

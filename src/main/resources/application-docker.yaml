@@ -56,30 +56,6 @@ access:
   password: ${SPRING_ACCESS_PASSWORD}
   swagger: ${SPRING_ACCESS_HOST_SWAGGER}
 
-# link external
-api:
-  token-auto: ${API_TOKEN_AUTO}
-  host-auto: ${API_HOST_AUTO}
-
-  token-pdf: ${API_TOKEN_PDF}
-  host-pdf: ${API_HOST_PDF}
 
 
-keycloak:
-  auth-server-url: http://localhost:8080/auth
-  realm: <NOME_DO_REALM>
-  resource: <NOME_DO_CLIENTE>
-  public-client: true
-  credentials:
-    secret: <CLIENT_SECRET>
-  ssl-required: external
-  use-resource-role-mappings: true
-
-notification:
-  email:
-    default-email-sender: ${DEFAULT_EMAIL_SENDER}
-    default-origin: ${DEFAULT_EMAIL_ORIGIN}
-  sms:
-    default-origin: ${DEFAULT_SMS_ORIGIN}
-    default-source: ${DEFAULT_SMS_SOURCE}
 

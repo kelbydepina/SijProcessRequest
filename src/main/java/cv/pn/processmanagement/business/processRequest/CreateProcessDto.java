@@ -24,7 +24,6 @@ public class CreateProcessDto { //é um DTO de entrada, ou seja, ele encapsula t
     private String otherNumbers;
     private String attachedProcesses;
     private String mainProcessNumber;
-    private String status;
     private LocalDate examinationDeadline;
     private String externalExaminationDeadline;
     private String processTypeDescription;
@@ -161,13 +160,6 @@ public class CreateProcessDto { //é um DTO de entrada, ou seja, ele encapsula t
         this.mainProcessNumber = mainProcessNumber;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
     public LocalDate getExaminationDeadline() {
         return examinationDeadline;

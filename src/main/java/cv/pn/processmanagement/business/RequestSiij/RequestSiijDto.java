@@ -2,6 +2,7 @@ package cv.pn.processmanagement.business.RequestSiij;
 
 import cv.pn.processmanagement.business.atorRequest.CreateAtorRequestDto;
 import cv.pn.processmanagement.business.fileRequest.CreateFileRequestDto;
+import cv.pn.processmanagement.business.fileRequest.FileRequestDto;
 import cv.pn.processmanagement.business.processRequest.CreateProcessDto;
 
 import java.io.Serializable;
@@ -14,7 +15,8 @@ public class RequestSiijDto implements Serializable {
 
         private List<CreateAtorRequestDto> atores;
 
-        private CreateFileRequestDto files;
+        //private CreateFileRequestDto files;
+        private List<FileRequestDto> files;
 
         public CreateProcessDto getProcess() {
             return process;
@@ -32,11 +34,11 @@ public class RequestSiijDto implements Serializable {
             this.atores = atores;
         }
 
-        public CreateFileRequestDto getFiles() {
-            return files;
-        }
+    public List<FileRequestDto> getFiles() {
+        return files;
+    }
 
-        public void setFiles(CreateFileRequestDto files) {
-            this.files = files;
-        }
+    public void setFiles(List<FileRequestDto> files) {
+        this.files = files;
+    }
 }

@@ -5,6 +5,7 @@ import cv.pn.processmanagement.business.atorRequest.AtorRequestRepository;
 import cv.pn.processmanagement.business.atorRequest.CreateAtorRequestDto;
 import cv.pn.processmanagement.business.processRequest.ProcessRequest;
 import cv.pn.processmanagement.business.processRequest.ProcessRepository;
+import cv.pn.processmanagement.exceptions.RecordNotFoundException;
 import cv.pn.processmanagement.utilities.APIResponse;
 import cv.pn.processmanagement.utilities.MessageState;
 import org.springframework.beans.BeanUtils;
@@ -28,25 +29,25 @@ public class AtorRequestService implements IAtorRequestService {
     }
 
     @Override
-    public APIResponse saveAtorRequestStep(CreateAtorRequestDto dto) {
+    public APIResponse saveAtorRequest(CreateAtorRequestDto dto, String processRequet) {
+
 
         try {
 
-                ProcessRequest process = processRepository.findById(dto.getProcessId())
+            ProcessRequest process = processRepository.findById(processRequet)
                         .orElseThrow(() -> new RuntimeException("Processo não encontrado"));
 
-                AtorRequest ator = new AtorRequest();
+            AtorRequest ator = new AtorRequest();
 
-                BeanUtils.copyProperties(dto, ator);
+            BeanUtils.copyProperties(dto, ator);
+            ator.setProcessRequest(process);
+            ator.setUserCreate("SYSTEM");
+            atorRequestRepository.save(ator);
 
-                ator.setProcessRequest(process);
-
-                atorRequestRepository.save(ator);
-
-                return new APIResponse.buildAPIResponse()
-                        .setStatus(true)
-                        .setStatusText(MessageState.SUCESSO)
-                        .builder();
+            return new APIResponse.buildAPIResponse()
+                    .setStatus(true)
+                    .setStatusText(MessageState.SUCESSO)
+                    .builder();
 
         } catch (Exception e) {
             e.printStackTrace(); // MOSTRAR erro real no console

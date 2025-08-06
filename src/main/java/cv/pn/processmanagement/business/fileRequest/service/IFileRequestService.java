@@ -10,7 +10,8 @@ import java.util.List;
 
 public interface IFileRequestService {
 
-    APIResponse saveAndUpdateFile(CreateFileRequestDto dto);
+    APIResponse saveAndUpdateFile(List<FileRequestDto> dto, String processRequest);
+
 
     List<FileRequestDto> mappingResponseFile(List<FileRequest> files);
 

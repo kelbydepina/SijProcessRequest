@@ -62,18 +62,13 @@ public class RequestSiijService implements IRequestSiijService {
                         throw new IllegalStateException("Objeto retornado não é do tipo ProcessRequest");
                     }
 
-                    ProcessRequest savedProcess = (ProcessRequest) detailObj;
-                    String processId = savedProcess.getId();
-
+                    //ProcessRequest savedProcess = (ProcessRequest) detailObj;
 
                    dto.getAtores().forEach(atorDto -> {
-                        atorDto.setProcessId(savedProcess.getId());
-                        iAtorRequestService.saveAtorRequestStep(atorDto);
+                        iAtorRequestService.saveAtorRequest(atorDto, ((ProcessRequest) detailObj).getId());
                     });
 
-
-                    dto.getFiles().setProcessId(processId);
-                    iFileRequestService.saveAndUpdateFile(dto.getFiles());
+                    iFileRequestService.saveAndUpdateFile(dto.getFiles(), ((ProcessRequest) detailObj).getId() );
 
 
 

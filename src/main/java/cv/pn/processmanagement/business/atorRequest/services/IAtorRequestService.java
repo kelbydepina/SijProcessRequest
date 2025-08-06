@@ -6,8 +6,7 @@ import cv.pn.processmanagement.utilities.APIResponse;
 
 public interface IAtorRequestService {
 
-    APIResponse saveAtorRequestStep(CreateAtorRequestDto dto);
-
+    APIResponse saveAtorRequest(CreateAtorRequestDto dto, String processRequet);
 
     APIResponse getAllAtor();
 }

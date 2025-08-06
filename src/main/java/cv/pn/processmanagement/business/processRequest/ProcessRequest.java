@@ -13,8 +13,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-//Representa um processo jurídico no sistema SIGO.
-//Armazena informações sobre crimes, prazos e andamento processual.
 
 @Entity
 @Table(name = "SIGO_PROCESS")

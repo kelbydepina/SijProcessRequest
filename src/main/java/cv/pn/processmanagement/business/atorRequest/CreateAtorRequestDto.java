@@ -10,8 +10,7 @@ public class CreateAtorRequestDto {
     private String nickname;
     private String motherName;
     private String fatherName;
-    private LocalDate dateOfBirth;
-    private String processId; // ID do processo ao qual o ator está vinculado
+    private LocalDate dateOfBirth;; // ID do processo ao qual o ator está vinculado
     //Permite vincular o ator ao país e local de nascimento com código e descrição.
     private String nationalityCode;
     private String nationalityDescription;
@@ -94,14 +93,6 @@ public class CreateAtorRequestDto {
 
     public void setMotherName(String motherName) {
         this.motherName = motherName;
-    }
-
-    public String getProcessId() {
-        return processId;
-    }
-
-    public void setProcessId(String processId) {
-        this.processId = processId;
     }
 
     public String getFatherName() {
