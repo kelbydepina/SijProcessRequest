@@ -5,7 +5,6 @@ import java.time.LocalDate;
 
 public class CreateAtorRequestDto {
     //Armazenam as informações básicas da pessoa.
-    private String userCreate;
     private String name;
     private String nickname;
     private String motherName;
@@ -39,13 +38,6 @@ public class CreateAtorRequestDto {
     private String contact;
 
 
-    public String getUserCreate() {
-        return userCreate;
-    }
-
-    public void setUserCreate(String userCreate) {
-        this.userCreate = userCreate;
-    }
 
     public String getName() {
         return name;

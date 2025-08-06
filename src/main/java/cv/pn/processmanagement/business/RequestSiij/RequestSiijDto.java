@@ -1,7 +1,6 @@
 package cv.pn.processmanagement.business.RequestSiij;
 
 import cv.pn.processmanagement.business.atorRequest.CreateAtorRequestDto;
-import cv.pn.processmanagement.business.fileRequest.CreateFileRequestDto;
 import cv.pn.processmanagement.business.fileRequest.FileRequestDto;
 import cv.pn.processmanagement.business.processRequest.CreateProcessDto;
 
@@ -15,7 +14,6 @@ public class RequestSiijDto implements Serializable {
 
         private List<CreateAtorRequestDto> atores;
 
-        //private CreateFileRequestDto files;
         private List<FileRequestDto> files;
 
         public CreateProcessDto getProcess() {

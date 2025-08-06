@@ -1,5 +1,7 @@
 package cv.pn.processmanagement.business.processRequest.services;
 
+import cv.pn.processmanagement.business.RequestSiij.ProcessNumberGenerator;
+import cv.pn.processmanagement.business.RequestSiij.RequestSiijDto;
 import cv.pn.processmanagement.business.processRequest.*;
 import cv.pn.processmanagement.utilities.APIResponse;
 import cv.pn.processmanagement.utilities.MessageState;
@@ -26,12 +28,27 @@ public class ProcessService implements IProcessService {
 
     @Override
     public APIResponse saveProcessStep(CreateProcessDto dto) {
-        try {
-                ProcessRequest processIntruction = new ProcessRequest();
 
-                BeanUtils.copyProperties(dto, processIntruction);
-                processIntruction.setStatus("Sij process save");
-                processRepository.save(processIntruction);
+        String identifierProcess = null;
+
+        try {
+
+
+
+
+            ProcessRequest processIntruction = new ProcessRequest();
+
+            List<ProcessRequest> lastProcesses = processRepository.findTopByOrderByIdentifierProcessDesc();
+            String lastNumber = lastProcesses.isEmpty() ? null : lastProcesses.get(0).getIdentifierProcess();
+
+            identifierProcess = ProcessNumberGenerator.generateProcessNumber(lastNumber, "PN");
+
+            BeanUtils.copyProperties(dto, processIntruction);
+            processIntruction.setIdentifierProcess(identifierProcess);
+            processIntruction.setStatus("Sij process save");
+            processIntruction.setUserCreate("SYSTEM");
+           // processIntruction.setProcessNumber(process.getProcessNumber());
+            processRepository.save(processIntruction);
 
             return new APIResponse.buildAPIResponse()
                     .setStatus(true)

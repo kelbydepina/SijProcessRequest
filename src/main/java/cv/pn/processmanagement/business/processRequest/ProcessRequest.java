@@ -101,7 +101,6 @@ public class  ProcessRequest extends CommonsAttributes {
     private String processTypeCode; //Tipo do processo
 
     @Column(name = "identifier",length = 50, unique = true, updatable = false) //nullable = false)
-    @NotBlank(message = "Identificador do processo é obrigatório")
     private String identifierProcess; //Identificador técnico do processo
 
     @Column(name = "reference_process", length = 50)

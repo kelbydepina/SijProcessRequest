@@ -69,13 +69,7 @@ public class FileRequestService implements IFileRequestService {
         }
     }
 
-    @Override
-    public List<FileRequestDto> mappingResponseFile(List<FileRequest> files) {
-        return files
-                .stream()
-                .map(FileRequestService::mappingResponseFileStatic)
-                .collect(Collectors.toList());
-    }
+
 
     @Override
     public APIResponse getAllFile(String relationTable) {
@@ -89,7 +83,7 @@ public class FileRequestService implements IFileRequestService {
 
             List<FileRequestDto> fileDtos = new ArrayList<>();
 
-            fileDtos.addAll(mappingResponseFile(filesActor));
+            fileDtos.addAll(fileDtos);
 
             objects.add(fileDtos);
 

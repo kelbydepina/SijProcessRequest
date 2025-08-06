@@ -1,6 +1,5 @@
 package cv.pn.processmanagement.business.RequestSiij.service;
 
-import cv.pn.processmanagement.business.RequestSiij.ProcessNumberGenerator;
 import cv.pn.processmanagement.business.RequestSiij.RequestSiijDto;
 
 import cv.pn.processmanagement.business.atorRequest.services.IAtorRequestService;
@@ -14,6 +13,7 @@ import cv.pn.processmanagement.utilities.MessageState;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -40,20 +40,21 @@ public class RequestSiijService implements IRequestSiijService {
     @Transactional
     public APIResponse saveFullProcess(RequestSiijDto dto) {
 
-        String processNumber = null;
+
 
               try{
 
+                  if (processRepository.existsByProcessNumber(dto.getProcess().getProcessNumber())){
+                      return new APIResponse.buildAPIResponse()
+                              .setStatus(false)
+                              .setDetails(Collections.singletonList("Numero de processo:" + dto.getProcess().getProcessNumber() + " ja existe no base de dados"))
+                              .setStatusText(MessageState.ERRO)
+                              .builder();
 
-                    List<ProcessRequest> lastProcesses = processRepository.findTopByOrderByIdentifierProcessDesc();
-                    String lastNumber = lastProcesses.isEmpty() ? null : lastProcesses.get(0).getIdentifierProcess();
+                  }
 
 
-                     processNumber = ProcessNumberGenerator.generateProcessNumber(lastNumber, "PN");
-                     dto.getProcess().setIdentifierProcess(processNumber);
-
-
-                    APIResponse response = iProcessService.saveProcessStep(dto.getProcess());
+                  APIResponse response = iProcessService.saveProcessStep(dto.getProcess());
 
                     Object detailObj = response.getDetails().get(0);
 
@@ -62,7 +63,7 @@ public class RequestSiijService implements IRequestSiijService {
                         throw new IllegalStateException("Objeto retornado não é do tipo ProcessRequest");
                     }
 
-                    //ProcessRequest savedProcess = (ProcessRequest) detailObj;
+
 
                    dto.getAtores().forEach(atorDto -> {
                         iAtorRequestService.saveAtorRequest(atorDto, ((ProcessRequest) detailObj).getId());
@@ -76,7 +77,7 @@ public class RequestSiijService implements IRequestSiijService {
             return new APIResponse.buildAPIResponse()
                 .setStatus(true)
                 .setStatusText(MessageState.SUCESSO)
-                .setDetails(List.of(processNumber)).builder();
+                .setDetails(List.of(((ProcessRequest) detailObj).getIdentifierProcess())).builder();
 
 
     } catch (Exception e) {

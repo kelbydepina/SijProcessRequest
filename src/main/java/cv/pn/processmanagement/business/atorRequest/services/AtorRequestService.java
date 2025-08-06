@@ -5,7 +5,6 @@ import cv.pn.processmanagement.business.atorRequest.AtorRequestRepository;
 import cv.pn.processmanagement.business.atorRequest.CreateAtorRequestDto;
 import cv.pn.processmanagement.business.processRequest.ProcessRequest;
 import cv.pn.processmanagement.business.processRequest.ProcessRepository;
-import cv.pn.processmanagement.exceptions.RecordNotFoundException;
 import cv.pn.processmanagement.utilities.APIResponse;
 import cv.pn.processmanagement.utilities.MessageState;
 import org.springframework.beans.BeanUtils;
@@ -29,12 +28,12 @@ public class AtorRequestService implements IAtorRequestService {
     }
 
     @Override
-    public APIResponse saveAtorRequest(CreateAtorRequestDto dto, String processRequet) {
+    public APIResponse saveAtorRequest(CreateAtorRequestDto dto, String processRequest) {
 
 
         try {
 
-            ProcessRequest process = processRepository.findById(processRequet)
+            ProcessRequest process = processRepository.findById(processRequest)
                         .orElseThrow(() -> new RuntimeException("Processo não encontrado"));
 
             AtorRequest ator = new AtorRequest();

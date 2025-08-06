@@ -8,7 +8,6 @@ public class AtorDto implements Serializable {
 
     private String observation;
     private CommonsParametrizationAttributesDto actorsCharacteristics;
-    private String userCreate;
     private CommonsParametrizationAttributesDto personType;
     private CommonsParametrizationAttributesDto actorType;
     private CommonsParametrizationAttributesDto dataOrigin;
@@ -29,14 +28,6 @@ public class AtorDto implements Serializable {
         this.actorsCharacteristics = actorsCharacteristics;
     }
 
-
-    public String getUserCreate() {
-        return userCreate;
-    }
-
-    public void setUserCreate(String userCreate) {
-        this.userCreate = userCreate;
-    }
 
     public CommonsParametrizationAttributesDto getPersonType() {
         return personType;

@@ -12,7 +12,7 @@ public class ProcessDto implements Serializable {
     private LocalDateTime processDateUntil;
 
     //private CommunicationDto communication;
-    private String identifierProcess;
+   // private String identifierProcess;
     private String processNumber;
     private String autoNumber;
     private String complaintOrigin;
@@ -83,14 +83,6 @@ public class ProcessDto implements Serializable {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getIdentifierProcess() {
-        return identifierProcess;
-    }
-
-    public void setIdentifierProcess(String identifierProcess) {
-        this.identifierProcess = identifierProcess;
     }
 
     public String getProcessNumber() {

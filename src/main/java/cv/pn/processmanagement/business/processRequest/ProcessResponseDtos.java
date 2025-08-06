@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 public class ProcessResponseDtos extends ProcessDto {
 
     private String id;
-    private String userCreate;
     private Boolean active;
     private LocalDateTime dateCreate;
 
@@ -15,7 +14,6 @@ public class ProcessResponseDtos extends ProcessDto {
     private CommonsParametrizationAttributesDto processType;
     private String status;
     private CommonsParametrizationAttributesDto processPhase;
-    private String identifierProcess;
     private String referenceProcess;
 
     private String colorProcess;
@@ -39,14 +37,6 @@ public class ProcessResponseDtos extends ProcessDto {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getUserCreate() {
-        return userCreate;
-    }
-
-    public void setUserCreate(String userCreate) {
-        this.userCreate = userCreate;
     }
 
     public Boolean getActive() {
@@ -95,14 +85,6 @@ public class ProcessResponseDtos extends ProcessDto {
 
     public void setProcessPhase(CommonsParametrizationAttributesDto processPhase) {
         this.processPhase = processPhase;
-    }
-
-    public String getIdentifierProcess() {
-        return identifierProcess;
-    }
-
-    public void setIdentifierProcess(String identifierProcess) {
-        this.identifierProcess = identifierProcess;
     }
 
     public String getReferenceProcess() {

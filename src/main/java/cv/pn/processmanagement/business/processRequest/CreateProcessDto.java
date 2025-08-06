@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 public class CreateProcessDto { //é um DTO de entrada, ou seja, ele encapsula todos os dados que o cliente envia para o backend ao criar um novo registro de processo jurídico. Ele permite separar a lógica da entidade ProcessIntruction, protegendo-a contra alterações diretas e mantendo o sistema desacoplado.
 
     //Indicam o criador e a situação inicial da ocorrência (presença do fato, detectado...).
-    private String userCreate;
     private Boolean presenceOfTheFact;
     private Boolean movedAndDetected;
     private LocalDateTime communicationDate;
@@ -29,7 +28,6 @@ public class CreateProcessDto { //é um DTO de entrada, ou seja, ele encapsula t
     private String processTypeDescription;
     private String processTypeCode;
     //Identificadores únicos e referencias internas ou externas para rastreio.
-    private String identifierProcess;
     private String referenceProcess;
     //Permitem categorizar o processo quanto à gravidade, tipo e prioridade de tratamento.
     private String classificationDescription;
@@ -55,14 +53,6 @@ public class CreateProcessDto { //é um DTO de entrada, ou seja, ele encapsula t
     private String organicCode; //Unidade orgânica
 
 
-
-    public String getUserCreate() {
-        return userCreate;
-    }
-
-    public void setUserCreate(String userCreate) {
-        this.userCreate = userCreate;
-    }
 
     public String getObservation() {
         return observation;
@@ -199,14 +189,6 @@ public class CreateProcessDto { //é um DTO de entrada, ou seja, ele encapsula t
 
     public void setProcessTypeCode(String processTypeCode) {
         this.processTypeCode = processTypeCode;
-    }
-
-    public String getIdentifierProcess() {
-        return identifierProcess;
-    }
-
-    public void setIdentifierProcess(String identifierProcess) {
-        this.identifierProcess = identifierProcess;
     }
 
     public String getReferenceProcess() {

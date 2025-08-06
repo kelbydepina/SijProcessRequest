@@ -15,7 +15,7 @@ public interface ProcessRepository extends JpaRepository<ProcessRequest, String>
     boolean existsByProcessNumber(String processNumber);
 
     // Buscar processo pelo identificador único
-    ProcessRequest findByIdentifierProcess(String identifierProcess);
+    boolean findByIdentifierProcess(String identifierProcess);
 
     List<ProcessRequest> findTopByOrderByIdentifierProcessDesc();
 

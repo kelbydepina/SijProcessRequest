@@ -13,7 +13,7 @@ public interface IFileRequestService {
     APIResponse saveAndUpdateFile(List<FileRequestDto> dto, String processRequest);
 
 
-    List<FileRequestDto> mappingResponseFile(List<FileRequest> files);
+
 
     APIResponse getAllFile(String processId);
 
