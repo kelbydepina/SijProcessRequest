@@ -3,7 +3,7 @@ package cv.pn.processmanagement.business.RequestSiij;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class ProcessNumberGenerator{
+public final class ProcessNumberGenerator{
 
     public static String generateProcessNumber(String lastNumber, String prefix) {
 

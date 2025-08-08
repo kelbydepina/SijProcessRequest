@@ -161,7 +161,6 @@ public class  ProcessRequest extends CommonsAttributes {
 
     @Column(name = "communication_date", nullable = false)
     @NotNull(message = "Data da comunicação é obrigatória")
-    @PastOrPresent(message = "Data da comunicação não pode ser futura")
     private LocalDateTime communicationDate; // Data de C omunicaçao
 
     @Column(name = "court")

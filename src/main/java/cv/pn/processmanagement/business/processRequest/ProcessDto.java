@@ -12,7 +12,6 @@ public class ProcessDto implements Serializable {
     private LocalDateTime processDateUntil;
 
     //private CommunicationDto communication;
-   // private String identifierProcess;
     private String processNumber;
     private String autoNumber;
     private String complaintOrigin;

@@ -10,6 +10,7 @@ import cv.pn.processmanagement.utilities.MessageState;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.Collections;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class AtorRequestService implements IAtorRequestService {
         try {
 
             ProcessRequest process = processRepository.findById(processRequest)
-                        .orElseThrow(() -> new RuntimeException("Processo não encontrado"));
+                        .orElseThrow(() -> new EntityNotFoundException("Processo com ID " + processRequest + " não encontrado"));
 
             AtorRequest ator = new AtorRequest();
 

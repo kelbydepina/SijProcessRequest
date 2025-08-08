@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//Ela fornece métodos para criar e recuperar instruções de processo.
+
 
 @Service
 public class ProcessService implements IProcessService {
@@ -34,8 +34,6 @@ public class ProcessService implements IProcessService {
         try {
 
 
-
-
             ProcessRequest processIntruction = new ProcessRequest();
 
             List<ProcessRequest> lastProcesses = processRepository.findTopByOrderByIdentifierProcessDesc();
@@ -47,7 +45,6 @@ public class ProcessService implements IProcessService {
             processIntruction.setIdentifierProcess(identifierProcess);
             processIntruction.setStatus("Sij process save");
             processIntruction.setUserCreate("SYSTEM");
-           // processIntruction.setProcessNumber(process.getProcessNumber());
             processRepository.save(processIntruction);
 
             return new APIResponse.buildAPIResponse()
