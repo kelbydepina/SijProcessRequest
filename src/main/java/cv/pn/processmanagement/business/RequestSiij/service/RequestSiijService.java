@@ -61,7 +61,7 @@ public class RequestSiijService implements IRequestSiijService {
                               throw new IllegalStateException("Objeto retornado não é do tipo ProcessRequest");
                           }
 
-                          if (dto.getAtores() == null || dto.getAtores().isEmpty()) {
+                          if (dto.getAtores() != null || dto.getAtores().isEmpty()) {
                               return new APIResponse.buildAPIResponse()
                                       .setStatus(false)
                                       .setStatusText(MessageState.ERRO)
@@ -70,7 +70,7 @@ public class RequestSiijService implements IRequestSiijService {
 
                           }
 
-                          if (dto.getFiles() == null || dto.getFiles().isEmpty()){
+                          if (dto.getFiles() != null || dto.getFiles().isEmpty()){
                               return new APIResponse.buildAPIResponse()
                                       .setStatus(false)
                                       .setStatusText(MessageState.ERRO)
@@ -105,7 +105,7 @@ public class RequestSiijService implements IRequestSiijService {
 
                 return new APIResponse.buildAPIResponse()
                     .setStatus(false)
-                    .setStatusText(MessageState.ERRO)
+                    .setStatusText(MessageState.ERRO_SAVE)
                     .setDetails(Collections.singletonList("confirmar dados enviado do processo"))
                     .builder();
         }
