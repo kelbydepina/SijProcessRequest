@@ -18,6 +18,7 @@ public class MessageState {
     public final static String ASSOCIAR = "Associado com sucesso";
 
     public final static String GUARDADO = "Guardado com sucesso";
+    public final static String ERRO_SAVE = "confirmar dados enviado do processo";
 
 
 }

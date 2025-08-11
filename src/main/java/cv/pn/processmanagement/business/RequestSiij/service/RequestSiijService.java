@@ -41,15 +41,14 @@ public class RequestSiijService implements IRequestSiijService {
     public APIResponse saveFullProcess(RequestSiijDto dto) {
 
 
-
               try{
 
-                  if (dto.getProcess().getProcessNumber() == null || dto.getProcess().getProcessNumber().isEmpty()) {
+                  if (dto.getProcess().getProcessNumber() != null || dto.getProcess().getProcessNumber().isEmpty()) {
 
                       if (processRepository.existsByProcessNumber(dto.getProcess().getProcessNumber())) {
                           return new APIResponse.buildAPIResponse()
                                   .setStatus(false)
-                                  .setDetails(Collections.singletonList("Numero de processo:" + dto.getProcess().getProcessNumber() + " ja existe no base de dados"))
+                                  .setDetails(Collections.singletonList("Numero de processo: " + dto.getProcess().getProcessNumber() + " ja existe"))
                                   .setStatusText(MessageState.ERRO)
                                   .builder();
                       }
@@ -75,7 +74,7 @@ public class RequestSiijService implements IRequestSiijService {
                               return new APIResponse.buildAPIResponse()
                                       .setStatus(false)
                                       .setStatusText(MessageState.ERRO)
-                                      .setDetails(Collections.singletonList("Os dados do File é Obrigatorio "))
+                                      .setDetails(Collections.singletonList("Os dados do Arquivo é Obrigatorio "))
                                       .builder();
 
                           }
@@ -106,8 +105,8 @@ public class RequestSiijService implements IRequestSiijService {
 
                 return new APIResponse.buildAPIResponse()
                     .setStatus(false)
-                    .setStatusText("Erro ao salvar processo completo: {} " + e.getMessage())
-                    .setDetails(List.of(e.getMessage()))
+                    .setStatusText(MessageState.ERRO)
+                    .setDetails(Collections.singletonList("confirmar dados enviado do processo"))
                     .builder();
         }
     }
