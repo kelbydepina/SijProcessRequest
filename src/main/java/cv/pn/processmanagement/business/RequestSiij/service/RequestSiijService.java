@@ -83,7 +83,7 @@ public class RequestSiijService implements IRequestSiijService {
                               iAtorRequestService.saveAtorRequest(atorDto, ((ProcessRequest) detailObj).getId());
                           });
 
-                          iFileRequestService.saveAndUpdateFile(dto.getFiles(), ((ProcessRequest) detailObj).getId() );
+                          iFileRequestService.saveAndUpdateFile(dto.getFiles(), ((ProcessRequest) detailObj).getId());
 
 
 
@@ -106,7 +106,7 @@ public class RequestSiijService implements IRequestSiijService {
                 return new APIResponse.buildAPIResponse()
                     .setStatus(false)
                     .setStatusText(MessageState.ERRO_SAVE)
-                    .setDetails(Collections.singletonList("confirmar dados enviado do processo"))
+                    .setDetails(Collections.singletonList("Confirmar dados enviado do processo"))
                     .builder();
         }
     }
