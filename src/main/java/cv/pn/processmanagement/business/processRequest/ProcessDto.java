@@ -1,80 +1,35 @@
 package cv.pn.processmanagement.business.processRequest;
 
+
+import cv.pn.processmanagement.business.atorRequest.AtorDto;
+import cv.pn.processmanagement.business.fileRequest.FileRequestDto;
+import cv.pn.processmanagement.enums.OrigemQueixa;
+import cv.pn.processmanagement.enums.TipoPrazoInvestigacao;
+
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.List;
+
 
 public class ProcessDto implements Serializable {
 
     private String id;
 
-    private LocalDateTime processDateOf;
-    private LocalDateTime processDateUntil;
-
-    //private CommunicationDto communication;
-    private String processNumber;
-    private String autoNumber;
-    private String complaintOrigin;
-    private String section;
-    private String court;
-    private String referenceNumber;
-    private Integer numberOfInvestigationDays;
-    private Boolean active;
-    private String status;
-    private LocalDateTime examDeadline;
-    private LocalDateTime examinationDeadline;
-    private String dmCommandCode;
-    private String dmCommandDescription;
-    private String organicDescription;
-    private String organicCode;
-    private String communicationAreaCode;
-    private String communicationAreaDescription;
-    private String dmCommunicationAreaCode;
-    private String dmCommunicationAreaDescription;
-    private String dmCommunicationByCode;
-    private String dmCommunicationByDescription;
-    private LocalDateTime communicationDate;
-    private Integer investigationDaysNumber;
-    private String district;
-    private String otherNumbers;
-    private String attachedProcesses;
-    private String mainProcessNumber;
-    private LocalDate externalExaminationDeadline;
-    private String processTypeDescription;
-    private String processTypeCode;
-    private String referenceProcess;
-    private String classificationDescription;
-    private String classificationCode;
-    private String subCrimeTypeCode;
-    private String subCrimeTypeDescription;
-    private String priorityCode;
-    private String priorityDescription;
-    private Boolean presenceOfTheFact;
-    private Boolean movedAndDetected;
-    private String meansOfCommunicationDescription;
-    private String meansOfCommunicationCode;
-    private String crimeType;
-    private String observation;
-
-
-    // 👇 Adicionado
-    //private String userCreate;
-
-    public LocalDateTime getProcessDateOf() {
-        return processDateOf;
-    }
-
-    public void setProcessDateOf(LocalDateTime processDateOf) {
-        this.processDateOf = processDateOf;
-    }
-
-    public LocalDateTime getProcessDateUntil() {
-        return processDateUntil;
-    }
-
-    public void setProcessDateUntil(LocalDateTime processDateUntil) {
-        this.processDateUntil = processDateUntil;
-    }
+    private String tipoCrime;
+    private String observacao;
+    private Integer prazoInvestigacao;
+    private TipoPrazoInvestigacao tipoPrazoInvestigacao; // "DIA", "MES", "ANO"
+    private String comarcaCode;
+    private String ComarcaDescription;
+    private String numeroProcesso;
+    private OrigemQueixa origemQueixa; // "PN", "MP", "OUTRA"
+    private String numeroReferencia;
+    private String procurador;
+    private LocalDate prazoExame;
+    private LocalDate prazoReExame;
+    private Integer versao;
+    private List<AtorDto> atorDtos;
+    private List<FileRequestDto> fileRequestDtos;
 
     public String getId() {
         return id;
@@ -84,348 +39,124 @@ public class ProcessDto implements Serializable {
         this.id = id;
     }
 
-    public String getProcessNumber() {
-        return processNumber;
+    public String getTipoCrime() {
+        return tipoCrime;
     }
 
-    public void setProcessNumber(String processNumber) {
-        this.processNumber = processNumber;
+    public void setTipoCrime(String tipoCrime) {
+        this.tipoCrime = tipoCrime;
     }
 
-    public String getAutoNumber() {
-        return autoNumber;
+    public String getObservacao() {
+        return observacao;
     }
 
-    public void setAutoNumber(String autoNumber) {
-        this.autoNumber = autoNumber;
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
     }
 
-    public String getComplaintOrigin() {
-        return complaintOrigin;
+    public Integer getPrazoInvestigacao() {
+        return prazoInvestigacao;
     }
 
-    public void setComplaintOrigin(String complaintOrigin) {
-        this.complaintOrigin = complaintOrigin;
+    public void setPrazoInvestigacao(Integer prazoInvestigacao) {
+        this.prazoInvestigacao = prazoInvestigacao;
     }
 
-    public String getSection() {
-        return section;
+    public TipoPrazoInvestigacao getTipoPrazoInvestigacao() {
+        return tipoPrazoInvestigacao;
     }
 
-    public void setSection(String section) {
-        this.section = section;
+    public void setTipoPrazoInvestigacao(TipoPrazoInvestigacao tipoPrazoInvestigacao) {
+        this.tipoPrazoInvestigacao = tipoPrazoInvestigacao;
     }
 
-    public String getCourt() {
-        return court;
+    public void setOrigemQueixa(OrigemQueixa origemQueixa) {
+        this.origemQueixa = origemQueixa;
     }
 
-    public void setCourt(String court) {
-        this.court = court;
+    public String getComarcaCode() {
+        return comarcaCode;
     }
 
-    public String getReferenceNumber() {
-        return referenceNumber;
+    public void setComarcaCode(String comarcaCode) {
+        this.comarcaCode = comarcaCode;
     }
 
-    public void setReferenceNumber(String referenceNumber) {
-        this.referenceNumber = referenceNumber;
+    public String getComarcaDescription() {
+        return ComarcaDescription;
     }
 
-    public Integer getNumberOfInvestigationDays() {
-        return numberOfInvestigationDays;
+    public void setComarcaDescription(String comarcaDescription) {
+        ComarcaDescription = comarcaDescription;
     }
 
-    public void setNumberOfInvestigationDays(Integer numberOfInvestigationDays) {
-        this.numberOfInvestigationDays = numberOfInvestigationDays;
+    public String getNumeroProcesso() {
+        return numeroProcesso;
     }
 
-    public Boolean getActive() {
-        return active;
+    public void setNumeroProcesso(String numeroProcesso) {
+        this.numeroProcesso = numeroProcesso;
     }
 
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public LocalDateTime getExamDeadline() {
-        return examDeadline;
-    }
-
-    public void setExamDeadline(LocalDateTime examDeadline) {
-        this.examDeadline = examDeadline;
-    }
-
-    public LocalDateTime getExaminationDeadline() {
-        return examinationDeadline;
-    }
-
-    public void setExaminationDeadline(LocalDateTime examinationDeadline) {
-        this.examinationDeadline = examinationDeadline;
-    }
-
-
-    public String getDmCommandCode() {
-        return dmCommandCode;
-    }
-
-    public void setDmCommandCode(String dmCommandCode) {
-        this.dmCommandCode = dmCommandCode;
-    }
-
-    public String getDmCommandDescription() {
-        return dmCommandDescription;
-    }
-
-    public void setDmCommandDescription(String dmCommandDescription) {
-        this.dmCommandDescription = dmCommandDescription;
-    }
-
-    public String getOrganicDescription() {
-        return organicDescription;
-    }
-
-    public void setOrganicDescription(String organicDescription) {
-        this.organicDescription = organicDescription;
-    }
-
-    public String getOrganicCode() {
-        return organicCode;
-    }
-
-    public void setOrganicCode(String organicCode) {
-        this.organicCode = organicCode;
-    }
-
-    public String getCommunicationAreaCode() {
-        return communicationAreaCode;
-    }
-
-    public void setCommunicationAreaCode(String communicationAreaCode) {
-        this.communicationAreaCode = communicationAreaCode;
-    }
-
-    public String getCommunicationAreaDescription() {
-        return communicationAreaDescription;
-    }
-
-    public void setCommunicationAreaDescription(String communicationAreaDescription) {
-        this.communicationAreaDescription = communicationAreaDescription;
-    }
-
-    public String getDmCommunicationAreaCode() {
-        return dmCommunicationAreaCode;
-    }
-
-    public void setDmCommunicationAreaCode(String dmCommunicationAreaCode) {
-        this.dmCommunicationAreaCode = dmCommunicationAreaCode;
-    }
-
-    public String getDmCommunicationAreaDescription() {
-        return dmCommunicationAreaDescription;
-    }
-
-    public void setDmCommunicationAreaDescription(String dmCommunicationAreaDescription) {
-        this.dmCommunicationAreaDescription = dmCommunicationAreaDescription;
-    }
-
-    public String getDmCommunicationByCode() {
-        return dmCommunicationByCode;
-    }
-
-    public void setDmCommunicationByCode(String dmCommunicationByCode) {
-        this.dmCommunicationByCode = dmCommunicationByCode;
-    }
-
-    public String getDmCommunicationByDescription() {
-        return dmCommunicationByDescription;
-    }
-
-    public void setDmCommunicationByDescription(String dmCommunicationByDescription) {
-        this.dmCommunicationByDescription = dmCommunicationByDescription;
-    }
-
-    public LocalDateTime getCommunicationDate() {
-        return communicationDate;
-    }
-
-    public void setCommunicationDate(LocalDateTime communicationDate) {
-        this.communicationDate = communicationDate;
-    }
-
-    public Integer getInvestigationDaysNumber() {
-        return investigationDaysNumber;
-    }
-
-    public void setInvestigationDaysNumber(Integer investigationDaysNumber) {
-        this.investigationDaysNumber = investigationDaysNumber;
-    }
-
-    public String getDistrict() {
-        return district;
-    }
-
-    public void setDistrict(String district) {
-        this.district = district;
-    }
-
-    public String getOtherNumbers() {
-        return otherNumbers;
-    }
-
-    public void setOtherNumbers(String otherNumbers) {
-        this.otherNumbers = otherNumbers;
-    }
-
-    public String getAttachedProcesses() {
-        return attachedProcesses;
-    }
-
-    public void setAttachedProcesses(String attachedProcesses) {
-        this.attachedProcesses = attachedProcesses;
-    }
-
-    public String getMainProcessNumber() {
-        return mainProcessNumber;
-    }
-
-    public void setMainProcessNumber(String mainProcessNumber) {
-        this.mainProcessNumber = mainProcessNumber;
-    }
-
-    public LocalDate getExternalExaminationDeadline() {
-        return externalExaminationDeadline;
-    }
-
-    public void setExternalExaminationDeadline(LocalDate externalExaminationDeadline) {
-        this.externalExaminationDeadline = externalExaminationDeadline;
-    }
-
-    public String getProcessTypeDescription() {
-        return processTypeDescription;
-    }
-
-    public void setProcessTypeDescription(String processTypeDescription) {
-        this.processTypeDescription = processTypeDescription;
-    }
-
-    public String getProcessTypeCode() {
-        return processTypeCode;
-    }
-
-    public void setProcessTypeCode(String processTypeCode) {
-        this.processTypeCode = processTypeCode;
-    }
-
-    public String getReferenceProcess() {
-        return referenceProcess;
-    }
-
-    public void setReferenceProcess(String referenceProcess) {
-        this.referenceProcess = referenceProcess;
-    }
-
-    public String getClassificationDescription() {
-        return classificationDescription;
-    }
-
-    public void setClassificationDescription(String classificationDescription) {
-        this.classificationDescription = classificationDescription;
-    }
-
-    public String getClassificationCode() {
-        return classificationCode;
-    }
-
-    public void setClassificationCode(String classificationCode) {
-        this.classificationCode = classificationCode;
-    }
-
-    public String getSubCrimeTypeCode() {
-        return subCrimeTypeCode;
-    }
-
-    public void setSubCrimeTypeCode(String subCrimeTypeCode) {
-        this.subCrimeTypeCode = subCrimeTypeCode;
-    }
-
-    public String getSubCrimeTypeDescription() {
-        return subCrimeTypeDescription;
-    }
-
-    public void setSubCrimeTypeDescription(String subCrimeTypeDescription) {
-        this.subCrimeTypeDescription = subCrimeTypeDescription;
-    }
-
-    public String getPriorityCode() {
-        return priorityCode;
-    }
 
-    public void setPriorityCode(String priorityCode) {
-        this.priorityCode = priorityCode;
+    public OrigemQueixa getOrigemQueixa() {
+        return origemQueixa;
     }
 
-    public String getPriorityDescription() {
-        return priorityDescription;
+    public String getNumeroReferencia() {
+        return numeroReferencia;
     }
 
-    public void setPriorityDescription(String priorityDescription) {
-        this.priorityDescription = priorityDescription;
+    public void setNumeroReferencia(String numeroReferencia) {
+        this.numeroReferencia = numeroReferencia;
     }
 
-    public Boolean getPresenceOfTheFact() {
-        return presenceOfTheFact;
+    public String getProcurador() {
+        return procurador;
     }
 
-    public void setPresenceOfTheFact(Boolean presenceOfTheFact) {
-        this.presenceOfTheFact = presenceOfTheFact;
+    public void setProcurador(String procurador) {
+        this.procurador = procurador;
     }
 
-    public Boolean getMovedAndDetected() {
-        return movedAndDetected;
+    public LocalDate getPrazoExame() {
+        return prazoExame;
     }
 
-    public void setMovedAndDetected(Boolean movedAndDetected) {
-        this.movedAndDetected = movedAndDetected;
+    public void setPrazoExame(LocalDate prazoExame) {
+        this.prazoExame = prazoExame;
     }
 
-    public String getMeansOfCommunicationDescription() {
-        return meansOfCommunicationDescription;
+    public LocalDate getPrazoReExame() {
+        return prazoReExame;
     }
 
-    public void setMeansOfCommunicationDescription(String meansOfCommunicationDescription) {
-        this.meansOfCommunicationDescription = meansOfCommunicationDescription;
+    public void setPrazoReExame(LocalDate prazoReExame) {
+        this.prazoReExame = prazoReExame;
     }
 
-    public String getMeansOfCommunicationCode() {
-        return meansOfCommunicationCode;
+    public Integer getVersao() {
+        return versao;
     }
 
-    public void setMeansOfCommunicationCode(String meansOfCommunicationCode) {
-        this.meansOfCommunicationCode = meansOfCommunicationCode;
+    public void setVersao(Integer versao) {
+        this.versao = versao;
     }
 
-    public String getCrimeType() {
-        return crimeType;
+    public List<AtorDto> getAtorDtos() {
+        return atorDtos;
     }
 
-    public void setCrimeType(String crimeType) {
-        this.crimeType = crimeType;
+    public void setAtorDtos(List<AtorDto> atorDtos) {
+        this.atorDtos = atorDtos;
     }
 
-    public String getObservation() {
-        return observation;
+    public List<FileRequestDto> getFileRequestDtos() {
+        return fileRequestDtos;
     }
 
-    public void setObservation(String observation) {
-        this.observation = observation;
+    public void setFileRequestDtos(List<FileRequestDto> fileRequestDtos) {
+        this.fileRequestDtos = fileRequestDtos;
     }
 }

@@ -1,55 +1,80 @@
 package cv.pn.processmanagement.business.atorRequest;
 
+import cv.pn.processmanagement.business.empressaRequest.EmpresaDto;
+import cv.pn.processmanagement.business.pessoaRequest.PessoaDto;
 import cv.pn.processmanagement.commons.CommonsParametrizationAttributesDto;
+import cv.pn.processmanagement.enums.ActorType;
+import cv.pn.processmanagement.enums.ActorsCharacteristics;
+import cv.pn.processmanagement.enums.PersonType;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 public class AtorDto implements Serializable {
 
-    private String observation;
-    private CommonsParametrizationAttributesDto actorsCharacteristics;
-    private CommonsParametrizationAttributesDto personType;
-    private CommonsParametrizationAttributesDto actorType;
-    private CommonsParametrizationAttributesDto dataOrigin;
+    private ActorsCharacteristics ator;
+    private ActorType tipoAtor;
+    private PersonType tipoPessoa;
+    private Boolean detido;
+    private LocalDateTime dataHoraDetencao;
+    private PessoaDto pessoa;
+    private EmpresaDto empresa;
 
-    public String getObservation() {
-        return observation;
+
+
+    public ActorsCharacteristics getAtor() {
+        return ator;
     }
 
-    public void setObservation(String observation) {
-        this.observation = observation;
+    public void setAtor(ActorsCharacteristics ator) {
+        this.ator = ator;
     }
 
-    public CommonsParametrizationAttributesDto getActorsCharacteristics() {
-        return actorsCharacteristics;
+    public ActorType getTipoAtor() {
+        return tipoAtor;
     }
 
-    public void setActorsCharacteristics(CommonsParametrizationAttributesDto actorsCharacteristics) {
-        this.actorsCharacteristics = actorsCharacteristics;
+    public void setTipoAtor(ActorType tipoAtor) {
+        this.tipoAtor = tipoAtor;
     }
 
-
-    public CommonsParametrizationAttributesDto getPersonType() {
-        return personType;
+    public PersonType getTipoPessoa() {
+        return tipoPessoa;
     }
 
-    public void setPersonType(CommonsParametrizationAttributesDto personType) {
-        this.personType = personType;
+    public void setTipoPessoa(PersonType tipoPessoa) {
+        this.tipoPessoa = tipoPessoa;
     }
 
-    public CommonsParametrizationAttributesDto getActorType() {
-        return actorType;
+    public Boolean getDetido() {
+        return detido;
     }
 
-    public void setActorType(CommonsParametrizationAttributesDto actorType) {
-        this.actorType = actorType;
+    public void setDetido(Boolean detido) {
+        this.detido = detido;
     }
 
-    public CommonsParametrizationAttributesDto getDataOrigin() {
-        return dataOrigin;
+    public LocalDateTime getDataHoraDetencao() {
+        return dataHoraDetencao;
     }
 
-    public void setDataOrigin(CommonsParametrizationAttributesDto dataOrigin) {
-        this.dataOrigin = dataOrigin;
+    public void setDataHoraDetencao(LocalDateTime dataHoraDetencao) {
+        this.dataHoraDetencao = dataHoraDetencao;
+    }
+
+    public PessoaDto getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(PessoaDto pessoa) {
+        this.pessoa = pessoa;
+    }
+
+    public EmpresaDto getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(EmpresaDto empresa) {
+        this.empresa = empresa;
     }
 }

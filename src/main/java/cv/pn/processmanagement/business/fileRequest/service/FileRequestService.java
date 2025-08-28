@@ -1,15 +1,13 @@
 package cv.pn.processmanagement.business.fileRequest.service;
 
 import cv.pn.processmanagement.business.fileRequest.*;
-import cv.pn.processmanagement.business.processRequest.ProcessRequest;
 import cv.pn.processmanagement.business.processRequest.ProcessRepository;
+import cv.pn.processmanagement.business.processRequest.ProcessRequest;
 import cv.pn.processmanagement.exceptions.RecordNotFoundException;
 import cv.pn.processmanagement.utilities.APIResponse;
 import cv.pn.processmanagement.utilities.MessageState;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,10 +16,13 @@ import java.util.stream.Collectors;
 public class FileRequestService implements IFileRequestService {
 
     private final FileRequestRepository fileRequestRepository;
+
     private final ProcessRepository processRepository;
+
 
     public FileRequestService(FileRequestRepository fileRequestRepository, ProcessRepository processRepository) {
         this.fileRequestRepository = fileRequestRepository;
+
         this.processRepository = processRepository;
     }
 
@@ -42,12 +43,14 @@ public class FileRequestService implements IFileRequestService {
 
                         FileRequest file = new FileRequest();
 
-                        file.setType(fileDto.getType());
-                        file.setName(fileDto.getName());
+                        file.setType(fileDto.getTipo());
+                        file.setName(fileDto.getDescricao());
+                        file.setNumero(fileDto.getNumero());
+                        file.getMineType(fileDto.getMineType());
                         file.setProcessRequest(processIntruction);
                         file.setUserCreate("SYSTEM");
-                       byte [] content = fileDto.getContent().getBytes();
-                       file.setContent(content);
+                       //byte [] content = fileDto.getBase64().getBytes();
+                       //file.setContent(content);
                         fileRequestRepository.saveAndFlush(file);
 
                         return fileDto;
@@ -71,7 +74,7 @@ public class FileRequestService implements IFileRequestService {
 
 
 
-    @Override
+    /*@Override
     public APIResponse getAllFile(String relationTable) {
 
        List<FileRequest> filesActor = fileRequestRepository.findAllByProcessRequestId(relationTable);
@@ -110,9 +113,9 @@ public class FileRequestService implements IFileRequestService {
 
         String content = new String(file.getContent());
 
-        dto.setContent(content);
+        dto.setBase64(content);
 
         return dto;
 
-    }
+    }*/
 }

@@ -1,6 +1,7 @@
 package cv.pn.processmanagement.business.fileRequest;
 
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import cv.pn.processmanagement.business.processRequest.ProcessRequest;
 import cv.pn.processmanagement.commons.CommonsAttributes;
@@ -8,11 +9,17 @@ import cv.pn.processmanagement.commons.CommonsAttributes;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "SIGO_FILE")
+@Table(name = "FILE_REQUEST")
 public class FileRequest extends CommonsAttributes {
 
     @Column(name = "content", length = 50000)
     private byte[] content;
+
+    @Column(name = "numero")
+    private String numero;
+
+    @Column(name = "mineType")
+    private String mineType;
 
     @Column(name = "name", nullable = false, length = 50)
     private String name;
@@ -56,4 +63,21 @@ public class FileRequest extends CommonsAttributes {
     public void setProcessRequest(ProcessRequest processRequest) {
         this.processRequest = processRequest;
     }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getMineType(String mineType) {
+        return this.mineType;
+    }
+
+    public void setMineType(String mineType) {
+        this.mineType = mineType;
+    }
 }
+

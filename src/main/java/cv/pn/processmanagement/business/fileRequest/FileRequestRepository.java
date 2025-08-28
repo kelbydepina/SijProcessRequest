@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface FileRequestRepository extends JpaRepository<FileRequest, String> {
 
-    List<FileRequest> findAllByProcessRequestId(String relationTable);
+    //List<FileRequest> findAllByProcessRequestId(String relationTable);
 
 }
 

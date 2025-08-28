@@ -1,7 +1,6 @@
 package cv.pn.processmanagement.business.processRequest.services;
 
 import cv.pn.processmanagement.business.RequestSiij.ProcessNumberGenerator;
-import cv.pn.processmanagement.business.RequestSiij.RequestSiijDto;
 import cv.pn.processmanagement.business.processRequest.*;
 import cv.pn.processmanagement.utilities.APIResponse;
 import cv.pn.processmanagement.utilities.MessageState;
@@ -36,16 +35,24 @@ public class ProcessService implements IProcessService {
 
             ProcessRequest processIntruction = new ProcessRequest();
 
-            List<ProcessRequest> lastProcesses = processRepository.findTopByOrderByIdentifierProcessDesc();
-            String lastNumber = lastProcesses.isEmpty() ? null : lastProcesses.get(0).getIdentifierProcess();
+            List<ProcessRequest> lastProcesses = processRepository.findTopByOrderByIdentificadorProcessoDesc();
+            String lastNumber = lastProcesses.isEmpty() ? null : lastProcesses.get(0).getIdentificadorProcesso();
 
-            identifierProcess = ProcessNumberGenerator.generateProcessNumber(lastNumber, "PN");
+           identifierProcess = ProcessNumberGenerator.generateProcessNumber(lastNumber, "PN");
 
             BeanUtils.copyProperties(dto, processIntruction);
-            processIntruction.setIdentifierProcess(identifierProcess);
+
+
+            processIntruction.setIdentificadorProcesso(identifierProcess);
             processIntruction.setStatus("Sij process save");
             processIntruction.setUserCreate("SYSTEM");
+
+            // Garante que a versão seja pelo menos 1
+            if (processIntruction.getVersao() == null || processIntruction.getVersao() == 0) {
+                processIntruction.setVersao(1);
+            }
             processRepository.save(processIntruction);
+
 
             return new APIResponse.buildAPIResponse()
                     .setStatus(true)
@@ -59,19 +66,20 @@ public class ProcessService implements IProcessService {
                     .setDetails(Collections.singletonList(e.getMessage()))
                     .builder();
         }
+
     }
 
 
 
     @Override
-    public APIResponse getAllProcessIntruction() {
+    public APIResponse getAllprocessIntruction() {
 
         try {
-                List<ProcessRequest> entities = processRepository.findAll();
+            List<ProcessRequest> entities = processRepository.findAll();
 
-                List<ProcessResponseDtos> dtos = entities.stream()
-                        .map(this::mappingProcessIntruction)
-                        .collect(Collectors.toList());
+            List<ProcessResponseDtos> dtos = entities.stream()
+                    .map(this::mappingProcessIntruction)
+                    .collect(Collectors.toList());
 
             return new APIResponse.buildAPIResponse()
                     .setStatus(true)
@@ -90,8 +98,17 @@ public class ProcessService implements IProcessService {
 
     private ProcessResponseDtos mappingProcessIntruction(ProcessRequest entity) { //Métudo auxiliar Converter uma entidade ProcessIntruction em um DTO ProcessResponseDtos.
         ProcessResponseDtos dto = new ProcessResponseDtos(); //Cria um DTO vazio.
+
         BeanUtils.copyProperties(entity, dto); //Copia propriedades da entidade para o DTO.
+
         return dto; //Retorna o DTO.
     }
-
 }
+
+
+
+
+
+
+
+

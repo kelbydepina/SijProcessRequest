@@ -1,7 +1,10 @@
 package cv.pn.processmanagement.business.processRequest;
 
 import cv.pn.processmanagement.commons.CommonsParametrizationAttributesDto;
+import cv.pn.processmanagement.enums.OrigemQueixa;
+import cv.pn.processmanagement.enums.TipoPrazoInvestigacao;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class ProcessResponseDtos extends ProcessDto {
@@ -10,7 +13,21 @@ public class ProcessResponseDtos extends ProcessDto {
     private Boolean active;
     private LocalDateTime dateCreate;
 
-    private CommonsParametrizationAttributesDto organic;
+    private String tipoCrime;
+    private String observacao;
+    private Integer prazoInvestigacao = 1;
+    private TipoPrazoInvestigacao tipoPrazoInvestigacao; // "DIA", "MES", "ANO"
+    private String comarcaCode;
+    private String ComarcaDescription;
+    private String numeroProcesso;
+    private OrigemQueixa origemQueixa; // "PN", "MP", "OUTRA"
+    private String numeroReferencia;
+    private String procurador;
+    private LocalDate prazoExame;
+    private LocalDate prazoReExame;
+    private Integer versao = 1;
+
+    /*private CommonsParametrizationAttributesDto organic;
     private CommonsParametrizationAttributesDto processType;
     private String status;
     private CommonsParametrizationAttributesDto processPhase;
@@ -24,12 +41,9 @@ public class ProcessResponseDtos extends ProcessDto {
 
     private String changePhaseNote;
     private CommonsParametrizationAttributesDto command;
-    private Boolean effectiveOrganic;
+    private Boolean effectiveOrganic;*/
 
-    private String subCrimeTypeCode;
-    private String subCrimeTypeDescription;
-    private String priorityCode;
-    private String priorityDescription;
+
 
     public String getId() {
         return id;
@@ -55,131 +69,133 @@ public class ProcessResponseDtos extends ProcessDto {
         this.dateCreate = dateCreate;
     }
 
-    public CommonsParametrizationAttributesDto getOrganic() {
-        return organic;
+    @Override
+    public String getTipoCrime() {
+        return tipoCrime;
     }
 
-    public void setOrganic(CommonsParametrizationAttributesDto organic) {
-        this.organic = organic;
+    @Override
+    public void setTipoCrime(String tipoCrime) {
+        this.tipoCrime = tipoCrime;
     }
 
-    public CommonsParametrizationAttributesDto getProcessType() {
-        return processType;
+    @Override
+    public String getObservacao() {
+        return observacao;
     }
 
-    public void setProcessType(CommonsParametrizationAttributesDto processType) {
-        this.processType = processType;
+    @Override
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
     }
 
-    public String getStatus() {
-        return status;
+    @Override
+    public Integer getPrazoInvestigacao() {
+        return prazoInvestigacao;
     }
 
-    public void setStatus(CommonsParametrizationAttributesDto status) {
-        this.status = String.valueOf(status);
+    @Override
+    public void setPrazoInvestigacao(Integer prazoInvestigacao) {
+        this.prazoInvestigacao = prazoInvestigacao;
     }
 
-    public CommonsParametrizationAttributesDto getProcessPhase() {
-        return processPhase;
+    @Override
+    public TipoPrazoInvestigacao getTipoPrazoInvestigacao() {
+        return tipoPrazoInvestigacao;
     }
 
-    public void setProcessPhase(CommonsParametrizationAttributesDto processPhase) {
-        this.processPhase = processPhase;
+    @Override
+    public void setTipoPrazoInvestigacao(TipoPrazoInvestigacao tipoPrazoInvestigacao) {
+        this.tipoPrazoInvestigacao = tipoPrazoInvestigacao;
     }
 
-    public String getReferenceProcess() {
-        return referenceProcess;
+    @Override
+    public String getComarcaCode() {
+        return comarcaCode;
     }
 
-    public void setReferenceProcess(String referenceProcess) {
-        this.referenceProcess = referenceProcess;
+    @Override
+    public void setComarcaCode(String comarcaCode) {
+        this.comarcaCode = comarcaCode;
     }
 
-    public String getColorProcess() {
-        return colorProcess;
+    @Override
+    public String getComarcaDescription() {
+        return ComarcaDescription;
     }
 
-    public void setColorProcess(String colorProcess) {
-        this.colorProcess = colorProcess;
+    @Override
+    public void setComarcaDescription(String comarcaDescription) {
+        ComarcaDescription = comarcaDescription;
     }
 
-    public String getRemainingProcessDate() {
-        return remainingProcessDate;
+    @Override
+    public String getNumeroProcesso() {
+        return numeroProcesso;
     }
 
-    public void setRemainingProcessDate(String remainingProcessDate) {
-        this.remainingProcessDate = remainingProcessDate;
+    @Override
+    public void setNumeroProcesso(String numeroProcesso) {
+        this.numeroProcesso = numeroProcesso;
     }
 
-    public String getDurationProcessDate() {
-        return durationProcessDate;
+    @Override
+    public OrigemQueixa getOrigemQueixa() {
+        return origemQueixa;
     }
 
-    public void setDurationProcessDate(String durationProcessDate) {
-        this.durationProcessDate = durationProcessDate;
+    @Override
+    public void setOrigemQueixa(OrigemQueixa origemQueixa) {
+        this.origemQueixa = origemQueixa;
     }
 
-    public CommonsParametrizationAttributesDto getProcessClassification() {
-        return processClassification;
+    @Override
+    public String getNumeroReferencia() {
+        return numeroReferencia;
     }
 
-    public void setProcessClassification(CommonsParametrizationAttributesDto processClassification) {
-        this.processClassification = processClassification;
+    @Override
+    public void setNumeroReferencia(String numeroReferencia) {
+        this.numeroReferencia = numeroReferencia;
     }
 
-    public String getChangePhaseNote() {
-        return changePhaseNote;
+    @Override
+    public String getProcurador() {
+        return procurador;
     }
 
-    public void setChangePhaseNote(String changePhaseNote) {
-        this.changePhaseNote = changePhaseNote;
+    @Override
+    public void setProcurador(String procurador) {
+        this.procurador = procurador;
     }
 
-    public CommonsParametrizationAttributesDto getCommand() {
-        return command;
+    @Override
+    public LocalDate getPrazoExame() {
+        return prazoExame;
     }
 
-    public void setCommand(CommonsParametrizationAttributesDto command) {
-        this.command = command;
+    @Override
+    public void setPrazoExame(LocalDate prazoExame) {
+        this.prazoExame = prazoExame;
     }
 
-    public Boolean getEffectiveOrganic() {
-        return effectiveOrganic;
+    @Override
+    public LocalDate getPrazoReExame() {
+        return prazoReExame;
     }
 
-    public void setEffectiveOrganic(Boolean effectiveOrganic) {
-        this.effectiveOrganic = effectiveOrganic;
+    @Override
+    public void setPrazoReExame(LocalDate prazoReExame) {
+        this.prazoReExame = prazoReExame;
     }
 
-    public String getSubCrimeTypeCode() {
-        return subCrimeTypeCode;
+    @Override
+    public Integer getVersao() {
+        return versao;
     }
 
-    public void setSubCrimeTypeCode(String subCrimeTypeCode) {
-        this.subCrimeTypeCode = subCrimeTypeCode;
-    }
-
-    public String getSubCrimeTypeDescription() {
-        return subCrimeTypeDescription;
-    }
-
-    public void setSubCrimeTypeDescription(String subCrimeTypeDescription) {
-        this.subCrimeTypeDescription = subCrimeTypeDescription;
-    }
-
-    public String getPriorityCode() {
-        return priorityCode;
-    }
-
-    public void setPriorityCode(String priorityCode) {
-        this.priorityCode = priorityCode;
-    }
-
-    public String getPriorityDescription() {
-        return priorityDescription;
-    }
-
-    public void setPriorityDescription(String priorityDescription) {
-        this.priorityDescription = priorityDescription;
+    @Override
+    public void setVersao(Integer versao) {
+        this.versao = versao;
     }
 }

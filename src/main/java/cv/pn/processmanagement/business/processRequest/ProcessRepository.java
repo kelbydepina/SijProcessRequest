@@ -11,16 +11,13 @@ public interface ProcessRepository extends JpaRepository<ProcessRequest, String>
     // Paginação de todos os processos
     Page<ProcessRequest> findAll(Pageable pageable);
 
-    boolean existsByIdentifierProcess(String identifierProcess);
-    boolean existsByProcessNumber(String processNumber);
+    boolean existsByIdentificadorProcesso(String identifierProcess);
+    boolean existsByNumeroProcesso(String numeroProcesso);
 
     // Buscar processo pelo identificador único
-    boolean findByIdentifierProcess(String identifierProcess);
+    boolean findByIdentificadorProcesso(String identifierProcess);
 
-    List<ProcessRequest> findTopByOrderByIdentifierProcessDesc();
+    List<ProcessRequest> findTopByOrderByIdentificadorProcessoDesc();
 
-    //Se quiser consultas por fase, status, tipo de crime etc.
-    /*List<Process> findAllByStatusCode(String statusCode);
-    List<Process> findAllByProcessPhaseCode(String processPhaseCode);
-    List<Process> findAllByCrimeTypeCode(String crimeTypeCode);*/
+
 }

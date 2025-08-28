@@ -28,7 +28,7 @@ public class APIResponse{
         this.processNumber = processNumber;
     }
 
-    public boolean isStatus() {
+    public boolean Status() {
         return status;
     }
 
@@ -85,6 +85,9 @@ public class APIResponse{
         this.processNumber = build.processNumber;
     }
 
+    public boolean getStatus() {
+        return status;
+    }
 
 
     public static class buildAPIResponse {

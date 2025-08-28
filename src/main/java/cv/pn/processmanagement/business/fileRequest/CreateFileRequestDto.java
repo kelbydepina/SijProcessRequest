@@ -6,7 +6,6 @@ import java.util.List;
 
 public class CreateFileRequestDto implements Serializable {
 
-    @NotBlank(message = "O criador do arquivo é obrigatório")
     private List<FileRequestDto> files;
 
     public List<FileRequestDto> getFiles() {

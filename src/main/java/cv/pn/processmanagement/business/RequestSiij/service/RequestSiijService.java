@@ -1,9 +1,6 @@
 package cv.pn.processmanagement.business.RequestSiij.service;
-
 import cv.pn.processmanagement.business.RequestSiij.RequestSiijDto;
-
 import cv.pn.processmanagement.business.atorRequest.services.IAtorRequestService;
-
 import cv.pn.processmanagement.business.fileRequest.service.IFileRequestService;
 import cv.pn.processmanagement.business.processRequest.ProcessRequest;
 import cv.pn.processmanagement.business.processRequest.ProcessRepository;
@@ -41,77 +38,84 @@ public class RequestSiijService implements IRequestSiijService {
     public APIResponse saveFullProcess(RequestSiijDto dto) {
 
 
-              try{
-
-                  if (dto.getProcess().getProcessNumber() != null || dto.getProcess().getProcessNumber().isEmpty()) {
-
-                      if (processRepository.existsByProcessNumber(dto.getProcess().getProcessNumber())) {
-                          return new APIResponse.buildAPIResponse()
-                                  .setStatus(false)
-                                  .setDetails(Collections.singletonList("Numero de processo: " + dto.getProcess().getProcessNumber() + " ja existe"))
-                                  .setStatusText(MessageState.ERRO)
-                                  .builder();
-                      }
-                          APIResponse response = iProcessService.saveProcessStep(dto.getProcess());
-
-                          Object detailObj = response.getDetails().get(0);
-
-                          if (!(detailObj instanceof ProcessRequest)) {
-
-                              throw new IllegalStateException("Objeto retornado não é do tipo ProcessRequest");
-                          }
-
-                          if (dto.getAtores() == null || dto.getAtores().isEmpty()) {
-                              return new APIResponse.buildAPIResponse()
-                                      .setStatus(false)
-                                      .setStatusText(MessageState.ERRO)
-                                      .setDetails(Collections.singletonList("Os dados do Autor é Obrigatorio "))
-                                      .builder();
-
-                          }
-
-                          if (dto.getFiles() == null || dto.getFiles().isEmpty()){
-                              return new APIResponse.buildAPIResponse()
-                                      .setStatus(false)
-                                      .setStatusText(MessageState.ERRO)
-                                      .setDetails(Collections.singletonList("Os dados do Arquivo é Obrigatorio "))
-                                      .builder();
-
-                          }
-
-                          dto.getAtores().forEach(atorDto -> {
-                              iAtorRequestService.saveAtorRequest(atorDto, ((ProcessRequest) detailObj).getId());
-                          });
-
-                          iFileRequestService.saveAndUpdateFile(dto.getFiles(), ((ProcessRequest) detailObj).getId());
+        try {
 
 
+            if (dto == null || dto.getProcess() == null) {
+                return new APIResponse.buildAPIResponse()
+                        .setStatus(false)
+                        .setStatusText(MessageState.ERRO)
+                        .setDetails(List.of("O objeto process é obrigatório."))
+                        .builder();
+            }
 
-                      return new APIResponse.buildAPIResponse()
-                              .setStatus(true)
-                              .setStatusText(MessageState.SUCESSO)
-                              .setDetails(List.of(((ProcessRequest) detailObj).getIdentifierProcess())).builder();
-                  } else {
-
-                      return new APIResponse.buildAPIResponse()
-                              .setStatus(true)
-                              .setStatusText(MessageState.ERRO)
-                              .setDetails(Collections.singletonList("Os dados do Processo é Obrigatorio")).builder();
-                  }
+                if (processRepository.existsByNumeroProcesso(dto.getProcess().getNumeroProcesso())) {
+                    return new APIResponse.buildAPIResponse()
+                            .setStatus(false)
+                            .setDetails(Collections.singletonList("Numero de processo: " + dto.getProcess().getNumeroProcesso() + " ja existe"))
+                            .setStatusText(MessageState.ERRO)
+                            .builder();
+                }
 
 
+                APIResponse response = iProcessService.saveProcessStep(dto.getProcess());
+                Object detailObj = response.getDetails().get(0);
 
-              } catch (Exception e) {
+                if (!(detailObj instanceof ProcessRequest)) {
+
+                    throw new IllegalStateException("Objeto retornado não é do tipo ProcessRequest");
+                }
+
+                ProcessRequest processRequest = (ProcessRequest) detailObj;
+
+                if (dto.getAtores() == null || dto.getAtores().isEmpty()) {
+
+                    return new APIResponse.buildAPIResponse()
+                            .setStatus(false)
+                            .setStatusText(MessageState.ERRO)
+                            .setDetails(Collections.singletonList("Os dados do Autor é Obrigatorio "))
+                            .builder();
+                }
+
+                if (dto.getFiles() == null || dto.getFiles().isEmpty()) {
+
+                    return new APIResponse.buildAPIResponse()
+                            .setStatus(false)
+                            .setStatusText(MessageState.ERRO)
+                            .setDetails(Collections.singletonList("Os dados do Arquivo é Obrigatorio "))
+                            .builder();
+                }
+
+
+                dto.getAtores().forEach(atorDto -> {
+                    iAtorRequestService.saveAtorRequest(atorDto, ((ProcessRequest) detailObj).getId());
+                    //iAtorRequestService.saveAtorRequest(atorDto);
+                });
+
+
+                iFileRequestService.saveAndUpdateFile(dto.getFiles(), ((ProcessRequest) detailObj).getId());
+                // iFileRequestService.saveAndUpdateFile(dto.getFiles(), processRequest.getId());
+
 
                 return new APIResponse.buildAPIResponse()
+                        .setStatus(true)
+                        .setStatusText(MessageState.SUCESSO)
+                        .setDetails(List.of(processRequest.getIdentificadorProcesso()))
+                        .builder();
+
+
+
+        } catch (Exception e) {
+
+            return new APIResponse.buildAPIResponse()
                     .setStatus(false)
                     .setStatusText(MessageState.ERRO_SAVE)
-                    .setDetails(Collections.singletonList("Confirmar dados enviado do processo"))
+                    .setDetails(Collections.singletonList(e.getMessage()))
                     .builder();
+
         }
+
     }
-
-
 
 }
 
