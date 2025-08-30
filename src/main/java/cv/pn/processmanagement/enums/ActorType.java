@@ -4,6 +4,7 @@ public enum ActorType {
 
     Arguido("ARGUIDO", "Arguido"),
     QEIXOSO("QEIXOSO", "Qeixoso"),
+    DENUNCIANTE("DENUNCIANTE", "Denunciante"),
     DENUNCIADO("DENUNCIADO", "Denunciado"),
     TESTIMUNHA("TESTIMUNHA", "Testimunha"),
     VITIMA("VITIMA", "Vitima");
@@ -24,4 +25,6 @@ public enum ActorType {
     public String getDescription() {
         return description;
     }
+
+
 }

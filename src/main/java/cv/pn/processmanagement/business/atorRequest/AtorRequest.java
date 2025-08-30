@@ -20,15 +20,15 @@ public class AtorRequest extends CommonsAttributes {
 
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "actorsCharacteristics", length = 10)
+    @Column(name = "actorsCharacteristics", length = 30)
     private ActorsCharacteristics ator;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "actorType", length = 12)
+    @Column(name = "actorType", length = 30)
     private ActorType tipoAtor;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "personType", length = 10)
+    @Column(name = "personType", length = 30)
     private PersonType tipoPessoa;
 
     @Column(name = "detido")
@@ -38,13 +38,13 @@ public class AtorRequest extends CommonsAttributes {
     private LocalDateTime dataHoraDetencao;
 
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "pessoa_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "pessoa_fk")
     private PessoaRequest pessoaRequest;
 
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "empresa_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "empresa_fk")
     private EmpresaRequest empresaRequest;
 
     @JsonIgnore

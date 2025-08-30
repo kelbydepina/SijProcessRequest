@@ -1,15 +1,26 @@
 package cv.pn.processmanagement.business.identificacao;
 
+import cv.pn.processmanagement.enums.DocumentType;
+
 import java.time.LocalDate;
 
 public class IdentificacaoResponseDto {
 
+    private DocumentType documentType;
     private String tipo;
     private String numero;
     private String paisEmissor;
     private String entidadeEmissora;
     private LocalDate dataEmissao;
     private LocalDate dataValidade;
+
+    public DocumentType getDocumentType() {
+        return documentType;
+    }
+
+    public void setDocumentType(DocumentType documentType) {
+        this.documentType = documentType;
+    }
 
     public String getTipo() {
         return tipo;

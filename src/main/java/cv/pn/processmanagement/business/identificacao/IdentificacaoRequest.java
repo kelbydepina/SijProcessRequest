@@ -3,6 +3,7 @@ package cv.pn.processmanagement.business.identificacao;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import cv.pn.processmanagement.business.pessoaRequest.PessoaRequest;
 import cv.pn.processmanagement.commons.CommonsAttributes;
+import cv.pn.processmanagement.enums.DocumentType;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -11,8 +12,10 @@ import java.time.LocalDate;
 @Table(name = "Identificacao_Request")
 public class IdentificacaoRequest extends CommonsAttributes {
 
-    @Column(name = "identification_type", length = 100)
-    private String tipo;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "document_type", length = 100)
+    private DocumentType tipo;
+
 
     @Column(name = "identification_number", length = 100)
     private String numero;
@@ -30,15 +33,15 @@ public class IdentificacaoRequest extends CommonsAttributes {
     private LocalDate dataValidade;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pessoa_id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "pessoa_fk", nullable = false)
     private PessoaRequest pessoaRequest;
 
-    public String getTipo() {
+    public DocumentType getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(DocumentType tipo) {
         this.tipo = tipo;
     }
 

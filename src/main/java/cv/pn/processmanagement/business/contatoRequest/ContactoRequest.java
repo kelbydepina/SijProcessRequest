@@ -18,8 +18,8 @@ public class ContactoRequest extends CommonsAttributes {
     private String contacto;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pessoa")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "pessoa_fk", nullable = false)
     private PessoaRequest pessoaRequest;
 
     public String getTipo() {

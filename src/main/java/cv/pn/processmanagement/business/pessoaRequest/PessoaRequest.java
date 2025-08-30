@@ -63,7 +63,7 @@ public class PessoaRequest extends CommonsAttributes {
 
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "endereco_id")
+    @JoinColumn(name = "endereco_fk")
     private EnderecoRequest endereco;
 
     // OneToMany Identificacoes

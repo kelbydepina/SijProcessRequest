@@ -8,7 +8,7 @@ public interface IAtorRequestService {
 
     APIResponse saveAtorRequest(CreateAtorRequestDto dto, String processRequest);
 
-    APIResponse getAllAtor();
+    //APIResponse getAllAtor();
 
 
 

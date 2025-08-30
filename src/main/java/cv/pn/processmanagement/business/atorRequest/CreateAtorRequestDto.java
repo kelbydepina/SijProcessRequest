@@ -77,4 +77,9 @@ public class CreateAtorRequestDto {
     public void setEmpresa(EmpresaDto empresa) {
         this.empresa = empresa;
     }
+
+
+    public boolean isDetido() {
+        return false;
+    }
 }

@@ -1,21 +1,28 @@
 package cv.pn.processmanagement.business.identificacao;
 
+import cv.pn.processmanagement.enums.DocumentType;
+
+
+
 import java.time.LocalDate;
 
 public class IdentificacaoDto {
 
-    private String tipo;
+    /*@NotNull(message = "O campo 'tipo' é obrigatório")
+    @Pattern(regexp = "BI|TRE|NIF|CNI|PASS|CC",
+            message = "O campo 'tipo' deve ser preenchido com uma das opções: CNI, PASS, BI, TRE, NIF, CC")*/
+    private DocumentType  tipo;
     private String numero;
     private String paisEmissor;
     private String entidadeEmissora;
     private LocalDate dataEmissao;
     private LocalDate dataValidade;
 
-    public String getTipo() {
+    public DocumentType getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(DocumentType tipo) {
         this.tipo = tipo;
     }
 

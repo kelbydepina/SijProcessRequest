@@ -4,6 +4,7 @@ public enum ActorsCharacteristics {
 
     CONHECIDO("CONHECIDO", "Conhecido"),
     DESCONHECIDO("DESCONHECIDO", "Desconhecido"),
+    ANONIMO("ANONIMO", "ANONIMO"),
     INDETERMINADO("INDETERMINADO", "Indeterminado");
 
     private final String code;
