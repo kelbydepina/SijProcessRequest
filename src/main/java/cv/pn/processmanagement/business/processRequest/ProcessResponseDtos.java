@@ -23,6 +23,7 @@ public class ProcessResponseDtos extends ProcessDto {
     private OrigemQueixa origemQueixa; // "PN", "MP", "OUTRA"
     private String numeroReferencia;
     private String procurador;
+    private String organica;
     private LocalDate prazoExame;
     private LocalDate prazoReExame;
     private Integer versao = 1;
@@ -167,6 +168,16 @@ public class ProcessResponseDtos extends ProcessDto {
     @Override
     public void setProcurador(String procurador) {
         this.procurador = procurador;
+    }
+
+    @Override
+    public String getOrganica() {
+        return organica;
+    }
+
+    @Override
+    public void setOrganica(String organica) {
+        this.organica = organica;
     }
 
     @Override

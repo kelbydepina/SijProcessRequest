@@ -1,4 +1,4 @@
-package cv.pn.processmanagement.business.fileRequest.controller;
+/*package cv.pn.processmanagement.business.fileRequest.controller;
 
 import cv.pn.processmanagement.business.fileRequest.CreateFileRequestDto;
 import cv.pn.processmanagement.business.fileRequest.FileRequestDto;
@@ -30,4 +30,4 @@ public class FileController {
         APIResponse response = iFileRequestService.saveAndUpdateFile((List<FileRequestDto>) dto, processRequest);
         return ResponseEntity.ok(response);
     }
-}
+}*/

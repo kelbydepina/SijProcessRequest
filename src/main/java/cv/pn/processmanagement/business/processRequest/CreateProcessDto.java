@@ -19,6 +19,7 @@ public class CreateProcessDto { //é um DTO de entrada, ou seja, ele encapsula t
     private OrigemQueixa origemQueixa; // "PN", "MP", "OUTRA"
     private String numeroReferencia;
     private String procurador;
+    private String organica;
     private LocalDate prazoExame;
     private LocalDate prazoReExame;
     private Integer versao = 1;
@@ -101,6 +102,14 @@ public class CreateProcessDto { //é um DTO de entrada, ou seja, ele encapsula t
 
     public void setProcurador(String procurador) {
         this.procurador = procurador;
+    }
+
+    public String getOrganica() {
+        return organica;
+    }
+
+    public void setOrganica(String organica) {
+        this.organica = organica;
     }
 
     public LocalDate getPrazoExame() {

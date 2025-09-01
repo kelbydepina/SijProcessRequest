@@ -1,7 +1,7 @@
 package cv.pn.processmanagement.business.pessoaRequest.services;
 
 
-import cv.pn.processmanagement.business.atorRequest.services.IAtorRequestService;
+
 import cv.pn.processmanagement.business.contatoRequest.ContactoDto;
 import cv.pn.processmanagement.business.contatoRequest.ContactoRequest;
 import cv.pn.processmanagement.business.enderecoRequest.EnderecoRequest;
@@ -18,8 +18,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+
 
 
 @Service
@@ -57,7 +56,7 @@ public class PessoaRequestService implements IPessoaRequestService {
                     for (IdentificacaoDto identificacaoDto : dto.getIdentificacoes()) {
                         IdentificacaoRequest identificacao = new IdentificacaoRequest();
                         BeanUtils.copyProperties(identificacaoDto, identificacao);
-                        identificacao.setPessoaRequest(pessoa); // Define o lado proprietário
+                        identificacao.setPessoaRequest(pessoa);
                         identificacao.setUserCreate("SYSTEM");
                         pessoa.getIdentificacoes().add(identificacao);
                     }
@@ -68,7 +67,7 @@ public class PessoaRequestService implements IPessoaRequestService {
                     for (ContactoDto contactoDto : dto.getContactos()) {
                         ContactoRequest contacto = new ContactoRequest();
                         BeanUtils.copyProperties(contactoDto, contacto);
-                        contacto.setPessoaRequest(pessoa); // Define o lado proprietário
+                        contacto.setPessoaRequest(pessoa);
                         contacto.setUserCreate("SYSTEM");
                         pessoa.getContactos().add(contacto);
                     }

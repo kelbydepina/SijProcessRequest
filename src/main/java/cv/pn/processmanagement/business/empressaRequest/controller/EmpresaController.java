@@ -1,4 +1,4 @@
-package cv.pn.processmanagement.business.empressaRequest.controller;
+/*package cv.pn.processmanagement.business.empressaRequest.controller;
 
 import cv.pn.processmanagement.business.empressaRequest.EmpresaDto;
 import cv.pn.processmanagement.business.empressaRequest.services.IEmpresaService;
@@ -25,4 +25,4 @@ public class EmpresaController {
     public ResponseEntity<APIResponse> criarEmpresa(@RequestBody EmpresaDto dto) {
         return ResponseEntity.ok(iEmpresaService.createEmpresa(dto));
     }
-}
+}*/

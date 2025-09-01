@@ -20,15 +20,15 @@ public class AtorRequest extends CommonsAttributes {
 
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "actorsCharacteristics", length = 30)
+    @Column(name = "actorsCharacteristics", length = 30, nullable = false)
     private ActorsCharacteristics ator;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "actorType", length = 30)
+    @Column(name = "actorType", length = 30, nullable = false)
     private ActorType tipoAtor;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "personType", length = 30)
+    @Column(name = "personType", length = 30, nullable = false)
     private PersonType tipoPessoa;
 
     @Column(name = "detido")

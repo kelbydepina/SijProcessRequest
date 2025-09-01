@@ -1,4 +1,4 @@
-package cv.pn.processmanagement.business.processRequest.controller;
+/*package cv.pn.processmanagement.business.processRequest.controller;
 
 import cv.pn.processmanagement.business.processRequest.CreateProcessDto;
 import cv.pn.processmanagement.business.processRequest.services.IProcessService;
@@ -31,4 +31,4 @@ public class ProcessController {
     public ResponseEntity<APIResponse> getAllProcess() {
         return ResponseEntity.ok(iProcessService.getAllprocessIntruction());
     }
-}
+}*/

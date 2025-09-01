@@ -99,9 +99,9 @@ public class ProcessService implements IProcessService {
     private ProcessResponseDtos mappingProcessIntruction(ProcessRequest entity) { //Métudo auxiliar Converter uma entidade ProcessIntruction em um DTO ProcessResponseDtos.
         ProcessResponseDtos dto = new ProcessResponseDtos(); //Cria um DTO vazio.
 
-        BeanUtils.copyProperties(entity, dto); //Copia propriedades da entidade para o DTO.
+        BeanUtils.copyProperties(entity, dto);
 
-        return dto; //Retorna o DTO.
+        return dto;
     }
 }
 

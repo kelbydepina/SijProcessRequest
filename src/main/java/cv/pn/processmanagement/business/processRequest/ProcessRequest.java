@@ -27,7 +27,7 @@ public class  ProcessRequest extends CommonsAttributes {
     @Column(name = "type_deadline_investigation", length = 12)
     private TipoPrazoInvestigacao tipoPrazoInvestigacao;
 
-    @Column(name = "type_crime", length = 150) //, nullable = false)
+    @Column(name = "type_crime", length = 150, nullable = false)
     @NotBlank(message = "Tipo de crime é obrigatório")
     private String tipoCrime;
 
@@ -63,7 +63,7 @@ public class  ProcessRequest extends CommonsAttributes {
     private String procurador;
 
     // Prazo do exame pericial
-    @Column(name = "organic")//, nullable = false)
+    @Column(name = "organic", length = 20, nullable = false)//, nullable = false)
     private String organica; //Unidade orgânica
 
     @Column(name = "investigation_deadline")

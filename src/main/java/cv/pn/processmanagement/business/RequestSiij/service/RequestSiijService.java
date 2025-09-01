@@ -3,7 +3,6 @@ import cv.pn.processmanagement.business.RequestSiij.RequestSiijDto;
 import cv.pn.processmanagement.business.atorRequest.CreateAtorRequestDto;
 import cv.pn.processmanagement.business.atorRequest.services.IAtorRequestService;
 import cv.pn.processmanagement.business.fileRequest.service.IFileRequestService;
-import cv.pn.processmanagement.business.pessoaRequest.PessoaDto;
 import cv.pn.processmanagement.business.processRequest.ProcessRequest;
 import cv.pn.processmanagement.business.processRequest.ProcessRepository;
 import cv.pn.processmanagement.business.processRequest.services.IProcessService;
@@ -12,7 +11,7 @@ import cv.pn.processmanagement.enums.PersonType;
 import cv.pn.processmanagement.utilities.APIResponse;
 import cv.pn.processmanagement.utilities.MessageState;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
+
 
 
 import javax.transaction.Transactional;
@@ -51,7 +50,7 @@ public class RequestSiijService implements IRequestSiijService {
                     return new APIResponse.buildAPIResponse()
                             .setStatus(false)
                             .setStatusText(MessageState.ERRO)
-                            .setDetails(List.of("O objeto process é obrigatório."))
+                            .setDetails(List.of("Dados do  process é obrigatório."))
                             .builder();
             }
 
@@ -69,7 +68,7 @@ public class RequestSiijService implements IRequestSiijService {
 
             if (!(detailObj instanceof ProcessRequest)) {
 
-                    throw new IllegalStateException("Objeto retornado não é do tipo ProcessRequest");
+                    throw new IllegalStateException("Dados retornado não é do tipo ProcessRequest");
             }
 
                 ProcessRequest processRequest = (ProcessRequest) detailObj;
@@ -108,7 +107,7 @@ public class RequestSiijService implements IRequestSiijService {
 
                     if (atorDto.getPessoa() == null) {
 
-                            throw new IllegalStateException("Para ator=DESCONHECIDO, o objeto 'pessoa' é obrigatório.");
+                            throw new IllegalStateException("Para ator DESCONHECIDO, o objeto 'pessoa' é obrigatório.");
                     }
 
 

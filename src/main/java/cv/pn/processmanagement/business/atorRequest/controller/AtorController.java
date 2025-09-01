@@ -1,4 +1,4 @@
-package cv.pn.processmanagement.business.atorRequest.controller;
+/*package cv.pn.processmanagement.business.atorRequest.controller;
 
 import cv.pn.processmanagement.business.atorRequest.CreateAtorRequestDto;
 import cv.pn.processmanagement.business.atorRequest.services.IAtorRequestService;
@@ -27,10 +27,5 @@ public class AtorController {
     }
 
 
-    /*@Operation(summary = "Get All Actor")
-    @GetMapping()
-    public ResponseEntity<APIResponse> getAllAtor() {
-        APIResponse response = iAtorRequestService.getAllAtor();
-        return ResponseEntity.ok(response);
-    }*/
-}
+
+}*/

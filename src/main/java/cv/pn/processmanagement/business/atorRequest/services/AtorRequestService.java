@@ -53,11 +53,11 @@ public class AtorRequestService implements IAtorRequestService {
         try {
 
 
-                if (dto == null) return erro(" os dados  ator é obrigatório.");
+                if (dto == null) return erro(" Os dados do ator sao obrigatório.");
                 if (dto.getTipoPessoa() == null)
                     return erro("O campo 'tipoPessoa' é obrigatório (SINGULAR ou COLECTIVA).");
 
-                // Busca o processo (garante process_fk não nulo)
+
                 ProcessRequest process = processRepository.findById(processRequest)
                         .orElseThrow(() -> new EntityNotFoundException("Processo com ID " + processRequest + " não encontrado"));
 
@@ -87,15 +87,15 @@ public class AtorRequestService implements IAtorRequestService {
 
                 if (singular && dto.getAtor() == ActorsCharacteristics.DESCONHECIDO) {
                     PessoaDto p = dto.getPessoa(); // já garantido != null
-                    // 1) sexo obrigatório (enum)
+                    //  sexo obrigatório (enum)
                     if (p.getSexo() == null) {
                         return erro("Para pessoa DESCONHECIDA, o campo 'sexo' é obrigatório.");
                     }
-                    // 2) descricaoFisica: texto real (mín. 10 chars e não placeholders)
+                    // descricaoFisica: texto real (mín. 10 chars e não placeholders)
                     if (isDescricaoInvalida(p.getDescricaoFisica())) {
                         return erro("Para pessoa DESCONHECIDA, 'descricaoFisica' é obrigatória e deve descrever a pessoa ");
                     }
-                    // 3) nome sempre forçado para "DESCONHECIDO"
+                    // nome sempre forçado para "DESCONHECIDO"
                     p.setNome("DESCONHECIDO");
                 }
 
@@ -116,7 +116,7 @@ public class AtorRequestService implements IAtorRequestService {
                     }
                     PessoaRequest pessoa = (PessoaRequest) pResp.getDetails().get(0);
                     ator.setPessoaRequest(pessoa);
-                } else { // COLECTIVA
+                } else {
                     APIResponse eResp = iEmpresaService.createEmpresa(dto.getEmpresa());
                     if (eResp == null || !Boolean.TRUE.equals(eResp.getStatus())
                             || eResp.getDetails() == null || eResp.getDetails().isEmpty()
