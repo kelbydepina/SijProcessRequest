@@ -63,7 +63,7 @@ public class  ProcessRequest extends CommonsAttributes {
     private String procurador;
 
     // Prazo do exame pericial
-    @Column(name = "organic", length = 20, nullable = false)//, nullable = false)
+    @Column(name = "organic", length = 20)//, nullable = false)
     private String organica; //Unidade orgânica
 
     @Column(name = "investigation_deadline")

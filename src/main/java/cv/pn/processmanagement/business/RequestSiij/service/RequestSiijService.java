@@ -3,6 +3,7 @@ import cv.pn.processmanagement.business.RequestSiij.RequestSiijDto;
 import cv.pn.processmanagement.business.atorRequest.CreateAtorRequestDto;
 import cv.pn.processmanagement.business.atorRequest.services.IAtorRequestService;
 import cv.pn.processmanagement.business.fileRequest.service.IFileRequestService;
+import cv.pn.processmanagement.business.pessoaRequest.PessoaDto;
 import cv.pn.processmanagement.business.processRequest.ProcessRequest;
 import cv.pn.processmanagement.business.processRequest.ProcessRepository;
 import cv.pn.processmanagement.business.processRequest.services.IProcessService;
@@ -11,7 +12,7 @@ import cv.pn.processmanagement.enums.PersonType;
 import cv.pn.processmanagement.utilities.APIResponse;
 import cv.pn.processmanagement.utilities.MessageState;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 
 import javax.transaction.Transactional;
@@ -50,7 +51,7 @@ public class RequestSiijService implements IRequestSiijService {
                     return new APIResponse.buildAPIResponse()
                             .setStatus(false)
                             .setStatusText(MessageState.ERRO)
-                            .setDetails(List.of("Dados do  process é obrigatório."))
+                            .setDetails(List.of("O objeto process é obrigatório."))
                             .builder();
             }
 
@@ -62,40 +63,10 @@ public class RequestSiijService implements IRequestSiijService {
                             .builder();
             }
 
-
-                APIResponse response = iProcessService.saveProcessStep(dto.getProcess());
-                Object detailObj = response.getDetails().get(0);
-
-            if (!(detailObj instanceof ProcessRequest)) {
-
-                    throw new IllegalStateException("Dados retornado não é do tipo ProcessRequest");
-            }
-
-                ProcessRequest processRequest = (ProcessRequest) detailObj;
-
-            if (dto.getAtores() == null || dto.getAtores().isEmpty()) {
-
-                    return new APIResponse.buildAPIResponse()
-                            .setStatus(false)
-                            .setStatusText(MessageState.ERRO)
-                            .setDetails(Collections.singletonList("Os dados do Autor é Obrigatorio "))
-                            .builder();
-            }
-
-            if (dto.getFiles() == null || dto.getFiles().isEmpty()) {
-
-                    return new APIResponse.buildAPIResponse()
-                            .setStatus(false)
-                            .setStatusText(MessageState.ERRO)
-                            .setDetails(Collections.singletonList("Os dados do Arquivo é Obrigatorio "))
-                            .builder();
-            }
-
-
-
             for (CreateAtorRequestDto atorDto : dto.getAtores()) {
 
                     boolean ehSingular = atorDto.getTipoPessoa() == PersonType.SINGULAR;
+                boolean colectiva = atorDto.getTipoPessoa() == PersonType.COLECTIVA;
 
                     String nomePossivel = (atorDto.getPessoa() != null) ? atorDto.getPessoa().getNome() : null;
                     boolean ehDesconhecidoPorEnum  = atorDto.getAtor() == ActorsCharacteristics.DESCONHECIDO;
@@ -103,11 +74,31 @@ public class RequestSiijService implements IRequestSiijService {
                             && !"".equals(nomePossivel.trim())
                             && "DESCONHECIDO".equalsIgnoreCase(nomePossivel.trim());
 
+
+                if (atorDto.getPessoa() != null && atorDto.getEmpresa() != null) {
+                    if (ehSingular) {
+                        throw new IllegalStateException("Envie apenas dados de 'pessoa' porque SINGULAR é uma pessoa.");
+                    } else if (colectiva) {
+                        throw new IllegalStateException("Envie apenas dados de 'empresa' porque COLECTIVA é uma empresa.");
+                    } else {
+                        throw new IllegalStateException("Envie apenas dados de 'pessoa' OU 'empresa', nunca os dois.");
+                    }
+                }
+
+
+                if (ehSingular && atorDto.getPessoa() == null)
+                    throw new IllegalStateException("Para tipoPessoa é SINGULAR, os dados 'pessoa' é obrigatório.");
+
+                if (colectiva && atorDto.getEmpresa() == null)
+                    throw new IllegalStateException("Para tipoPessoa é COLECTIVA, o dados 'empresa' é obrigatório.");
+
+
+
                 if (ehSingular && (ehDesconhecidoPorEnum || ehDesconhecidoPeloNome)) {
 
                     if (atorDto.getPessoa() == null) {
 
-                            throw new IllegalStateException("Para ator DESCONHECIDO, o objeto 'pessoa' é obrigatório.");
+                            throw new IllegalStateException("Para ator=DESCONHECIDO, o objeto 'pessoa' é obrigatório.");
                     }
 
 
@@ -120,7 +111,8 @@ public class RequestSiijService implements IRequestSiijService {
                     String df = atorDto.getPessoa().getDescricaoFisica();
                     if (df == null || df.trim().isEmpty()) {
 
-                            throw new IllegalStateException("Para pessoa DESCONHECIDA, o campo 'descricaoFisica' é obrigatório.");
+
+                        throw new IllegalStateException("Para pessoa DESCONHECIDA, o campo 'descricaoFisica' é obrigatório.");
                     }
 
 
@@ -131,20 +123,39 @@ public class RequestSiijService implements IRequestSiijService {
                     }
                 }
 
-
-
-                APIResponse aResp = iAtorRequestService.saveAtorRequest(atorDto, processRequest.getId());
-                if (!Boolean.TRUE.equals(aResp.getStatus())) {
-
-                        throw new IllegalStateException(firstDetail(aResp.getDetails()));
-                }
             }
 
+            APIResponse response = iProcessService.saveProcessStep(dto.getProcess());
+            Object detailObj = response.getDetails().get(0);
 
-                iFileRequestService.saveAndUpdateFile(dto.getFiles(), ((ProcessRequest) detailObj).getId());
+            if (!(detailObj instanceof ProcessRequest)) {
 
+                throw new IllegalStateException("Objeto retornado não é do tipo ProcessRequest");
+            }
 
+            ProcessRequest processRequest = (ProcessRequest) detailObj;
 
+            if (dto.getAtores() == null || dto.getAtores().isEmpty()) {
+
+                return new APIResponse.buildAPIResponse()
+                        .setStatus(false)
+                        .setStatusText(MessageState.ERRO)
+                        .setDetails(Collections.singletonList("Os dados do Autor é Obrigatorio "))
+                        .builder();
+            }
+
+            if (dto.getFiles() == null || dto.getFiles().isEmpty()) {
+
+                return new APIResponse.buildAPIResponse()
+                        .setStatus(false)
+                        .setStatusText(MessageState.ERRO)
+                        .setDetails(Collections.singletonList("Os dados do Arquivo é Obrigatorio "))
+                        .builder();
+            }
+
+             iAtorRequestService.saveAtorRequest(dto.getAtores(), ((ProcessRequest) detailObj).getId());
+
+            iFileRequestService.saveAndUpdateFile(dto.getFiles(), ((ProcessRequest) detailObj).getId());
 
                 return new APIResponse.buildAPIResponse()
                         .setStatus(true)

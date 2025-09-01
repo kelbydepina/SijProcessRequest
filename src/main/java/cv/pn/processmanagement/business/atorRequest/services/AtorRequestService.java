@@ -4,6 +4,8 @@ import cv.pn.processmanagement.business.atorRequest.AtorRequestRepository;
 import cv.pn.processmanagement.business.atorRequest.CreateAtorRequestDto;
 import cv.pn.processmanagement.business.empressaRequest.EmpresaRequest;
 import cv.pn.processmanagement.business.empressaRequest.services.IEmpresaService;
+import cv.pn.processmanagement.business.fileRequest.FileRequest;
+import cv.pn.processmanagement.business.fileRequest.FileRequestDto;
 import cv.pn.processmanagement.business.pessoaRequest.PessoaDto;
 import cv.pn.processmanagement.business.pessoaRequest.PessoaRequest;
 import cv.pn.processmanagement.business.pessoaRequest.services.IPessoaRequestService;
@@ -19,8 +21,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.Collections;
 import java.util.List;
-
-
+import java.util.stream.Collectors;
 
 
 @Service
@@ -47,123 +48,51 @@ public class AtorRequestService implements IAtorRequestService {
 
     @Transactional
     @Override
-    public APIResponse saveAtorRequest(CreateAtorRequestDto dto, String processRequest) {
+    public APIResponse saveAtorRequest(List<CreateAtorRequestDto> atoresDtos, String processRequest) {
 
 
         try {
 
+            List<AtorRequest>  actor =  atoresDtos
+                    .stream()
+                    .map(atores -> {
 
-                if (dto == null) return erro(" Os dados do ator sao obrigatório.");
-                if (dto.getTipoPessoa() == null)
-                    return erro("O campo 'tipoPessoa' é obrigatório (SINGULAR ou COLECTIVA).");
+                        AtorRequest ator = new AtorRequest();
+                        BeanUtils.copyProperties(atores, ator);
 
+                        ator.setUserCreate("SYSTEM");
 
-                ProcessRequest process = processRepository.findById(processRequest)
-                        .orElseThrow(() -> new EntityNotFoundException("Processo com ID " + processRequest + " não encontrado"));
+                        APIResponse pResp = iPessoaRequestService.createPessoa(atores.getPessoa());
 
-                boolean singular  = dto.getTipoPessoa() == PersonType.SINGULAR;
-                boolean colectiva = dto.getTipoPessoa() == PersonType.COLECTIVA;
+                        PessoaRequest pessoa = (PessoaRequest) pResp.getDetails().get(0);
+                        ator.setPessoaRequest(pessoa);
 
+                        APIResponse eResp = iEmpresaService.createEmpresa(atores.getEmpresa());
 
+                        EmpresaRequest empresa = (EmpresaRequest) eResp.getDetails().get(0);
+                        ator.setEmpresaRequest(empresa);
 
-                if (dto.getPessoa() != null && dto.getEmpresa() != null) {
-                    if (singular) {
-                        return erro("Envie apenas dados de 'pessoa' porque SINGULAR é uma pessoa.");
-                    } else if (colectiva) {
-                        return erro("Envie apenas dados de 'empresa' porque COLECTIVA é uma empresa.");
-                    } else {
-                        return erro("Envie apenas dados de 'pessoa' OU 'empresa', nunca os dois.");
-                    }
-                }
+                        atorRequestRepository.saveAndFlush(ator);
 
+                        return ator;
 
+                    }).collect(Collectors.toList());
 
-                if (singular && dto.getPessoa() == null)
-                    return erro("Para tipoPessoa é SINGULAR, os dados 'pessoa' é obrigatório.");
-                if (colectiva && dto.getEmpresa() == null)
-                    return erro("Para tipoPessoa é COLECTIVA, o dados 'empresa' é obrigatório.");
-
-
-
-                if (singular && dto.getAtor() == ActorsCharacteristics.DESCONHECIDO) {
-                    PessoaDto p = dto.getPessoa(); // já garantido != null
-                    //  sexo obrigatório (enum)
-                    if (p.getSexo() == null) {
-                        return erro("Para pessoa DESCONHECIDA, o campo 'sexo' é obrigatório.");
-                    }
-                    // descricaoFisica: texto real (mín. 10 chars e não placeholders)
-                    if (isDescricaoInvalida(p.getDescricaoFisica())) {
-                        return erro("Para pessoa DESCONHECIDA, 'descricaoFisica' é obrigatória e deve descrever a pessoa ");
-                    }
-                    // nome sempre forçado para "DESCONHECIDO"
-                    p.setNome("DESCONHECIDO");
-                }
-
-
-
-                AtorRequest ator = new AtorRequest();
-                BeanUtils.copyProperties(dto, ator, "id", "processRequest", "pessoa", "empresa");
-                ator.setProcessRequest(process);
-                ator.setUserCreate("SYSTEM");
-
-
-                if (singular) {
-                    APIResponse pResp = iPessoaRequestService.createPessoa(dto.getPessoa());
-                    if (pResp == null || !Boolean.TRUE.equals(pResp.getStatus())
-                            || pResp.getDetails() == null || pResp.getDetails().isEmpty()
-                            || !(pResp.getDetails().get(0) instanceof PessoaRequest)) {
-                        return erro("Falha ao salvar Pessoa do ator.");
-                    }
-                    PessoaRequest pessoa = (PessoaRequest) pResp.getDetails().get(0);
-                    ator.setPessoaRequest(pessoa);
-                } else {
-                    APIResponse eResp = iEmpresaService.createEmpresa(dto.getEmpresa());
-                    if (eResp == null || !Boolean.TRUE.equals(eResp.getStatus())
-                            || eResp.getDetails() == null || eResp.getDetails().isEmpty()
-                            || !(eResp.getDetails().get(0) instanceof EmpresaRequest)) {
-                        return erro("Falha ao salvar Empresa do ator.");
-                    }
-                    EmpresaRequest empresa = (EmpresaRequest) eResp.getDetails().get(0);
-                    ator.setEmpresaRequest(empresa);
-                }
-
-
-                atorRequestRepository.saveAndFlush(ator);
-
-                return ok(ator);
-
-        } catch (Exception e) {
-            return erro("Erro ao salvar ator: " + e.getMessage());
-        }
-
-
-    }
-
-        private boolean isDescricaoInvalida(String descricaoFisica) {
-            if (descricaoFisica.length() < 10) return true;
-            String t = descricaoFisica.trim();
-            if (t.length() < MIN_DESC_CHARS) return true;
-            String low = t.toLowerCase();
-
-            return low.equals("string") || low.equals("descricao") || low.equals("descrição")
-                    || low.equals("n/a") || low.equals("na") || low.equals("-") || low.equals("desconhecido");
-    }
-
-
-        private APIResponse ok(Object d) {
             return new APIResponse.buildAPIResponse()
                     .setStatus(true)
                     .setStatusText(MessageState.SUCESSO)
-                    .setDetails(List.of(d))
+                    .setDetails(Collections.singletonList(actor))
                     .builder();
-    }
 
-        private APIResponse erro(String m) {
+
+        } catch (Exception e) {
             return new APIResponse.buildAPIResponse()
                     .setStatus(false)
                     .setStatusText(MessageState.ERRO)
-                    .setDetails(Collections.singletonList(m))
                     .builder();
+        }
+
+
     }
 }
 

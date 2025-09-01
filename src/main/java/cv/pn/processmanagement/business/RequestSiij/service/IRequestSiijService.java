@@ -6,4 +6,5 @@ import cv.pn.processmanagement.utilities.APIResponse;
 public interface IRequestSiijService {
 
     APIResponse saveFullProcess(RequestSiijDto dto);
+
 }
