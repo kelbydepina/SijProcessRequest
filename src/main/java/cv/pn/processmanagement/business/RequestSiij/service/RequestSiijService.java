@@ -3,7 +3,7 @@ import cv.pn.processmanagement.business.RequestSiij.RequestSiijDto;
 import cv.pn.processmanagement.business.atorRequest.CreateAtorRequestDto;
 import cv.pn.processmanagement.business.atorRequest.services.IAtorRequestService;
 import cv.pn.processmanagement.business.fileRequest.service.IFileRequestService;
-import cv.pn.processmanagement.business.pessoaRequest.PessoaDto;
+import cv.pn.processmanagement.business.processRequest.CreateProcessDto;
 import cv.pn.processmanagement.business.processRequest.ProcessRequest;
 import cv.pn.processmanagement.business.processRequest.ProcessRepository;
 import cv.pn.processmanagement.business.processRequest.services.IProcessService;
@@ -12,12 +12,13 @@ import cv.pn.processmanagement.enums.PersonType;
 import cv.pn.processmanagement.utilities.APIResponse;
 import cv.pn.processmanagement.utilities.MessageState;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
+
 
 
 import javax.transaction.Transactional;
 import java.util.Collections;
 import java.util.List;
+
 
 
 
@@ -51,9 +52,23 @@ public class RequestSiijService implements IRequestSiijService {
                     return new APIResponse.buildAPIResponse()
                             .setStatus(false)
                             .setStatusText(MessageState.ERRO)
-                            .setDetails(List.of("O objeto process é obrigatório."))
+                            .setDetails(List.of("Os dados process é obrigatório."))
                             .builder();
             }
+
+            CreateProcessDto proc = dto.getProcess();
+
+                if (proc.getTipoCrime() == null || proc.getTipoCrime().trim().isEmpty()
+                        || "string".equalsIgnoreCase(proc.getTipoCrime().trim())) {
+                    throw new IllegalStateException("Tipo de crime é obrigatório.");
+                }
+
+                if (proc.getProcurador() == null || proc.getProcurador().trim().isEmpty()
+                        || "string".equalsIgnoreCase(proc.getProcurador().trim())) {
+                    throw new IllegalStateException("Procurador é obrigatório.");
+            }
+
+
 
                 if (processRepository.existsByNumeroProcesso(dto.getProcess().getNumeroProcesso())) {
                     return new APIResponse.buildAPIResponse()
@@ -65,14 +80,14 @@ public class RequestSiijService implements IRequestSiijService {
 
             for (CreateAtorRequestDto atorDto : dto.getAtores()) {
 
-                    boolean ehSingular = atorDto.getTipoPessoa() == PersonType.SINGULAR;
-                boolean colectiva = atorDto.getTipoPessoa() == PersonType.COLECTIVA;
+                        boolean ehSingular = atorDto.getTipoPessoa() == PersonType.SINGULAR;
+                        boolean colectiva = atorDto.getTipoPessoa() == PersonType.COLECTIVA;
 
-                    String nomePossivel = (atorDto.getPessoa() != null) ? atorDto.getPessoa().getNome() : null;
-                    boolean ehDesconhecidoPorEnum  = atorDto.getAtor() == ActorsCharacteristics.DESCONHECIDO;
-                    boolean ehDesconhecidoPeloNome = (nomePossivel != null)
-                            && !"".equals(nomePossivel.trim())
-                            && "DESCONHECIDO".equalsIgnoreCase(nomePossivel.trim());
+                        String nomePossivel = (atorDto.getPessoa() != null) ? atorDto.getPessoa().getNome() : null;
+                        boolean ehDesconhecidoPorEnum  = atorDto.getAtor() == ActorsCharacteristics.DESCONHECIDO;
+                        boolean ehDesconhecidoPeloNome = (nomePossivel != null)
+                                && !"".equals(nomePossivel.trim())
+                                && "DESCONHECIDO".equalsIgnoreCase(nomePossivel.trim());
 
 
                 if (atorDto.getPessoa() != null && atorDto.getEmpresa() != null) {
@@ -98,7 +113,7 @@ public class RequestSiijService implements IRequestSiijService {
 
                     if (atorDto.getPessoa() == null) {
 
-                            throw new IllegalStateException("Para ator=DESCONHECIDO, o objeto 'pessoa' é obrigatório.");
+                            throw new IllegalStateException("Para ator DESCONHECIDO, os dados 'pessoa' sao obrigatório.");
                     }
 
 
@@ -106,6 +121,7 @@ public class RequestSiijService implements IRequestSiijService {
 
                             throw new IllegalStateException("Para pessoa DESCONHECIDA, o campo 'sexo' é obrigatório.");
                     }
+
 
 
                     String df = atorDto.getPessoa().getDescricaoFisica();
@@ -125,63 +141,59 @@ public class RequestSiijService implements IRequestSiijService {
 
             }
 
-            APIResponse response = iProcessService.saveProcessStep(dto.getProcess());
-            Object detailObj = response.getDetails().get(0);
+                APIResponse response = iProcessService.saveProcessStep(dto.getProcess());
+                Object detailObj = response.getDetails().get(0);
 
             if (!(detailObj instanceof ProcessRequest)) {
 
                 throw new IllegalStateException("Objeto retornado não é do tipo ProcessRequest");
             }
 
-            ProcessRequest processRequest = (ProcessRequest) detailObj;
+                ProcessRequest processRequest = (ProcessRequest) detailObj;
 
             if (dto.getAtores() == null || dto.getAtores().isEmpty()) {
 
-                return new APIResponse.buildAPIResponse()
-                        .setStatus(false)
-                        .setStatusText(MessageState.ERRO)
-                        .setDetails(Collections.singletonList("Os dados do Autor é Obrigatorio "))
-                        .builder();
+                    return new APIResponse.buildAPIResponse()
+                            .setStatus(false)
+                            .setStatusText(MessageState.ERRO)
+                            .setDetails(Collections.singletonList("Os dados do Autor é Obrigatorio "))
+                            .builder();
             }
 
             if (dto.getFiles() == null || dto.getFiles().isEmpty()) {
 
-                return new APIResponse.buildAPIResponse()
-                        .setStatus(false)
-                        .setStatusText(MessageState.ERRO)
-                        .setDetails(Collections.singletonList("Os dados do Arquivo é Obrigatorio "))
-                        .builder();
+                    return new APIResponse.buildAPIResponse()
+                            .setStatus(false)
+                            .setStatusText(MessageState.ERRO)
+                            .setDetails(Collections.singletonList("Os dados do Arquivo é Obrigatorio "))
+                            .builder();
             }
 
-             iAtorRequestService.saveAtorRequest(dto.getAtores(), ((ProcessRequest) detailObj).getId());
+                 iAtorRequestService.saveAtorRequest(dto.getAtores(), ((ProcessRequest) detailObj).getId());
 
-            iFileRequestService.saveAndUpdateFile(dto.getFiles(), ((ProcessRequest) detailObj).getId());
+                iFileRequestService.saveAndUpdateFile(dto.getFiles(), ((ProcessRequest) detailObj).getId());
 
-                return new APIResponse.buildAPIResponse()
-                        .setStatus(true)
-                        .setStatusText(MessageState.SUCESSO)
-                        .setDetails(List.of(processRequest.getIdentificadorProcesso()))
-                        .builder();
+                    return new APIResponse.buildAPIResponse()
+                            .setStatus(true)
+                            .setStatusText(MessageState.SUCESSO)
+                            .setDetails(List.of(processRequest.getIdentificadorProcesso()))
+                            .builder();
 
 
 
         } catch (Exception e) {
 
-                return new APIResponse.buildAPIResponse()
-                        .setStatus(false)
-                        .setStatusText(MessageState.ERRO_SAVE)
-                        .setDetails(Collections.singletonList(e.getMessage()))
-                        .builder();
+                    return new APIResponse.buildAPIResponse()
+                            .setStatus(false)
+                            .setStatusText(MessageState.ERRO_SAVE)
+                            .setDetails(Collections.singletonList(e.getMessage()))
+                            .builder();
 
         }
 
     }
 
-    private String firstDetail(List<Object> details) {
-            if (details == null || details.isEmpty()) return "Erro ao salvar ator.";
-            Object d0 = details.get(0);
-            return (d0 == null) ? "Erro ao salvar ator." : String.valueOf(d0);
-    }
+
 
 
 }

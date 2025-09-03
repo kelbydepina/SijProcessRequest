@@ -1,5 +1,6 @@
 package cv.pn.processmanagement.business.atorRequest;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import cv.pn.processmanagement.business.empressaRequest.EmpresaDto;
 import cv.pn.processmanagement.business.pessoaRequest.PessoaDto;
 import cv.pn.processmanagement.commons.CommonsParametrizationAttributesDto;
@@ -8,7 +9,9 @@ import cv.pn.processmanagement.enums.ActorsCharacteristics;
 import cv.pn.processmanagement.enums.PersonType;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class AtorDto implements Serializable {
 
@@ -16,7 +19,11 @@ public class AtorDto implements Serializable {
     private ActorType tipoAtor;
     private PersonType tipoPessoa;
     private Boolean detido;
-    private LocalDateTime dataHoraDetencao;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private String dataDetencao;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm[:ss]")
+    private String horaDetencao;
+
     private PessoaDto pessoa;
     private EmpresaDto empresa;
 
@@ -54,12 +61,20 @@ public class AtorDto implements Serializable {
         this.detido = detido;
     }
 
-    public LocalDateTime getDataHoraDetencao() {
-        return dataHoraDetencao;
+    public String getDataDetencao() {
+        return dataDetencao;
     }
 
-    public void setDataHoraDetencao(LocalDateTime dataHoraDetencao) {
-        this.dataHoraDetencao = dataHoraDetencao;
+    public void setDataDetencao(String dataDetencao) {
+        this.dataDetencao = dataDetencao;
+    }
+
+    public String getHoraDetencao() {
+        return horaDetencao;
+    }
+
+    public void setHoraDetencao(String horaDetencao) {
+        this.horaDetencao = horaDetencao;
     }
 
     public PessoaDto getPessoa() {

@@ -1,6 +1,10 @@
 package cv.pn.processmanagement.business.empressaRequest;
 
+import cv.pn.processmanagement.business.contatoRequest.ContactoDto;
+import cv.pn.processmanagement.business.enderecoRequest.EnderecoDto;
+
 import java.time.LocalDate;
+import java.util.List;
 
 public class EmpresaDto {
 
@@ -12,6 +16,8 @@ public class EmpresaDto {
     private String nrMatricula;
     private String funcao;
     private String nomeRepresentante;
+    private EnderecoDto endereco;
+    private List<ContactoDto> contactos;
 
     public String getRegistoComercial() {
         return registoComercial;
@@ -75,5 +81,21 @@ public class EmpresaDto {
 
     public void setNomeRepresentante(String nomeRepresentante) {
         this.nomeRepresentante = nomeRepresentante;
+    }
+
+    public EnderecoDto getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(EnderecoDto endereco) {
+        this.endereco = endereco;
+    }
+
+    public List<ContactoDto> getContactos() {
+        return contactos;
+    }
+
+    public void setContactos(List<ContactoDto> contactos) {
+        this.contactos = contactos;
     }
 }

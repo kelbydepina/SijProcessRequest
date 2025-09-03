@@ -7,6 +7,6 @@ import cv.pn.processmanagement.business.pessoaRequest.PessoaRequest;
 import java.util.List;
 
 public interface IIdentificacaoService {
-   // List<IdentificacaoRequest> processarIdentificacoes(List<IdentificacaoDto> identificacoes, PessoaRequest pessoaRequest);
+
     List<IdentificacaoRequest> processarIdentificacoes(List<IdentificacaoDto> identificacoes, PessoaRequest pessoaRequest);
 }

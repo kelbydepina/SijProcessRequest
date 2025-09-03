@@ -5,6 +5,7 @@ import cv.pn.processmanagement.enums.OrigemQueixa;
 import cv.pn.processmanagement.enums.TipoPrazoInvestigacao;
 
 import java.time.LocalDate;
+import java.util.Collection;
 
 
 public class CreateProcessDto { //é um DTO de entrada, ou seja, ele encapsula todos os dados que o cliente envia para o backend ao criar um novo registro de processo jurídico. Ele permite separar a lógica da entidade ProcessIntruction, protegendo-a contra alterações diretas e mantendo o sistema desacoplado.
@@ -135,6 +136,7 @@ public class CreateProcessDto { //é um DTO de entrada, ou seja, ele encapsula t
     public void setVersao(Integer versao) {
         this.versao = versao;
     }
+
 
 
 }

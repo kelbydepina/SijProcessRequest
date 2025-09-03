@@ -1,11 +1,13 @@
 package cv.pn.processmanagement.business.empressaRequest;
 
+import cv.pn.processmanagement.business.contatoRequest.ContactoRequest;
+import cv.pn.processmanagement.business.enderecoRequest.EnderecoRequest;
 import cv.pn.processmanagement.commons.CommonsAttributes;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -35,6 +37,14 @@ public class EmpresaRequest extends CommonsAttributes {
 
     @Column(name = "representative_name", length = 200)
     private String nomeRepresentante;
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "endereco_fk")
+    private EnderecoRequest endereco;
+
+    // OneToMany Contactos
+    @OneToMany(mappedBy = "empresaRequest", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ContactoRequest> contactos = new ArrayList<>();
 
     public String getRegistoComercial() {
         return registoComercial;
@@ -98,5 +108,21 @@ public class EmpresaRequest extends CommonsAttributes {
 
     public void setNomeRepresentante(String nomeRepresentante) {
         this.nomeRepresentante = nomeRepresentante;
+    }
+
+    public List<ContactoRequest> getContactos() {
+        return contactos;
+    }
+
+    public void setContactos(List<ContactoRequest> contactos) {
+        this.contactos = contactos;
+    }
+
+    public EnderecoRequest getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(EnderecoRequest endereco) {
+        this.endereco = endereco;
     }
 }

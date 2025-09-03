@@ -28,15 +28,18 @@ public class  ProcessRequest extends CommonsAttributes {
     private TipoPrazoInvestigacao tipoPrazoInvestigacao;
 
     @Column(name = "type_crime", length = 150, nullable = false)
-    @NotBlank(message = "Tipo de crime é obrigatório")
     private String tipoCrime;
 
     @Column(name = "observation", length = 512)
     private String observacao;
 
 
-    @Column(name = "district", length = 100)
-    private String comarca;
+    @Column(name = "district_code", length = 50, nullable = false)
+    private String comarcaCode;
+
+    @Column(name = "district_description", length = 200, nullable = false)
+    @NotBlank(message = "Descrição da comarca é obrigatória")
+    private String comarcaDescription;
 
     @Column(name = "examination_deadline")
     private LocalDate prazoExame;
@@ -44,7 +47,6 @@ public class  ProcessRequest extends CommonsAttributes {
     @Column(name = "examination_reDeadline")
     private LocalDate prazoReExame;
 
-    //@JsonIgnore
     @Column(name = "process_number", unique = true)
     @NotBlank(message = "Número de processo é obrigatório")
     private String numeroProcesso;
@@ -59,11 +61,12 @@ public class  ProcessRequest extends CommonsAttributes {
     @Column(name = "status", length = 50)
     private String status;
 
-    @Column(name = "prosecutor", length = 200)
+    @Column(name = "prosecutor", length = 200, nullable = false)
+    @NotBlank(message = "Procurador é obrigatório")
     private String procurador;
 
     // Prazo do exame pericial
-    @Column(name = "organic", length = 20)//, nullable = false)
+    @Column(name = "organic", length = 20, nullable = false)
     private String organica; //Unidade orgânica
 
     @Column(name = "investigation_deadline")
@@ -136,12 +139,20 @@ public class  ProcessRequest extends CommonsAttributes {
         this.observacao = observacao;
     }
 
-    public String getComarca() {
-        return comarca;
+    public String getComarcaCode() {
+        return comarcaCode;
     }
 
-    public void setComarca(String comarca) {
-        this.comarca = comarca;
+    public void setComarcaCode(String comarcaCode) {
+        this.comarcaCode = comarcaCode;
+    }
+
+    public String getComarcaDescription() {
+        return comarcaDescription;
+    }
+
+    public void setComarcaDescription(String comarcaDescription) {
+        this.comarcaDescription = comarcaDescription;
     }
 
     public LocalDate getPrazoExame() {

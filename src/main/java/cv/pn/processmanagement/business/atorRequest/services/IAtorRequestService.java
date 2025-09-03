@@ -9,7 +9,7 @@ import java.util.List;
 public interface IAtorRequestService {
 
     APIResponse saveAtorRequest(List<CreateAtorRequestDto> atoresDtos, String processRequest);
-    //APIResponse saveAtorRequest(CreateAtorRequestDto dto, String processRequest);
+
 
 
     //APIResponse getAllAtor();

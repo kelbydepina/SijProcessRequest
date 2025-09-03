@@ -1,6 +1,7 @@
 package cv.pn.processmanagement.business.contatoRequest;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import cv.pn.processmanagement.business.empressaRequest.EmpresaRequest;
 import cv.pn.processmanagement.business.pessoaRequest.PessoaRequest;
 import cv.pn.processmanagement.commons.CommonsAttributes;
 
@@ -18,9 +19,14 @@ public class ContactoRequest extends CommonsAttributes {
     private String contacto;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "pessoa_fk", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "pessoa_fk")
     private PessoaRequest pessoaRequest;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "empresa_fk")
+    private EmpresaRequest empresaRequest;
 
     public String getTipo() {
         return tipo;
@@ -44,5 +50,13 @@ public class ContactoRequest extends CommonsAttributes {
 
     public void setPessoaRequest(PessoaRequest pessoaRequest) {
         this.pessoaRequest = pessoaRequest;
+    }
+
+    public EmpresaRequest getEmpresaRequest() {
+        return empresaRequest;
+    }
+
+    public void setEmpresaRequest(EmpresaRequest empresaRequest) {
+        this.empresaRequest = empresaRequest;
     }
 }

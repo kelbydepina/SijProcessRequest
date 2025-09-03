@@ -30,8 +30,6 @@ public class PessoaRequestService implements IPessoaRequestService {
 
     public PessoaRequestService(PessoaRepository pessoaRepository, IIdentificacaoService identificacaoService) {
         this.pessoaRepository = pessoaRepository;
-
-
         this.identificacaoService = identificacaoService;
     }
     @Transactional

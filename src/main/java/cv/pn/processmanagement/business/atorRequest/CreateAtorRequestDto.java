@@ -1,21 +1,28 @@
 package cv.pn.processmanagement.business.atorRequest;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import cv.pn.processmanagement.business.empressaRequest.EmpresaDto;
 import cv.pn.processmanagement.business.pessoaRequest.PessoaDto;
 import cv.pn.processmanagement.enums.ActorType;
 import cv.pn.processmanagement.enums.ActorsCharacteristics;
+import cv.pn.processmanagement.enums.FlagNational;
 import cv.pn.processmanagement.enums.PersonType;
+import io.swagger.v3.oas.annotations.media.Schema;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class CreateAtorRequestDto {
 
     private ActorsCharacteristics ator;
     private ActorType tipoAtor;
     private PersonType tipoPessoa;
-    private Boolean detido;
-    private LocalDateTime dataHoraDetencao;
+    private FlagNational flagNacional;
+    private Boolean detido = false;
+    private String dataDetencao;
+    private String horaDetencao;
+
     private PessoaDto pessoa;
     private EmpresaDto empresa;
 
@@ -46,6 +53,14 @@ public class CreateAtorRequestDto {
         this.tipoPessoa = tipoPessoa;
     }
 
+    public FlagNational getFlagNacional() {
+        return flagNacional;
+    }
+
+    public void setFlagNacional(FlagNational flagNacional) {
+        this.flagNacional = flagNacional;
+    }
+
     public Boolean getDetido() {
         return detido;
     }
@@ -54,12 +69,20 @@ public class CreateAtorRequestDto {
         this.detido = detido;
     }
 
-    public LocalDateTime getDataHoraDetencao() {
-        return dataHoraDetencao;
+    public String getDataDetencao() {
+        return dataDetencao;
     }
 
-    public void setDataHoraDetencao(LocalDateTime dataHoraDetencao) {
-        this.dataHoraDetencao = dataHoraDetencao;
+    public void setDataDetencao(String dataDetencao) {
+        this.dataDetencao = dataDetencao;
+    }
+
+    public String getHoraDetencao() {
+        return horaDetencao;
+    }
+
+    public void setHoraDetencao(String horaDetencao) {
+        this.horaDetencao = horaDetencao;
     }
 
     public PessoaDto getPessoa() {

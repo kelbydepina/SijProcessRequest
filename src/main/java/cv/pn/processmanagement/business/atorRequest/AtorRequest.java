@@ -1,5 +1,6 @@
 package cv.pn.processmanagement.business.atorRequest;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import cv.pn.processmanagement.business.empressaRequest.EmpresaRequest;
 import cv.pn.processmanagement.business.pessoaRequest.PessoaRequest;
@@ -7,11 +8,13 @@ import cv.pn.processmanagement.business.processRequest.ProcessRequest;
 import cv.pn.processmanagement.commons.CommonsAttributes;
 import cv.pn.processmanagement.enums.ActorType;
 import cv.pn.processmanagement.enums.ActorsCharacteristics;
+import cv.pn.processmanagement.enums.FlagNational;
 import cv.pn.processmanagement.enums.PersonType;
 
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 
 @Entity
@@ -31,11 +34,21 @@ public class AtorRequest extends CommonsAttributes {
     @Column(name = "personType", length = 30, nullable = false)
     private PersonType tipoPessoa;
 
-    @Column(name = "detido")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "flag_national", length = 30, nullable = false)
+    private FlagNational flagNacional;
+
+    @Column(name = "detained")
     private Boolean detido = false;
 
-    @Column(name = "data_hora_detencao")
-    private LocalDateTime dataHoraDetencao;
+    @Column(name = "date_of_detention")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate dataDetencao;
+
+    @Column(name = "time_of_detention")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm[:ss]")
+    private LocalTime horaDetencao;
+
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
@@ -78,6 +91,13 @@ public class AtorRequest extends CommonsAttributes {
         this.tipoPessoa = tipoPessoa;
     }
 
+    public FlagNational getFlagNacional() {
+        return flagNacional;
+    }
+
+    public void setFlagNacional(FlagNational flagNacional) {
+        this.flagNacional = flagNacional;
+    }
 
     public Boolean getDetido() {
         return detido;
@@ -87,12 +107,20 @@ public class AtorRequest extends CommonsAttributes {
         this.detido = detido;
     }
 
-    public LocalDateTime getDataHoraDetencao() {
-        return dataHoraDetencao;
+    public LocalDate getDataDetencao() {
+        return dataDetencao;
     }
 
-    public void setDataHoraDetencao(LocalDateTime dataHoraDetencao) {
-        this.dataHoraDetencao = dataHoraDetencao;
+    public void setDataDetencao(LocalDate dataDetencao) {
+        this.dataDetencao = dataDetencao;
+    }
+
+    public LocalTime getHoraDetencao() {
+        return horaDetencao;
+    }
+
+    public void setHoraDetencao(LocalTime horaDetencao) {
+        this.horaDetencao = horaDetencao;
     }
 
     public PessoaRequest getPessoaRequest() {
