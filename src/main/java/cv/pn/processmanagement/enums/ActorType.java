@@ -2,12 +2,12 @@ package cv.pn.processmanagement.enums;
 
 public enum ActorType {
 
-    Arguido("ARGUIDO", "Arguido"),
-    QEIXOSO("QEIXOSO", "Qeixoso"),
-    DENUNCIANTE("DENUNCIANTE", "Denunciante"),
-    DENUNCIADO("DENUNCIADO", "Denunciado"),
-    TESTIMUNHA("TESTIMUNHA", "Testimunha"),
-    VITIMA("VITIMA", "Vitima");
+    Arguido("ARGUIDO", "ARGUIDO"),
+    QEIXOSO("QEIXOSO", "QEIXOSO"),
+    DENUNCIANTE("DENUNCIANTE", "DENUNCIANTE"),
+    DENUNCIADO("DENUNCIADO", "DENUNCIADO"),
+    TESTIMUNHA("TESTIMUNHA", "TESTIMUNHA"),
+    VITIMA("VITIMA", "VITIMA");
 
     private final String code;
     private final String description;

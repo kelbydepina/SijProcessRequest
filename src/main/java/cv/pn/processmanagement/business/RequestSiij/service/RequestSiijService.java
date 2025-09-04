@@ -8,6 +8,7 @@ import cv.pn.processmanagement.business.processRequest.ProcessRequest;
 import cv.pn.processmanagement.business.processRequest.ProcessRepository;
 import cv.pn.processmanagement.business.processRequest.services.IProcessService;
 import cv.pn.processmanagement.enums.ActorsCharacteristics;
+import cv.pn.processmanagement.enums.OrigemQueixa;
 import cv.pn.processmanagement.enums.PersonType;
 import cv.pn.processmanagement.utilities.APIResponse;
 import cv.pn.processmanagement.utilities.MessageState;
@@ -56,21 +57,19 @@ public class RequestSiijService implements IRequestSiijService {
                             .builder();
             }
 
-            CreateProcessDto proc = dto.getProcess();
+            CreateProcessDto proc = getCreateProcessDto(dto);
 
-                if (proc.getTipoCrime() == null || proc.getTipoCrime().trim().isEmpty()
-                        || "string".equalsIgnoreCase(proc.getTipoCrime().trim())) {
-                    throw new IllegalStateException("Tipo de crime é obrigatório.");
-                }
-
-                if (proc.getProcurador() == null || proc.getProcurador().trim().isEmpty()
+            if (proc.getProcurador() == null || proc.getProcurador().trim().isEmpty()
                         || "string".equalsIgnoreCase(proc.getProcurador().trim())) {
                     throw new IllegalStateException("Procurador é obrigatório.");
             }
 
 
 
-                if (processRepository.existsByNumeroProcesso(dto.getProcess().getNumeroProcesso())) {
+
+
+
+            if (processRepository.existsByNumeroProcesso(dto.getProcess().getNumeroProcesso())) {
                     return new APIResponse.buildAPIResponse()
                             .setStatus(false)
                             .setDetails(Collections.singletonList("Numero de processo: " + dto.getProcess().getNumeroProcesso() + " ja existe"))
@@ -193,7 +192,31 @@ public class RequestSiijService implements IRequestSiijService {
 
     }
 
+    private static CreateProcessDto getCreateProcessDto(RequestSiijDto dto) {
 
+        CreateProcessDto proc = dto.getProcess();
+
+        if (proc.getOrigemQueixa() != null && proc.getOrigemQueixa() == OrigemQueixa.PN) {
+
+            if (proc.getNumeroReferencia() == null || proc.getNumeroReferencia().trim().isEmpty()
+                    || "string".equalsIgnoreCase(proc.getNumeroReferencia().trim())) {
+                throw new IllegalStateException(
+                        "O campo 'numeroReferencia' é obrigatório quando origemQueixa é PN.");
+            }
+
+            if (proc.getOrganica() == null || proc.getOrganica().trim().isEmpty()
+                    || "string".equalsIgnoreCase(proc.getOrganica().trim())) {
+                throw new IllegalStateException(
+                        "O campo 'organica' é obrigatório quando origemQueixa é PN.");
+            }
+        }
+
+        if (proc.getTipoCrime() == null || proc.getTipoCrime().trim().isEmpty()
+                || "string".equalsIgnoreCase(proc.getTipoCrime().trim())) {
+            throw new IllegalStateException("Tipo de crime é obrigatório.");
+        }
+        return proc;
+    }
 
 
 }

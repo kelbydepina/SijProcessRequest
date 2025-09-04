@@ -1,8 +1,8 @@
 package cv.pn.processmanagement.enums;
 
 public enum FlagNational {
-    Nacional( "NACIONAL", "Nacional"),
-    ESTRANGEIRO("ESTRANGEIRO"," Estrangeiro");
+    Nacional( "NACIONAL", "NACIONAL"),
+    ESTRANGEIRO("ESTRANGEIRO"," ESTRANGEIRO");
 
     private final String code;
     private final String description;

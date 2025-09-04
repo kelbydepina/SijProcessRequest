@@ -2,10 +2,10 @@ package cv.pn.processmanagement.enums;
 
 public enum ActorsCharacteristics {
 
-    CONHECIDO("CONHECIDO", "Conhecido"),
-    DESCONHECIDO("DESCONHECIDO", "Desconhecido"),
+    CONHECIDO("CONHECIDO", "CONHECIDO"),
+    DESCONHECIDO("DESCONHECIDO", "DESCONHECIDO"),
     ANONIMO("ANONIMO", "ANONIMO"),
-    INDETERMINADO("INDETERMINADO", "Indeterminado");
+    INDETERMINADO("INDETERMINADO", "INDETERMINADO");
 
     private final String code;
     private final String description;

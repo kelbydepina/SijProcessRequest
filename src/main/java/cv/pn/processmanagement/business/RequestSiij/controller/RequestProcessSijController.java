@@ -1,7 +1,7 @@
 package cv.pn.processmanagement.business.RequestSiij.controller;
 
-import cv.pn.processmanagement.business.RequestSiij.service.IRequestSiijService;
 import cv.pn.processmanagement.business.RequestSiij.RequestSiijDto;
+import cv.pn.processmanagement.business.RequestSiij.service.IRequestSiijService;
 import cv.pn.processmanagement.utilities.APIResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
@@ -13,12 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("1.0.0/requestSiij")
-public class RequestSijjController {
+@RequestMapping("V1/RequestProcessSij")
+
+public class RequestProcessSijController {
 
     private final IRequestSiijService iRequestSiijService;
 
-    public RequestSijjController(IRequestSiijService iRequestSiijService) {
+    public RequestProcessSijController(IRequestSiijService iRequestSiijService) {
         this.iRequestSiijService = iRequestSiijService;
     }
 
@@ -28,4 +29,5 @@ public class RequestSijjController {
         APIResponse response = iRequestSiijService.saveFullProcess(dto);
         return ResponseEntity.ok(response);
     }
+
 }

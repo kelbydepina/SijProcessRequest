@@ -10,10 +10,7 @@ import cv.pn.processmanagement.enums.TipoPrazoInvestigacao;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,10 +31,10 @@ public class  ProcessRequest extends CommonsAttributes {
     private String observacao;
 
 
-    @Column(name = "district_code", length = 50, nullable = false)
+    @Column(name = "district_code", length = 50)
     private String comarcaCode;
 
-    @Column(name = "district_description", length = 200, nullable = false)
+    @Column(name = "district_description", length = 200)
     @NotBlank(message = "Descrição da comarca é obrigatória")
     private String comarcaDescription;
 
@@ -55,7 +52,7 @@ public class  ProcessRequest extends CommonsAttributes {
     @Column(name = "origin_complaint", length = 10)
     private OrigemQueixa origemQueixa = OrigemQueixa.PN;
 
-    @Column(name = "reference_number", length = 100)
+    @Column(name = "reference_number", length = 100, nullable = false)
     private String numeroReferencia;
 
     @Column(name = "status", length = 50)
@@ -66,13 +63,13 @@ public class  ProcessRequest extends CommonsAttributes {
     private String procurador;
 
     // Prazo do exame pericial
-    @Column(name = "organic", length = 20, nullable = false)
+    @Column(name = "organic", length = 20)
     private String organica; //Unidade orgânica
 
     @Column(name = "investigation_deadline")
     private Integer prazoInvestigacao = 1;
 
-    @Column(name = "process_identifier",length = 50, unique = true)// updatable = false) //nullable = false)
+    @Column(name = "process_identifier",length = 50, unique = true, nullable = false)// updatable = false) //nullable = false)
     private String identificadorProcesso; //Identificador técnico do processo
 
     @JsonIgnore
@@ -88,13 +85,32 @@ public class  ProcessRequest extends CommonsAttributes {
     @Min(value = 1, message = "Versão deve ser no mínimo 1")
     private Integer versao = 1;
 
-    @PrePersist
+    /*@PrePersist
     public void prePersist() {
         // Se vier null ou 0 do DTO/JSON, forçamos 1
         if (versao == null || versao == 0) {
             versao = 1;
         }
+    }*/
+
+    @PrePersist
+    @PreUpdate
+    private void normalizeDefaults() {
+        if (versao == null || versao < 1) versao = 1;
+        if (prazoInvestigacao == null || prazoInvestigacao < 1) prazoInvestigacao = 1;
     }
+
+
+    /*@PrePersist
+    @PreUpdate
+    public void normalizeDefaults() {
+        System.out.println("DEBUG: normalizeDefaults() executado");
+        if (versao == null || versao < 1) {
+            versao = 1;
+        }
+    }*/
+
+
 
     public List<FileRequest> getFiles() {
         return files;

@@ -1,14 +1,15 @@
 package cv.pn.processmanagement.business.atorRequest;
 
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+
+
 import cv.pn.processmanagement.business.empressaRequest.EmpresaDto;
 import cv.pn.processmanagement.business.pessoaRequest.PessoaDto;
 import cv.pn.processmanagement.enums.ActorType;
 import cv.pn.processmanagement.enums.ActorsCharacteristics;
 import cv.pn.processmanagement.enums.FlagNational;
 import cv.pn.processmanagement.enums.PersonType;
-import io.swagger.v3.oas.annotations.media.Schema;
+
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -21,6 +22,9 @@ public class CreateAtorRequestDto {
     private FlagNational flagNacional;
     private Boolean detido = false;
     private String dataDetencao;
+    //@JsonDeserialize(using = LocalTimeDeserializer.class)
+   // @JsonSerialize(using = LocalTimeSerializer.class)
+   // @JsonDeserialize(using = CustomLocalTimeDeserializer.class)
     private String horaDetencao;
 
     private PessoaDto pessoa;

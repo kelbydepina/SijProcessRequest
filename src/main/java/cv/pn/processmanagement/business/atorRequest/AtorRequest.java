@@ -42,11 +42,9 @@ public class AtorRequest extends CommonsAttributes {
     private Boolean detido = false;
 
     @Column(name = "date_of_detention")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate dataDetencao;
 
     @Column(name = "time_of_detention")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm[:ss]")
     private LocalTime horaDetencao;
 
 

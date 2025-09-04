@@ -1,5 +1,5 @@
 server:
-  port: 8082
+  port: 8083
 
 logging:
   file:
@@ -37,6 +37,8 @@ spring:
     username: user
     password: 1hQ1n6Z5p5WnkKN4
 
+
+
 # springdoc api configuration
 springdoc:
   api-docs:
@@ -49,7 +51,7 @@ springdoc:
 access:
   username: sigo
   password: sigo
-  swagger: http://localhost:8082/api/swagger-ui/index.html
+  swagger: http://localhost:8083/api/swagger-ui/index.html
 
 # link external
 link:

@@ -1,9 +1,9 @@
 package cv.pn.processmanagement.enums;
 
 public enum OrigemQueixa {
-    PN("PN", "Pn"),
+    PN("PN", "PN"),
     PJ("PJ", "PJ"),
-    SIJ("SIJ", "Sij");
+    SIJ("SIJ", "SIJ");
 
     private final String code;
     private final String description;

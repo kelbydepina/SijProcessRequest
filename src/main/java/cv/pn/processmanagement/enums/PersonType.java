@@ -2,8 +2,8 @@ package cv.pn.processmanagement.enums;
 
 public enum PersonType {
 
-    SINGULAR("SINGULAR", "Singular"),
-    COLECTIVA("COLECTIVA", "Coletivo");
+    SINGULAR("SINGULAR", "SINGULAR"),
+    COLECTIVA("COLECTIVA", "COLECTIVA");
 
     private final String code;
     private final String description;
