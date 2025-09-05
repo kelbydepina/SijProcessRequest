@@ -188,13 +188,6 @@ public class RequestSiijService implements IRequestSiijService {
 
     }
 
-    private void requireNonBlank(String nome, String s) {
-
-        if (nome == null || nome.trim().isEmpty()) {
-            throw new IllegalStateException(s);
-        }
-    }
-
 
     private static CreateProcessDto getCreateProcessDto(RequestSiijDto dto) {
 
