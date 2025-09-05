@@ -9,6 +9,7 @@ import cv.pn.processmanagement.enums.Gender;
 import cv.pn.processmanagement.enums.MaritalStatus;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ public class PessoaRequest extends CommonsAttributes {
     @Column(name = "marital_status", length = 1, nullable = false)
     private MaritalStatus estadoCivil;
 
-    @Column(name = "name", length = 1000)
+    @Column(name = "name", length = 150, nullable = false)
     private String nome;
 
     @Column(name = "nickname", length = 200)

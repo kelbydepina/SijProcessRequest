@@ -52,14 +52,13 @@ public class  ProcessRequest extends CommonsAttributes {
     @Column(name = "origin_complaint", length = 10)
     private OrigemQueixa origemQueixa = OrigemQueixa.PN;
 
-    @Column(name = "reference_number", length = 100, nullable = false)
+    @Column(name = "reference_number", length = 100)
     private String numeroReferencia;
 
     @Column(name = "status", length = 50)
     private String status;
 
-    @Column(name = "prosecutor", length = 200, nullable = false)
-    @NotBlank(message = "Procurador é obrigatório")
+    @Column(name = "prosecutor", length = 200)
     private String procurador;
 
     // Prazo do exame pericial
@@ -69,7 +68,7 @@ public class  ProcessRequest extends CommonsAttributes {
     @Column(name = "investigation_deadline")
     private Integer prazoInvestigacao = 1;
 
-    @Column(name = "process_identifier",length = 50, unique = true, nullable = false)// updatable = false) //nullable = false)
+    @Column(name = "process_identifier",length = 50, unique = true, nullable = false)
     private String identificadorProcesso; //Identificador técnico do processo
 
     @JsonIgnore

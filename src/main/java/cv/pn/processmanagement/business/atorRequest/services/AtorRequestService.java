@@ -67,11 +67,10 @@ public class AtorRequestService implements IAtorRequestService {
                                 APIResponse pResp = iPessoaRequestService.createPessoa(atores.getPessoa());
                                 if (pResp == null || !Boolean.TRUE.equals(pResp.getStatus())
                                         || pResp.getDetails() == null || pResp.getDetails().isEmpty()
-                                        || !(pResp.getDetails().get(0) instanceof PessoaRequest)) {
+                                        || !(pResp.getDetails().get(0) instanceof PessoaRequest pessoa)) {
                                     throw new IllegalStateException("Falha ao salvar pessoa do ator.");
                             }
-                                PessoaRequest pessoa = (PessoaRequest) pResp.getDetails().get(0);
-                                ator.setPessoaRequest(pessoa);
+                            ator.setPessoaRequest(pessoa);
                         }
 
                         // Se veio EMPRESA, salva e associa
@@ -79,11 +78,10 @@ public class AtorRequestService implements IAtorRequestService {
                                 APIResponse eResp = iEmpresaService.createEmpresa(atores.getEmpresa());
                                 if (eResp == null || !Boolean.TRUE.equals(eResp.getStatus())
                                         || eResp.getDetails() == null || eResp.getDetails().isEmpty()
-                                        || !(eResp.getDetails().get(0) instanceof EmpresaRequest)) {
+                                        || !(eResp.getDetails().get(0) instanceof EmpresaRequest empresa)) {
                                     throw new IllegalStateException("Falha ao salvar empresa do ator.");
                             }
-                                EmpresaRequest empresa = (EmpresaRequest) eResp.getDetails().get(0);
-                                ator.setEmpresaRequest(empresa);
+                            ator.setEmpresaRequest(empresa);
                         }
 
                         if (atores.getPessoa() == null && atores.getEmpresa() == null) {

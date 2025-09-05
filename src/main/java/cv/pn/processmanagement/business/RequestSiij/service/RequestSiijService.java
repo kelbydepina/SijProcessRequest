@@ -59,6 +59,8 @@ public class RequestSiijService implements IRequestSiijService {
 
             CreateProcessDto proc = getCreateProcessDto(dto);
 
+
+
             if (proc.getProcurador() == null || proc.getProcurador().trim().isEmpty()
                         || "string".equalsIgnoreCase(proc.getProcurador().trim())) {
                     throw new IllegalStateException("Procurador é obrigatório.");
@@ -82,12 +84,8 @@ public class RequestSiijService implements IRequestSiijService {
                         boolean ehSingular = atorDto.getTipoPessoa() == PersonType.SINGULAR;
                         boolean colectiva = atorDto.getTipoPessoa() == PersonType.COLECTIVA;
 
-                        String nomePossivel = (atorDto.getPessoa() != null) ? atorDto.getPessoa().getNome() : null;
-                        boolean ehDesconhecidoPorEnum  = atorDto.getAtor() == ActorsCharacteristics.DESCONHECIDO;
-                        boolean ehDesconhecidoPeloNome = (nomePossivel != null)
-                                && !"".equals(nomePossivel.trim())
-                                && "DESCONHECIDO".equalsIgnoreCase(nomePossivel.trim());
 
+               
 
                 if (atorDto.getPessoa() != null && atorDto.getEmpresa() != null) {
                     if (ehSingular) {
@@ -107,48 +105,44 @@ public class RequestSiijService implements IRequestSiijService {
                     throw new IllegalStateException("Para tipoPessoa é COLECTIVA, o dados 'empresa' é obrigatório.");
 
 
+                // Regras por característica do ator
+                if (ehSingular) {
+                    var pessoa = atorDto.getPessoa();
 
-                if (ehSingular && (ehDesconhecidoPorEnum || ehDesconhecidoPeloNome)) {
+                    switch (atorDto.getAtor()) {
 
-                    if (atorDto.getPessoa() == null) {
+                        case DESCONHECIDO:
+                            pessoa.setNome("DESCONHECIDO");
+                            break;
 
-                            throw new IllegalStateException("Para ator DESCONHECIDO, os dados 'pessoa' sao obrigatório.");
-                    }
+                        case INDETERMINADO:
+                            pessoa.setNome("IDETERMINADO");
+                            break;
 
+                        case ANONIMO:
+                            pessoa.setNome("ANONIMO");
+                            break;
 
-                    if (atorDto.getPessoa().getSexo() == null) {
+                        case CONHECIDO:
 
-                            throw new IllegalStateException("Para pessoa DESCONHECIDA, o campo 'sexo' é obrigatório.");
-                    }
-
-
-
-                    String df = atorDto.getPessoa().getDescricaoFisica();
-                    if (df == null || df.trim().isEmpty()) {
-
-
-                        throw new IllegalStateException("Para pessoa DESCONHECIDA, o campo 'descricaoFisica' é obrigatório.");
-                    }
-
-
-                    String nome = atorDto.getPessoa().getNome();
-                    if (nome == null || nome.trim().isEmpty() || !nome.equalsIgnoreCase("DESCONHECIDO")) {
-
-                            atorDto.getPessoa().setNome("DESCONHECIDO");
+                            if (pessoa.getSexo() == null) {
+                                throw new IllegalStateException("Para CONHECIDO, o campo 'sexo' é obrigatório.");
+                            }
+                            break;
                     }
                 }
 
-            }
+
+
+        }
 
                 APIResponse response = iProcessService.saveProcessStep(dto.getProcess());
                 Object detailObj = response.getDetails().get(0);
 
-            if (!(detailObj instanceof ProcessRequest)) {
+            if (!(detailObj instanceof ProcessRequest processRequest)) {
 
                 throw new IllegalStateException("Objeto retornado não é do tipo ProcessRequest");
             }
-
-                ProcessRequest processRequest = (ProcessRequest) detailObj;
 
             if (dto.getAtores() == null || dto.getAtores().isEmpty()) {
 
@@ -168,9 +162,9 @@ public class RequestSiijService implements IRequestSiijService {
                             .builder();
             }
 
-                 iAtorRequestService.saveAtorRequest(dto.getAtores(), ((ProcessRequest) detailObj).getId());
+                 iAtorRequestService.saveAtorRequest(dto.getAtores(), processRequest.getId());
 
-                iFileRequestService.saveAndUpdateFile(dto.getFiles(), ((ProcessRequest) detailObj).getId());
+                iFileRequestService.saveAndUpdateFile(dto.getFiles(), processRequest.getId());
 
                     return new APIResponse.buildAPIResponse()
                             .setStatus(true)
@@ -190,11 +184,26 @@ public class RequestSiijService implements IRequestSiijService {
 
         }
 
+
+
     }
+
+    private void requireNonBlank(String nome, String s) {
+
+        if (nome == null || nome.trim().isEmpty()) {
+            throw new IllegalStateException(s);
+        }
+    }
+
 
     private static CreateProcessDto getCreateProcessDto(RequestSiijDto dto) {
 
         CreateProcessDto proc = dto.getProcess();
+
+        if (proc.getTipoCrime() == null || proc.getTipoCrime().trim().isEmpty()
+                || "string".equalsIgnoreCase(proc.getTipoCrime().trim())) {
+            throw new IllegalStateException("Tipo de crime é obrigatório.");
+        }
 
         if (proc.getOrigemQueixa() != null && proc.getOrigemQueixa() == OrigemQueixa.PN) {
 
@@ -211,10 +220,7 @@ public class RequestSiijService implements IRequestSiijService {
             }
         }
 
-        if (proc.getTipoCrime() == null || proc.getTipoCrime().trim().isEmpty()
-                || "string".equalsIgnoreCase(proc.getTipoCrime().trim())) {
-            throw new IllegalStateException("Tipo de crime é obrigatório.");
-        }
+
         return proc;
     }
 
