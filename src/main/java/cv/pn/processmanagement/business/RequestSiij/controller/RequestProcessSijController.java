@@ -25,7 +25,7 @@ public class RequestProcessSijController {
 
     @Operation(summary = "save Full Process")
     @PostMapping()
-    public ResponseEntity<APIResponse> criarRequestSiij(@Valid @RequestBody RequestSiijDto dto) {
+    public ResponseEntity<APIResponse> criarRequestSiij(@javax.validation.Valid @RequestBody RequestSiijDto dto) {
         APIResponse response = iRequestSiijService.saveFullProcess(dto);
         return ResponseEntity.ok(response);
     }

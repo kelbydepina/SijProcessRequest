@@ -1,22 +1,30 @@
 package cv.pn.processmanagement.business.pessoaRequest;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import cv.pn.processmanagement.business.contatoRequest.ContactoDto;
 import cv.pn.processmanagement.business.enderecoRequest.EnderecoDto;
 import cv.pn.processmanagement.business.identificacao.IdentificacaoDto;
 import cv.pn.processmanagement.enums.Gender;
 import cv.pn.processmanagement.enums.MaritalStatus;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
 public class PessoaDto {
 
+    @javax.validation.constraints.NotBlank(message = "JASON INVALIDO")
     private String nome;
     private String alcunha;
     private String flagNacional;
     private String nomeMae;
     private String nomePai;
+    @com.fasterxml.jackson.annotation.JsonAlias({"genero","sexo"})
+    @javax.validation.constraints.NotNull(message = "JASON INVALIDO")
     private Gender sexo;
+    @com.fasterxml.jackson.annotation.JsonAlias({"estadoCivil","estadocivel","estado_civil"})
+    @javax.validation.constraints.NotNull(message = "JASON INVALIDO")
     private MaritalStatus estadoCivil;
     private String nacionalidade;
     private Integer idNacionalidade;

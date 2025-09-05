@@ -13,6 +13,8 @@ public class RequestSiijDto implements Serializable {
 
         private CreateProcessDto process;
 
+    @javax.validation.Valid
+    @javax.validation.constraints.NotEmpty(message = "JASON INVALIDO")
         private List<CreateAtorRequestDto> atores;
 
         private List<FileRequestDto> files;

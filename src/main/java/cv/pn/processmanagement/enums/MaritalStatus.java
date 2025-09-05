@@ -26,7 +26,7 @@ public enum MaritalStatus {
         return description;
     }
 
-    @JsonCreator
+   /* @JsonCreator
     public static MaritalStatus from(Object raw) {
         final String MSG = "Campo 'estadoCivil' inválido. Use apenas: S, C, V, U, D.";
         if (raw == null) {
@@ -51,7 +51,27 @@ public enum MaritalStatus {
     public String toValue() {
         // Serializa como o código (S/C/V/U/D)
         return this.code;
+    }*/
+
+    @JsonCreator
+    public static MaritalStatus from(Object v) {
+        if (v == null) throw new IllegalArgumentException("JASON INVALIDO"); // ausente/null
+        String s = v.toString().trim().toUpperCase();
+        if (s.isEmpty()) throw new IllegalArgumentException("JASON INVALIDO"); // presente porém vazio
+
+        // aceita exatamente: S, C, V, U, D
+        if (s.equals("S")) return S;
+        if (s.equals("C")) return C;
+        if (s.equals("V")) return V;
+        if (s.equals("U")) return U;
+        if (s.equals("D")) return D;
+
+        // valor inválido → mensagem clara (Regra 2)
+        throw new IllegalArgumentException("O campo 'estadoCivil' deve ser um dos valores válidos: S, C, V, U, D.");
     }
+
+    @JsonValue
+    public String toValue() { return name(); }
 
     /*@JsonCreator
     public static MaritalStatus from(Object v) {

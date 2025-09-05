@@ -10,9 +10,9 @@ import cv.pn.processmanagement.enums.ActorsCharacteristics;
 import cv.pn.processmanagement.enums.FlagNational;
 import cv.pn.processmanagement.enums.PersonType;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 public class CreateAtorRequestDto {
 
@@ -26,7 +26,8 @@ public class CreateAtorRequestDto {
    // @JsonSerialize(using = LocalTimeSerializer.class)
    // @JsonDeserialize(using = CustomLocalTimeDeserializer.class)
     private String horaDetencao;
-
+    @javax.validation.Valid
+    @javax.validation.constraints.NotNull(message = "JASON INVALIDO")
     private PessoaDto pessoa;
     private EmpresaDto empresa;
 
