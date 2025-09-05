@@ -61,6 +61,8 @@ public class RequestSiijService implements IRequestSiijService {
 
 
 
+
+
             if (proc.getProcurador() == null || proc.getProcurador().trim().isEmpty()
                         || "string".equalsIgnoreCase(proc.getProcurador().trim())) {
                     throw new IllegalStateException("Procurador é obrigatório.");
@@ -103,6 +105,15 @@ public class RequestSiijService implements IRequestSiijService {
 
                 if (colectiva && atorDto.getEmpresa() == null)
                     throw new IllegalStateException("Para tipoPessoa é COLECTIVA, o dados 'empresa' é obrigatório.");
+
+
+                if (atorDto.getPessoa().getNome() == null || atorDto.getPessoa().getNome().trim().isEmpty()
+                        || "string".equalsIgnoreCase(proc.getTipoCrime().trim())) {
+
+                        throw new IllegalStateException("O Campo Nome Pessoa é Obrigatorio.");
+
+
+                }
 
 
                 // Regras por característica do ator
@@ -189,6 +200,8 @@ public class RequestSiijService implements IRequestSiijService {
     }
 
 
+
+
     private static CreateProcessDto getCreateProcessDto(RequestSiijDto dto) {
 
         CreateProcessDto proc = dto.getProcess();
@@ -196,6 +209,18 @@ public class RequestSiijService implements IRequestSiijService {
         if (proc.getTipoCrime() == null || proc.getTipoCrime().trim().isEmpty()
                 || "string".equalsIgnoreCase(proc.getTipoCrime().trim())) {
             throw new IllegalStateException("Tipo de crime é obrigatório.");
+        }
+
+        // VALIDAÇÃO SIMPLES DO CAMPO COMARCA
+        if (proc.getComarcaCode() == null || proc.getComarcaCode().trim().isEmpty()
+                || "string".equalsIgnoreCase(proc.getComarcaCode().trim())) {
+            throw new IllegalStateException("Campo 'comarcaCode' é obrigatório.");
+        }
+
+        //  VALIDAÇÃO DA DESCRIÇÃO DA COMARCA
+        if (proc.getComarcaDescription() == null || proc.getComarcaDescription().trim().isEmpty()
+                || "string".equalsIgnoreCase(proc.getComarcaDescription().trim())) {
+            throw new IllegalStateException("Campo 'comarcaDescription' é obrigatório.");
         }
 
         if (proc.getOrigemQueixa() != null && proc.getOrigemQueixa() == OrigemQueixa.PN) {

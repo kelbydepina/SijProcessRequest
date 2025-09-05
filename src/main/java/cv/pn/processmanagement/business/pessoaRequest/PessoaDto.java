@@ -14,7 +14,7 @@ import java.util.List;
 
 public class PessoaDto {
 
-    @javax.validation.constraints.NotBlank(message = "JASON INVALIDO")
+
     private String nome;
     private String alcunha;
     private String flagNacional;

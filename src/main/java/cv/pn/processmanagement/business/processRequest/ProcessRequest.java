@@ -31,10 +31,10 @@ public class  ProcessRequest extends CommonsAttributes {
     private String observacao;
 
 
-    @Column(name = "district_code", length = 50)
+    @Column(name = "district_code", length = 50, nullable = false)
     private String comarcaCode;
 
-    @Column(name = "district_description", length = 200)
+    @Column(name = "district_description", length = 200, nullable = false)
     @NotBlank(message = "Descrição da comarca é obrigatória")
     private String comarcaDescription;
 
