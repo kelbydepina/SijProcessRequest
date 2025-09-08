@@ -111,8 +111,8 @@ public class ApiExceptionHandler {
 
         String f = fe.getField().toLowerCase(); // ex.: "atores[0].pessoa.nome"
         return f.endsWith("nome") // PESSOA.NOME
-                || f.endsWith("sexo") || f.endsWith("genero")
-                || f.endsWith("estadocivil") || f.endsWith("estadocivel") || f.endsWith("estado_civil");
+                || f.endsWith("sexo") || f.endsWith("genero");
+
     }
 
     private ResponseEntity<APIResponse> badRequest(String msg) { return badRequest(List.of(msg)); }

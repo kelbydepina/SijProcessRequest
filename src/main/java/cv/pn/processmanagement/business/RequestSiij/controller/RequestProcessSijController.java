@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("v1/RequestProcessSij")
+@RequestMapping("v1/requestProcessSij")
 
 public class RequestProcessSijController {
 

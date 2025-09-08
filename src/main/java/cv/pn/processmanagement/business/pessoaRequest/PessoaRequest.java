@@ -26,7 +26,7 @@ public class PessoaRequest extends CommonsAttributes {
     private Gender sexo;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "marital_status", length = 1, nullable = false)
+    @Column(name = "marital_status", length = 1)
     private MaritalStatus estadoCivil;
 
     @Column(name = "name", length = 150, nullable = false)
@@ -34,9 +34,6 @@ public class PessoaRequest extends CommonsAttributes {
 
     @Column(name = "nickname", length = 200)
     private String alcunha;
-
-    @Column(name = "national_flag", length = 50)
-    private String flagNacional;
 
     @Column(name = "mothers_name", length = 100)
     private String nomeMae;
@@ -114,14 +111,6 @@ public class PessoaRequest extends CommonsAttributes {
 
     public void setAlcunha(String alcunha) {
         this.alcunha = alcunha;
-    }
-
-    public String getFlagNacional() {
-        return flagNacional;
-    }
-
-    public void setFlagNacional(String flagNacional) {
-        this.flagNacional = flagNacional;
     }
 
     public String getNomeMae() {

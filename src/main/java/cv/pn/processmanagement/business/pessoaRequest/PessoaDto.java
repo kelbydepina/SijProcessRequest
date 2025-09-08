@@ -17,14 +17,11 @@ public class PessoaDto {
 
     private String nome;
     private String alcunha;
-    private String flagNacional;
     private String nomeMae;
     private String nomePai;
     @com.fasterxml.jackson.annotation.JsonAlias({"genero","sexo"})
     @javax.validation.constraints.NotNull(message = "JASON INVALIDO")
     private Gender sexo;
-    @com.fasterxml.jackson.annotation.JsonAlias({"estadoCivil","estadocivel","estado_civil"})
-    @javax.validation.constraints.NotNull(message = "JASON INVALIDO")
     private MaritalStatus estadoCivil;
     private String nacionalidade;
     private Integer idNacionalidade;
@@ -50,14 +47,6 @@ public class PessoaDto {
 
     public void setAlcunha(String alcunha) {
         this.alcunha = alcunha;
-    }
-
-    public String getFlagNacional() {
-        return flagNacional;
-    }
-
-    public void setFlagNacional(String flagNacional) {
-        this.flagNacional = flagNacional;
     }
 
     public String getNomeMae() {

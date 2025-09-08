@@ -13,7 +13,6 @@ public class PessoaResponseDto {
 
     private String nome;
     private String alcunha;
-    private String flagNacional;
     private String nomeMae;
     private String nomePai;
     private Gender sexo;
@@ -44,14 +43,6 @@ public class PessoaResponseDto {
 
     public void setAlcunha(String alcunha) {
         this.alcunha = alcunha;
-    }
-
-    public String getFlagNacional() {
-        return flagNacional;
-    }
-
-    public void setFlagNacional(String flagNacional) {
-        this.flagNacional = flagNacional;
     }
 
     public String getNomeMae() {

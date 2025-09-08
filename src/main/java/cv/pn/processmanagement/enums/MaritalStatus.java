@@ -26,6 +26,16 @@ public enum MaritalStatus {
         return description;
     }
 
+    @JsonCreator
+    public static MaritalStatus from(String v) {
+        if (v == null || v.isBlank()) return null;  // aceita vazio -> null
+        try {
+            return MaritalStatus.valueOf(v.trim().toUpperCase());
+        } catch (IllegalArgumentException ex) {
+            return null; // inválido -> null, sem explodir
+        }
+    }
+
    /* @JsonCreator
     public static MaritalStatus from(Object raw) {
         final String MSG = "Campo 'estadoCivil' inválido. Use apenas: S, C, V, U, D.";
@@ -53,7 +63,7 @@ public enum MaritalStatus {
         return this.code;
     }*/
 
-    @JsonCreator
+    /*@JsonCreator
     public static MaritalStatus from(Object v) {
         if (v == null) throw new IllegalArgumentException("JASON INVALIDO"); // ausente/null
         String s = v.toString().trim().toUpperCase();

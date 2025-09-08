@@ -8,9 +8,7 @@ import java.time.LocalDate;
 
 public class IdentificacaoDto {
 
-    /*@NotNull(message = "O campo 'tipo' é obrigatório")
-    @Pattern(regexp = "BI|TRE|NIF|CNI|PASS|CC",
-            message = "O campo 'tipo' deve ser preenchido com uma das opções: CNI, PASS, BI, TRE, NIF, CC")*/
+
     private DocumentType  tipo;
     private String numero;
     private String paisEmissor;

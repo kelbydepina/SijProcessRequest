@@ -55,7 +55,7 @@ public class FileRequestService implements IFileRequestService {
 
                         return fileDto;
 
-                    }).collect(Collectors.toList());
+                    }).toList();
 
             CreateFileRequestDto createFileDto = new CreateFileRequestDto();
 

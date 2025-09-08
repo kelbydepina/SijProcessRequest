@@ -21,10 +21,10 @@ public class FileRequest extends CommonsAttributes {
     @Column(name = "mineType")
     private String mineType;
 
-    @Column(name = "name", nullable = false, length = 50)
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "type", nullable = false, length = 20)
+    @Column(name = "type")
     private String type;
 
     @JsonIgnore

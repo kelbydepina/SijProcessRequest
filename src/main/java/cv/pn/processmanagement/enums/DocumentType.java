@@ -1,7 +1,7 @@
 package cv.pn.processmanagement.enums;
 
 
-import com.fasterxml.jackson.annotation.JsonCreator;
+
 
 public enum DocumentType {
     BI("Bilhete de Identidade", "BI", 1),
@@ -34,6 +34,7 @@ public enum DocumentType {
     public int getOrdem() {
         return ordem;
     }
+
 
 
 }
