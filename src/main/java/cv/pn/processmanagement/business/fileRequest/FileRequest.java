@@ -12,8 +12,8 @@ import javax.persistence.*;
 @Table(name = "FILE_REQUEST")
 public class FileRequest extends CommonsAttributes {
 
-    @Column(name = "content", length = 50000)
-    private byte[] content;
+   /* @Column(name = "content", length = 50000)
+    private byte[] content;*/
 
     @Column(name = "numero")
     private String numero;
@@ -21,8 +21,8 @@ public class FileRequest extends CommonsAttributes {
     @Column(name = "mineType")
     private String mineType;
 
-    @Column(name = "name")
-    private String name;
+    /*@Column(name = "name")
+    private String name;*/
 
     @Column(name = "type")
     private String type;
@@ -35,21 +35,21 @@ public class FileRequest extends CommonsAttributes {
     @JoinColumn(name = "process_fk", nullable = false)
     private ProcessRequest processRequest;
 
-    public byte[] getContent() {
+    /*public byte[] getContent() {
         return content;
     }
 
     public void setContent(byte[] content) {
         this.content = content;
-    }
+    }*/
 
-    public String getName() {
+    /*public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
+    }*/
 
     public String getType() {
         return type;
