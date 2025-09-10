@@ -1,6 +1,6 @@
 package cv.pn.processmanagement.business.atorRequest;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import cv.pn.processmanagement.business.empressaRequest.EmpresaRequest;
 import cv.pn.processmanagement.business.pessoaRequest.PessoaRequest;

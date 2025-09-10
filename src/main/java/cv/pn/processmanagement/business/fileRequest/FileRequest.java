@@ -27,6 +27,9 @@ public class FileRequest extends CommonsAttributes {
     @Column(name = "type")
     private String type;
 
+    @Column(name = "description")
+    private String descricao;
+
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "process_fk", nullable = false)
@@ -78,6 +81,14 @@ public class FileRequest extends CommonsAttributes {
 
     public void setMineType(String mineType) {
         this.mineType = mineType;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }
 

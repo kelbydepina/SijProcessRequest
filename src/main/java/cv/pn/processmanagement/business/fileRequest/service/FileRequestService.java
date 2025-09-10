@@ -44,18 +44,36 @@ public class FileRequestService implements IFileRequestService {
                         FileRequest file = new FileRequest();
 
                         file.setType(fileDto.getTipo());
-                        file.setName(fileDto.getDescricao());
+                        //file.setName(fileDto.getDescricao());
+                        file.setDescricao(fileDto.getDescricao());
                         file.setNumero(fileDto.getNumero());
-                        file.getMineType(fileDto.getMineType());
+                        file.setMineType(fileDto.getMineType());
                         file.setProcessRequest(processIntruction);
                         file.setUserCreate("SYSTEM");
                        //byte [] content = fileDto.getBase64().getBytes();
                        //file.setContent(content);
                         fileRequestRepository.saveAndFlush(file);
 
+                        // Processar conteúdo base64 se necessário
+                        /*if (fileDto.getBase64() != null) {
+                            byte[] content = Base64.getDecoder().decode(fileDto.getBase64());
+                            file.setContent(content);
+                        }*/
+
+
                         return fileDto;
+                        //return file; // Retornar a entidade salva
 
                     }).toList();
+
+            // 3. Salvar em batch (mais eficiente)
+            //List<FileRequest> savedFiles = fileRequestRepository.saveAll(filesToSave);
+
+// Criar DTO de resposta corretamente
+           /* CreateFileRequestDto createFileDto = new CreateFileRequestDto();
+            createFileDto.setFiles(savedFiles.stream()
+                    .map(this::convertToDto) // Métudo para converter Entity para DTO
+                    .toList());*/
 
             CreateFileRequestDto createFileDto = new CreateFileRequestDto();
 
@@ -68,7 +86,11 @@ public class FileRequestService implements IFileRequestService {
                     .setDetails(Collections.singletonList(createFileDto))
                     .builder();
         } catch (Exception e) {
-            return new APIResponse.buildAPIResponse().setStatus(false).setStatusText(MessageState.ERRO).setDetails(Collections.singletonList(e.getMessage())).builder();
+            return new APIResponse.buildAPIResponse()
+                    .setStatus(false)
+                    .setStatusText(MessageState.ERRO)
+                    .setDetails(Collections.singletonList(e.getMessage()))
+                    .builder();
         }
     }
 

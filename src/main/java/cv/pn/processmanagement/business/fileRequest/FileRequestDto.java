@@ -10,6 +10,7 @@ public class FileRequestDto implements Serializable {
     private String descricao;
     private String base64;
 
+
     public String getTipo() {
         return tipo;
     }

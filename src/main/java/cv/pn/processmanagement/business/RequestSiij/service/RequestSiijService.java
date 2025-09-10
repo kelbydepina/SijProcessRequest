@@ -63,14 +63,10 @@ public class RequestSiijService implements IRequestSiijService {
 
             CreateProcessDto proc = getCreateProcessDto(dto);
 
-
-
-
-
-            if (proc.getProcurador() == null || proc.getProcurador().trim().isEmpty()
-                        || "string".equalsIgnoreCase(proc.getProcurador().trim())) {
-                    throw new IllegalStateException("Procurador é obrigatório.");
-            }
+                if (proc.getProcurador() == null || proc.getProcurador().trim().isEmpty()
+                            || "string".equalsIgnoreCase(proc.getProcurador().trim())) {
+                        throw new IllegalStateException("Procurador é obrigatório.");
+                }
 
 
 
@@ -93,13 +89,13 @@ public class RequestSiijService implements IRequestSiijService {
                  // validaçao campo detido
                 if (atorDto.getDetido() != null && atorDto.getDetido() ){
 
-                    if (atorDto.getDataDetencao() == null || atorDto.getDataDetencao().trim().isEmpty()) {
-                        throw new RuntimeException("Campo 'dataDetencao' é obrigatório quando detido é true");
-                    }
+                        if (atorDto.getDataDetencao() == null || atorDto.getDataDetencao().trim().isEmpty()) {
+                            throw new RuntimeException("Campo 'dataDetencao' é obrigatório quando detido é true");
+                        }
 
-                    if (atorDto.getHoraDetencao() == null || atorDto.getHoraDetencao().trim().isEmpty()) {
-                        throw new RuntimeException("Campo 'horaDetencao' é obrigatório quando detido é true");
-                    }
+                        if (atorDto.getHoraDetencao() == null || atorDto.getHoraDetencao().trim().isEmpty()) {
+                            throw new RuntimeException("Campo 'horaDetencao' é obrigatório quando detido é true");
+                        }
                 }
                
 
@@ -170,52 +166,52 @@ public class RequestSiijService implements IRequestSiijService {
                     if (pessoa.getEndereco() != null) {
                         EnderecoDto endereco = pessoa.getEndereco();
 
-                        if (endereco.getIlha() == null || endereco.getIlha().trim().isEmpty()
-                                || "string".equalsIgnoreCase(endereco.getIlha().trim())) {
-                            throw new RuntimeException("Campo 'ilha' do endereço é obrigatório");
-                        }
+                            if (endereco.getIlha() == null || endereco.getIlha().trim().isEmpty()
+                                    || "string".equalsIgnoreCase(endereco.getIlha().trim())) {
+                                throw new RuntimeException("Campo 'ilha' do endereço é obrigatório");
+                            }
 
-                        if (endereco.getConcelho() == null || endereco.getConcelho().trim().isEmpty()
-                                || "string".equalsIgnoreCase(endereco.getConcelho().trim())) {
-                            throw new RuntimeException("Campo 'concelho' do endereço é obrigatório");
-                        }
+                            if (endereco.getConcelho() == null || endereco.getConcelho().trim().isEmpty()
+                                    || "string".equalsIgnoreCase(endereco.getConcelho().trim())) {
+                                throw new RuntimeException("Campo 'concelho' do endereço é obrigatório");
+                            }
 
-                        if (endereco.getFreguesia() == null || endereco.getFreguesia().trim().isEmpty()
-                                || "string".equalsIgnoreCase(endereco.getFreguesia().trim())) {
-                            throw new RuntimeException("Campo 'freguesia' do endereço é obrigatório");
-                        }
+                            if (endereco.getFreguesia() == null || endereco.getFreguesia().trim().isEmpty()
+                                    || "string".equalsIgnoreCase(endereco.getFreguesia().trim())) {
+                                throw new RuntimeException("Campo 'freguesia' do endereço é obrigatório");
+                            }
 
-                        if (endereco.getZona() == null || endereco.getZona().trim().isEmpty()
-                                || "string".equalsIgnoreCase(endereco.getZona().trim())) {
-                            throw new RuntimeException("Campo 'zona' do endereço é obrigatório");
-                        }
+                            if (endereco.getZona() == null || endereco.getZona().trim().isEmpty()
+                                    || "string".equalsIgnoreCase(endereco.getZona().trim())) {
+                                throw new RuntimeException("Campo 'zona' do endereço é obrigatório");
+                            }
 
-                        if (endereco.getLocalidade() == null || endereco.getLocalidade().trim().isEmpty()
-                                || "string".equalsIgnoreCase(endereco.getLocalidade().trim())) {
-                            throw new RuntimeException("Campo 'localidade' do endereço é obrigatório");
-                        }
+                            if (endereco.getLocalidade() == null || endereco.getLocalidade().trim().isEmpty()
+                                    || "string".equalsIgnoreCase(endereco.getLocalidade().trim())) {
+                                throw new RuntimeException("Campo 'localidade' do endereço é obrigatório");
+                            }
 
 
 
-                        if (endereco.getIdIlha() == null) {
-                            throw new RuntimeException("Campo 'idIlha' do endereço é obrigatório");
-                        }
+                            if (endereco.getIdIlha() == null) {
+                                throw new RuntimeException("Campo 'idIlha' do endereço é obrigatório");
+                            }
 
-                        if (endereco.getIdConcelho() == null) {
-                            throw new RuntimeException("Campo 'idConcelho' do endereço é obrigatório");
-                        }
+                            if (endereco.getIdConcelho() == null) {
+                                throw new RuntimeException("Campo 'idConcelho' do endereço é obrigatório");
+                            }
 
-                        if (endereco.getIdFreguesia() == null) {
-                            throw new RuntimeException("Campo 'idFreguesia' do endereço é obrigatório");
-                        }
+                            if (endereco.getIdFreguesia() == null) {
+                                throw new RuntimeException("Campo 'idFreguesia' do endereço é obrigatório");
+                            }
 
-                        if (endereco.getIdZona() == null) {
-                            throw new RuntimeException("Campo 'idZona' do endereço é obrigatório");
-                        }
+                            if (endereco.getIdZona() == null) {
+                                throw new RuntimeException("Campo 'idZona' do endereço é obrigatório");
+                            }
 
-                        if (endereco.getIdLocalidade() == null) {
-                            throw new RuntimeException("Campo 'idLocalidade' do endereço é obrigatório");
-                        }
+                            if (endereco.getIdLocalidade() == null) {
+                                throw new RuntimeException("Campo 'idLocalidade' do endereço é obrigatório");
+                            }
                     }
 
                     // validaçao campo identificaçoes
@@ -223,32 +219,32 @@ public class RequestSiijService implements IRequestSiijService {
 
                         for (IdentificacaoDto identificacao : pessoa.getIdentificacoes()) {
 
-                            if (identificacao.getTipo() == null) {
-                                throw new RuntimeException("Campo 'tipo' da identificação é obrigatório");
-                            }
+                                if (identificacao.getTipo() == null) {
+                                    throw new RuntimeException("Campo 'tipo' da identificação é obrigatório");
+                                }
 
-                            if (identificacao.getNumero() == null || identificacao.getNumero().trim().isEmpty()
-                                    || "string".equalsIgnoreCase(identificacao.getNumero().trim())) {
-                                throw new RuntimeException("Campo 'numero' da identificação é obrigatório");
-                            }
+                                if (identificacao.getNumero() == null || identificacao.getNumero().trim().isEmpty()
+                                        || "string".equalsIgnoreCase(identificacao.getNumero().trim())) {
+                                    throw new RuntimeException("Campo 'numero' da identificação é obrigatório");
+                                }
 
-                            if (identificacao.getPaisEmissor() == null || identificacao.getPaisEmissor().trim().isEmpty()
-                                    || "string".equalsIgnoreCase(identificacao.getPaisEmissor().trim())) {
-                                throw new RuntimeException("Campo 'paisEmissor' da identificação é obrigatório");
-                            }
+                                if (identificacao.getPaisEmissor() == null || identificacao.getPaisEmissor().trim().isEmpty()
+                                        || "string".equalsIgnoreCase(identificacao.getPaisEmissor().trim())) {
+                                    throw new RuntimeException("Campo 'paisEmissor' da identificação é obrigatório");
+                                }
 
-                            if (identificacao.getEntidadeEmissora() == null || identificacao.getEntidadeEmissora().trim().isEmpty()
-                                    || "string".equalsIgnoreCase(identificacao.getEntidadeEmissora().trim())) {
-                                throw new RuntimeException("Campo 'entidadeEmissora' da identificação é obrigatório");
-                            }
+                                if (identificacao.getEntidadeEmissora() == null || identificacao.getEntidadeEmissora().trim().isEmpty()
+                                        || "string".equalsIgnoreCase(identificacao.getEntidadeEmissora().trim())) {
+                                    throw new RuntimeException("Campo 'entidadeEmissora' da identificação é obrigatório");
+                                }
 
-                            if (identificacao.getDataEmissao() == null) {
-                                throw new RuntimeException("Campo 'dataEmissao' da identificação é obrigatório");
-                            }
+                                if (identificacao.getDataEmissao() == null) {
+                                    throw new RuntimeException("Campo 'dataEmissao' da identificação é obrigatório");
+                                }
 
-                            if (identificacao.getDataValidade() == null) {
-                                throw new RuntimeException("Campo 'dataValidade' da identificação é obrigatório");
-                            }
+                                if (identificacao.getDataValidade() == null) {
+                                    throw new RuntimeException("Campo 'dataValidade' da identificação é obrigatório");
+                                }
                         }
                     }
 
@@ -257,15 +253,15 @@ public class RequestSiijService implements IRequestSiijService {
 
                         for (ContactoDto contato : pessoa.getContactos()) {
 
-                            if (contato.getTipo() == null || contato.getTipo().trim().isEmpty()
-                                    || "string".equalsIgnoreCase(contato.getTipo().trim())) {
-                                throw new RuntimeException("Campo 'tipo' do contacto é obrigatório");
-                            }
+                                if (contato.getTipo() == null || contato.getTipo().trim().isEmpty()
+                                        || "string".equalsIgnoreCase(contato.getTipo().trim())) {
+                                    throw new RuntimeException("Campo 'tipo' do contacto é obrigatório");
+                                }
 
-                            if (contato.getContacto() == null || contato.getContacto().trim().isEmpty()
-                                    || "string".equalsIgnoreCase(contato.getContacto().trim())) {
-                                throw new RuntimeException("Campo 'contacto' é obrigatório");
-                            }
+                                if (contato.getContacto() == null || contato.getContacto().trim().isEmpty()
+                                        || "string".equalsIgnoreCase(contato.getContacto().trim())) {
+                                    throw new RuntimeException("Campo 'contacto' é obrigatório");
+                                }
                         }
                     }
                 }
@@ -303,35 +299,35 @@ public class RequestSiijService implements IRequestSiijService {
 
            for (FileRequestDto file: dto.getFiles()) {
 
-               if (file.getTipo() == null || file.getTipo().trim().isEmpty()
-                       || "string".equalsIgnoreCase(file.getTipo().trim())) {
-                 throw new RuntimeException("Campo 'tipo file' é obrigatório");
-                   //errosFiles.add("Campo 'tipo file' é obrigatório");
-               }
+                   if (file.getTipo() == null || file.getTipo().trim().isEmpty()
+                           || "string".equalsIgnoreCase(file.getTipo().trim())) {
+                     throw new RuntimeException("Campo 'tipo file' é obrigatório");
+                       //errosFiles.add("Campo 'tipo file' é obrigatório");
+                   }
 
-               if (file.getNumero() == null || file.getNumero().trim().isEmpty()
-                       || "string".equalsIgnoreCase(file.getNumero().trim())) {
-                   throw new RuntimeException("Campo 'numero file' é obrigatório");
-                   //errosFiles.add("Campo 'numero file' é obrigatório");
-               }
+                   if (file.getNumero() == null || file.getNumero().trim().isEmpty()
+                           || "string".equalsIgnoreCase(file.getNumero().trim())) {
+                       throw new RuntimeException("Campo 'numero file' é obrigatório");
+                       //errosFiles.add("Campo 'numero file' é obrigatório");
+                   }
 
-               if (file.getMineType() == null|| file.getMineType().trim().isEmpty()
-                       || "string".equalsIgnoreCase(file.getMineType().trim())) {
-                  throw new RuntimeException("Campo 'mineType file' é obrigatório");
-                  // errosFiles.add("Campo 'mineType file' é obrigatório");
-               }
+                   if (file.getMineType() == null|| file.getMineType().trim().isEmpty()
+                           || "string".equalsIgnoreCase(file.getMineType().trim())) {
+                      throw new RuntimeException("Campo 'mineType file' é obrigatório");
+                      // errosFiles.add("Campo 'mineType file' é obrigatório");
+                   }
 
-               if (file.getDescricao() == null || file.getDescricao().trim().isEmpty()
-                       || "string".equalsIgnoreCase(file.getDescricao().trim())) {
-                   throw new RuntimeException("Campo 'descricao file' é obrigatório");
-                   //errosFiles.add("Campo 'descricao file' é obrigatório");
-               }
+                   if (file.getDescricao() == null || file.getDescricao().trim().isEmpty()
+                           || "string".equalsIgnoreCase(file.getDescricao().trim())) {
+                       throw new RuntimeException("Campo 'descricao file' é obrigatório");
+                       //errosFiles.add("Campo 'descricao file' é obrigatório");
+                   }
 
-               if (file.getBase64() == null || file.getBase64().trim().isEmpty()
-                       || "string".equalsIgnoreCase(file.getBase64().trim())) {
-                  throw new RuntimeException("Campo 'base64 file ' é obrigatório");
-                  // errosFiles.add("Campo 'base64 file' é obrigatório");
-               }
+                   if (file.getBase64() == null || file.getBase64().trim().isEmpty()
+                           || "string".equalsIgnoreCase(file.getBase64().trim())) {
+                      throw new RuntimeException("Campo 'base64 file ' é obrigatório");
+                      // errosFiles.add("Campo 'base64 file' é obrigatório");
+                   }
            }
 
             // Remover duplicados na messagem
@@ -400,17 +396,17 @@ public class RequestSiijService implements IRequestSiijService {
 
         if (proc.getOrigemQueixa() != null && proc.getOrigemQueixa() == OrigemQueixa.PN) {
 
-            if (proc.getNumeroReferencia() == null || proc.getNumeroReferencia().trim().isEmpty()
-                    || "string".equalsIgnoreCase(proc.getNumeroReferencia().trim())) {
-                throw new IllegalStateException(
-                        "O campo 'numeroReferencia' é obrigatório quando origemQueixa é PN.");
-            }
+                if (proc.getNumeroReferencia() == null || proc.getNumeroReferencia().trim().isEmpty()
+                        || "string".equalsIgnoreCase(proc.getNumeroReferencia().trim())) {
+                    throw new IllegalStateException(
+                            "O campo 'numeroReferencia' é obrigatório quando origemQueixa é PN.");
+                }
 
-            if (proc.getOrganica() == null || proc.getOrganica().trim().isEmpty()
-                    || "string".equalsIgnoreCase(proc.getOrganica().trim())) {
-                throw new IllegalStateException(
-                        "O campo 'organica' é obrigatório quando origemQueixa é PN.");
-            }
+                if (proc.getOrganica() == null || proc.getOrganica().trim().isEmpty()
+                        || "string".equalsIgnoreCase(proc.getOrganica().trim())) {
+                    throw new IllegalStateException(
+                            "O campo 'organica' é obrigatório quando origemQueixa é PN.");
+                }
         }
 
 

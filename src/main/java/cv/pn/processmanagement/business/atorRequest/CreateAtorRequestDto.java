@@ -10,8 +10,7 @@ import cv.pn.processmanagement.enums.ActorsCharacteristics;
 import cv.pn.processmanagement.enums.FlagNational;
 import cv.pn.processmanagement.enums.PersonType;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+
 
 
 public class CreateAtorRequestDto {

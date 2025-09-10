@@ -58,6 +58,7 @@ public class AtorRequestService implements IAtorRequestService {
 
                             ProcessRequest process = processRepository.findById(processRequest)
                                     .orElseThrow(() -> new javax.persistence.EntityNotFoundException("Processo com ID " + processRequest + " não encontrado"));
+
                             ator.setProcessRequest(process);
 
 
