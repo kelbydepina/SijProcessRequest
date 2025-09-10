@@ -21,7 +21,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
-    generate-ddl: true
+    generate-ddl: false
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     defer-datasource-initialization: false
 

@@ -61,14 +61,14 @@ public class RequestSiijService implements IRequestSiijService {
                             .builder();
             }
 
+
+
             CreateProcessDto proc = getCreateProcessDto(dto);
 
                 if (proc.getProcurador() == null || proc.getProcurador().trim().isEmpty()
                             || "string".equalsIgnoreCase(proc.getProcurador().trim())) {
                         throw new IllegalStateException("Procurador é obrigatório.");
                 }
-
-
 
 
 
@@ -340,8 +340,6 @@ public class RequestSiijService implements IRequestSiijService {
                         .setDetails(Collections.singletonList(errosUnicos))
                         .builder();
             }*/
-
-
 
 
                  iAtorRequestService.saveAtorRequest(dto.getAtores(), processRequest.getId());

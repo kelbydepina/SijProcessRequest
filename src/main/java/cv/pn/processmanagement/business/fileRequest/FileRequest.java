@@ -30,6 +30,9 @@ public class FileRequest extends CommonsAttributes {
     @Column(name = "description")
     private String descricao;
 
+    @Column(name = "base64")
+    private String base64;
+
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "process_fk", nullable = false)
@@ -89,6 +92,14 @@ public class FileRequest extends CommonsAttributes {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public String getBase64() {
+        return base64;
+    }
+
+    public void setBase64(String base64) {
+        this.base64 = base64;
     }
 }
 
