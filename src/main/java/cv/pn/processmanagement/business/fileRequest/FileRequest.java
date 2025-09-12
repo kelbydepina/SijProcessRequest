@@ -19,7 +19,7 @@ public class FileRequest extends CommonsAttributes {
     private String numero;
 
     @Column(name = "mineType")
-    private String mineType;
+    private String mimeType;
 
     /*@Column(name = "name")
     private String name;*/
@@ -78,12 +78,12 @@ public class FileRequest extends CommonsAttributes {
         this.numero = numero;
     }
 
-    public String getMineType(String mineType) {
-        return this.mineType;
+    public String getMimeType() {
+        return mimeType;
     }
 
-    public void setMineType(String mineType) {
-        this.mineType = mineType;
+    public void setMimeType(String mimeType) {
+        this.mimeType = mimeType;
     }
 
     public String getDescricao() {

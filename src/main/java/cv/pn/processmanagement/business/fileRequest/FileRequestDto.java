@@ -6,7 +6,7 @@ public class FileRequestDto implements Serializable {
 
     private String tipo;
     private String numero;
-    private String mineType;
+    private String mimeType;
     private String descricao;
     private String base64;
 
@@ -27,12 +27,12 @@ public class FileRequestDto implements Serializable {
         this.numero = numero;
     }
 
-    public String getMineType() {
-        return mineType;
+    public String getMimeType() {
+        return mimeType;
     }
 
-    public void setMineType(String mineType) {
-        this.mineType = mineType;
+    public void setMimeType(String mimeType) {
+        this.mimeType = mimeType;
     }
 
     public String getDescricao() {

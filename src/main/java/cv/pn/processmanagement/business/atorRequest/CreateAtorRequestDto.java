@@ -25,8 +25,8 @@ public class CreateAtorRequestDto {
    // @JsonSerialize(using = LocalTimeSerializer.class)
    // @JsonDeserialize(using = CustomLocalTimeDeserializer.class)
     private String horaDetencao;
-    @javax.validation.Valid
-    @javax.validation.constraints.NotNull(message = "JASON INVALIDO")
+    //@javax.validation.Valid
+   // @javax.validation.constraints.NotNull(message = "JASON INVALIDO")
     private PessoaDto pessoa;
     private EmpresaDto empresa;
 

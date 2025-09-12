@@ -47,7 +47,7 @@ public class FileRequestService implements IFileRequestService {
                         //file.setName(fileDto.getDescricao());
                         file.setDescricao(fileDto.getDescricao());
                         file.setNumero(fileDto.getNumero());
-                        file.setMineType(fileDto.getMineType());
+                        file.setMimeType(fileDto.getMimeType());
                         file.setBase64(fileDto.getBase64());
                         file.setProcessRequest(processIntruction);
                         file.setUserCreate("SYSTEM");

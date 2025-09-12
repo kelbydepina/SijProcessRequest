@@ -14,6 +14,7 @@ public class EmpresaDto {
     private String naturezaJuridica;
     private String capitalSocial;
     private String nrMatricula;
+    private Integer nrNif;
     private String funcao;
     private String nomeRepresentante;
     private EnderecoDto endereco;
@@ -65,6 +66,14 @@ public class EmpresaDto {
 
     public void setNrMatricula(String nrMatricula) {
         this.nrMatricula = nrMatricula;
+    }
+
+    public Integer getNrNif() {
+        return nrNif;
+    }
+
+    public void setNrNif(Integer nrNif) {
+        this.nrNif = nrNif;
     }
 
     public String getFuncao() {

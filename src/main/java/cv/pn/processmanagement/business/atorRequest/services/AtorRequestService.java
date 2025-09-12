@@ -47,6 +47,11 @@ public class AtorRequestService implements IAtorRequestService {
         try {
 
 
+            ProcessRequest process = processRepository.findById(processRequest)
+                    .orElseThrow(() -> new javax.persistence.EntityNotFoundException("Processo com ID " + processRequest + " não encontrado"));
+
+
+
             List<AtorRequest>  actor =  atoresDtos
                     .stream()
                     .map(atores -> {
@@ -56,8 +61,8 @@ public class AtorRequestService implements IAtorRequestService {
 
                             ator.setUserCreate("SYSTEM");
 
-                            ProcessRequest process = processRepository.findById(processRequest)
-                                    .orElseThrow(() -> new javax.persistence.EntityNotFoundException("Processo com ID " + processRequest + " não encontrado"));
+                            /*ProcessRequest process = processRepository.findById(processRequest)
+                                    .orElseThrow(() -> new javax.persistence.EntityNotFoundException("Processo com ID " + processRequest + " não encontrado"));*/
 
                             ator.setProcessRequest(process);
 

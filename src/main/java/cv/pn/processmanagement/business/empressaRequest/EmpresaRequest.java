@@ -32,6 +32,9 @@ public class EmpresaRequest extends CommonsAttributes {
     @Column(name = "registration_number", length = 100)
     private String nrMatricula;
 
+    @Column(name = "nif_number")
+    private Integer nrNif;
+
     @Column(name = "function", length = 100)
     private String funcao;
 
@@ -124,5 +127,13 @@ public class EmpresaRequest extends CommonsAttributes {
 
     public void setEndereco(EnderecoRequest endereco) {
         this.endereco = endereco;
+    }
+
+    public Integer getNrNif() {
+        return nrNif;
+    }
+
+    public void setNrNif(Integer nrNif) {
+        this.nrNif = nrNif;
     }
 }

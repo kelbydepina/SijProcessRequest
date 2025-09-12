@@ -110,6 +110,8 @@ public class RequestSiijService implements IRequestSiijService {
                 }
 
 
+
+
                 if (ehSingular && atorDto.getPessoa() == null)
                     throw new IllegalStateException("Para tipoPessoa é SINGULAR, os dados 'pessoa' é obrigatório.");
 
@@ -117,12 +119,19 @@ public class RequestSiijService implements IRequestSiijService {
                     throw new IllegalStateException("Para tipoPessoa é COLECTIVA, o dados 'empresa' é obrigatório.");
 
 
-                if (atorDto.getPessoa().getNome() == null || atorDto.getPessoa().getNome().trim().isEmpty()
+               /* if (atorDto.getPessoa().getNome() == null || atorDto.getPessoa().getNome().trim().isEmpty()
                         || "string".equalsIgnoreCase(atorDto.getPessoa().getNome().trim())) {
 
                         throw new IllegalStateException("O Campo Nome Pessoa é Obrigatorio.");
 
-                }
+                }*/
+
+               /* if (atorDto.getEmpresa().getRegistoComercial() == null || atorDto.getEmpresa().getRegistoComercial().trim().isEmpty()
+                        || "string" .equalsIgnoreCase(atorDto.getEmpresa().getRegistoComercial().trim())) {
+
+                    throw new RuntimeException("O Campo RegistoComercial é Obrigatorio. ");
+
+                }*/
 
                 // Melhor prática: criar uma variável para evitar múltiplas chamadas
                /* String nome = atorDto.getPessoa().getNome();
@@ -157,6 +166,13 @@ public class RequestSiijService implements IRequestSiijService {
                             }
                             break;
                     }
+                }
+
+                if (ehSingular) {
+                    var pessoa = atorDto.getPessoa();
+                    if (pessoa.getNome() == null || pessoa.getNome().isBlank() || "string".equalsIgnoreCase(pessoa.getNome()))
+                        throw new IllegalStateException("O Campo Nome Pessoa é Obrigatorio.");
+
                 }
 
                 if (ehSingular) {
@@ -267,6 +283,26 @@ public class RequestSiijService implements IRequestSiijService {
                 }
 
 
+                if (colectiva) {
+                    var colet = atorDto.getEmpresa();
+
+                    if (colet.getRegistoComercial() == null || colet.getRegistoComercial().trim().isEmpty()
+                        || "string" .equalsIgnoreCase(colet.getRegistoComercial().trim())) {
+
+                        throw new RuntimeException("O Campo RegistoComercial EMPRESA é Obrigatorio.");
+                    }
+
+                    if (atorDto.getEmpresa().getNrNif() == null) {
+                        throw new RuntimeException("O Campo NIF EMPRESA é Obrigatorio");
+                    }
+
+                }
+
+
+
+
+
+
         }
 
                 APIResponse response = iProcessService.saveProcessStep(dto.getProcess());
@@ -297,6 +333,8 @@ public class RequestSiijService implements IRequestSiijService {
 
            // List<String> errosFiles = new ArrayList<>();
 
+
+
            for (FileRequestDto file: dto.getFiles()) {
 
                    if (file.getTipo() == null || file.getTipo().trim().isEmpty()
@@ -311,8 +349,8 @@ public class RequestSiijService implements IRequestSiijService {
                        //errosFiles.add("Campo 'numero file' é obrigatório");
                    }
 
-                   if (file.getMineType() == null|| file.getMineType().trim().isEmpty()
-                           || "string".equalsIgnoreCase(file.getMineType().trim())) {
+                   if (file.getMimeType() == null|| file.getMimeType().trim().isEmpty()
+                           || "string".equalsIgnoreCase(file.getMimeType().trim())) {
                       throw new RuntimeException("Campo 'mineType file' é obrigatório");
                       // errosFiles.add("Campo 'mineType file' é obrigatório");
                    }
