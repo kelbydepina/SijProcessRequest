@@ -52,6 +52,14 @@ public class RequestSiijService implements IRequestSiijService {
 
         try {
 
+            if (processRepository.existsByNumeroProcesso(dto.getProcess().getNumeroProcesso())) {
+                return new APIResponse.buildAPIResponse()
+                        .setStatus(false)
+                        .setDetails(Collections.singletonList("Numero de processo: " + dto.getProcess().getNumeroProcesso() + " ja existe"))
+                        .setStatusText(MessageState.ERRO)
+                        .builder();
+            }
+
 
                 if (dto == null || dto.getProcess() == null) {
                     return new APIResponse.buildAPIResponse()
@@ -73,13 +81,7 @@ public class RequestSiijService implements IRequestSiijService {
 
 
 
-            if (processRepository.existsByNumeroProcesso(dto.getProcess().getNumeroProcesso())) {
-                    return new APIResponse.buildAPIResponse()
-                            .setStatus(false)
-                            .setDetails(Collections.singletonList("Numero de processo: " + dto.getProcess().getNumeroProcesso() + " ja existe"))
-                            .setStatusText(MessageState.ERRO)
-                            .builder();
-            }
+
 
             for (CreateAtorRequestDto atorDto : dto.getAtores()) {
 
@@ -282,10 +284,6 @@ public class RequestSiijService implements IRequestSiijService {
 
 
                 }
-
-
-
-
 
 
         }
