@@ -42,10 +42,10 @@ public class AtorRequest extends CommonsAttributes {
     private Boolean detido = false;
 
     @Column(name = "date_of_detention")
-    private LocalDate dataDetencao;
+    private String dataDetencao;
 
     @Column(name = "time_of_detention")
-    private LocalTime horaDetencao;
+    private String horaDetencao;
 
 
     @JsonIgnore
@@ -105,19 +105,19 @@ public class AtorRequest extends CommonsAttributes {
         this.detido = detido;
     }
 
-    public LocalDate getDataDetencao() {
+    public String getDataDetencao() {
         return dataDetencao;
     }
 
-    public void setDataDetencao(LocalDate dataDetencao) {
+    public void setDataDetencao(String dataDetencao) {
         this.dataDetencao = dataDetencao;
     }
 
-    public LocalTime getHoraDetencao() {
+    public String getHoraDetencao() {
         return horaDetencao;
     }
 
-    public void setHoraDetencao(LocalTime horaDetencao) {
+    public void setHoraDetencao(String horaDetencao) {
         this.horaDetencao = horaDetencao;
     }
 

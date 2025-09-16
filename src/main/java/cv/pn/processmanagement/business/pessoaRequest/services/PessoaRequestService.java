@@ -56,7 +56,7 @@ public class PessoaRequestService implements IPessoaRequestService {
                         BeanUtils.copyProperties(identificacaoDto, identificacao);
                         identificacao.setPessoaRequest(pessoa);
                         identificacao.setUserCreate("SYSTEM");
-                        pessoa.getIdentificacoes().add(identificacao);
+                       // pessoa.getIdentificacoes().add(identificacao);
                     }
             }
 
@@ -74,7 +74,7 @@ public class PessoaRequestService implements IPessoaRequestService {
             pessoaRepository.save(pessoa);
 
             // Processar identificações se existirem
-            if (dto.getIdentificacoes() != null) {
+            if (dto.getIdentificacoes() != null && !dto.getIdentificacoes().isEmpty()) {
                 identificacaoService.processarIdentificacoes(dto.getIdentificacoes(), pessoa);
             }
 
