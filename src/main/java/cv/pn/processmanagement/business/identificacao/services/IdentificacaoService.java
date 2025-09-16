@@ -37,7 +37,7 @@ public class IdentificacaoService implements IIdentificacaoService {
         //  PRIMEIRO: LIMPAR DUPLICATAS EXISTENTES ANTES DE ADICIONAR NOVAS
         int duplicadosRemovidos = limparDuplicatas(pessoaRequest);
         if (duplicadosRemovidos > 0) {
-            System.out.println("🔄 " + duplicadosRemovidos + " duplicados removidos antes de processar novas identificações");
+
         }
 
         for (IdentificacaoDto dto : identificacoes) {
@@ -50,8 +50,8 @@ public class IdentificacaoService implements IIdentificacaoService {
                 );
 
                 if (jaExiste) {
-                    System.out.println(" Identificação duplicada ignorada: " + dto.getTipo() + " - " + dto.getNumero());
-                    continue; // Pula para a próxima identificação
+
+                    continue;
                 }
 
                 //  CRIAR E SALVAR APENAS SE NÃO EXISTIR
@@ -59,10 +59,10 @@ public class IdentificacaoService implements IIdentificacaoService {
                 IdentificacaoRequest saved = identificacaoRepository.save(identificacao);
                 identificacoesSalvas.add(saved);
 
-                System.out.println(" Identificação salva: " + dto.getTipo() + " - " + dto.getNumero());
+
 
             } catch (Exception e) {
-                System.err.println(" Erro ao processar identificação: " + e.getMessage());
+
             }
         }
 

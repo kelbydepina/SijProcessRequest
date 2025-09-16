@@ -110,28 +110,12 @@ public class RequestSiijService implements IRequestSiijService {
                 }
 
 
-
-
                 if (ehSingular && atorDto.getPessoa() == null)
                     throw new IllegalStateException("Para tipoPessoa é SINGULAR, os dados 'pessoa' é obrigatório.");
 
                 if (colectiva && atorDto.getEmpresa() == null)
                     throw new IllegalStateException("Para tipoPessoa é COLECTIVA, o dados 'empresa' é obrigatório.");
 
-
-               /* if (atorDto.getPessoa().getNome() == null || atorDto.getPessoa().getNome().trim().isEmpty()
-                        || "string".equalsIgnoreCase(atorDto.getPessoa().getNome().trim())) {
-
-                        throw new IllegalStateException("O Campo Nome Pessoa é Obrigatorio.");
-
-                }*/
-
-               /* if (atorDto.getEmpresa().getRegistoComercial() == null || atorDto.getEmpresa().getRegistoComercial().trim().isEmpty()
-                        || "string" .equalsIgnoreCase(atorDto.getEmpresa().getRegistoComercial().trim())) {
-
-                    throw new RuntimeException("O Campo RegistoComercial é Obrigatorio. ");
-
-                }*/
 
                 // Melhor prática: criar uma variável para evitar múltiplas chamadas
                /* String nome = atorDto.getPessoa().getNome();
@@ -296,6 +280,7 @@ public class RequestSiijService implements IRequestSiijService {
                         throw new RuntimeException("O Campo NIF EMPRESA é Obrigatorio");
                     }
 
+
                 }
 
 
@@ -351,7 +336,7 @@ public class RequestSiijService implements IRequestSiijService {
 
                    if (file.getMimeType() == null|| file.getMimeType().trim().isEmpty()
                            || "string".equalsIgnoreCase(file.getMimeType().trim())) {
-                      throw new RuntimeException("Campo 'mineType file' é obrigatório");
+                      throw new RuntimeException("Campo 'mieType file' é obrigatório");
                       // errosFiles.add("Campo 'mineType file' é obrigatório");
                    }
 
