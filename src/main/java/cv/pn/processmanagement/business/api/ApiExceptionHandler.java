@@ -37,7 +37,7 @@ public class ApiExceptionHandler {
                 // Mensagem específica dos enums (Regra 2) OU "JASON INVALIDO" se vier padronizada do enum
                 return badRequest(msg);
             }
-            return badRequest("JASON INVALIDO");
+            return badRequest("JSON COM CAMPO INVALIDO");
         }
 
         // Se for outro tipo de erro de parse (JSON malformado, tipo incompatível etc.)
@@ -47,13 +47,10 @@ public class ApiExceptionHandler {
             return badRequest("Valores inválidos para enum. Preencha com os valores válidos definidos.");
         }
 
-        return badRequest("JASON INVALIDO");
+        return badRequest("JSON COM CAMPO INVALIDO");
     }
 
-    /**
-     * Regra 1 (ausente): se @NotNull/@NotBlank(message="JASON INVALIDO") falhar para
-     * nome/sexo/estadoCivil, devolvemos 400 "JASON INVALIDO".
-     */
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<APIResponse> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {
 
@@ -64,7 +61,7 @@ public class ApiExceptionHandler {
 
         if (faltouCampoObrigatorioChave) {
             // Regra 1: ausente/null/vazio
-            return badRequest("JASON INVALIDO");
+            return badRequest("JSON COM CAMPO INVALIDO");
         }
 
         // Demais validações: mantém seu comportamento original
@@ -88,17 +85,13 @@ public class ApiExceptionHandler {
         return badRequest(msgs.isEmpty() ? List.of("Parâmetros inválidos.") : msgs);
     }
 
-    /**
-     * Fallback para IllegalArgumentException fora do parse.
-     * Se vier das regras dos enums, devolvemos a mensagem; caso contrário, mantém padrão.
-     */
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<APIResponse> handleIllegalArgument(IllegalArgumentException ex) {
         String msg = ex.getMessage();
         if (msg != null && !msg.isBlank()) {
             return badRequest(msg);
         }
-        return badRequest("JASON INVALIDO");
+        return badRequest("JSON COM CAMPO INVALIDO");
     }
 
     // ---- helpers ------------------------------------------------------------

@@ -290,13 +290,7 @@ public class RequestSiijService implements IRequestSiijService {
 
         }
 
-                APIResponse response = iProcessService.saveProcessStep(dto.getProcess());
-                Object detailObj = response.getDetails().get(0);
 
-            if (!(detailObj instanceof ProcessRequest processRequest)) {
-
-                throw new IllegalStateException("Objeto retornado não é do tipo ProcessRequest");
-            }
 
             if (dto.getAtores() == null || dto.getAtores().isEmpty()) {
 
@@ -364,6 +358,13 @@ public class RequestSiijService implements IRequestSiijService {
                         .builder();
             }*/
 
+            APIResponse response = iProcessService.saveProcessStep(dto.getProcess());
+            Object detailObj = response.getDetails().get(0);
+
+            if (!(detailObj instanceof ProcessRequest processRequest)) {
+
+                throw new IllegalStateException("Objeto retornado não é do tipo ProcessRequest");
+            }
 
                  iAtorRequestService.saveAtorRequest(dto.getAtores(), processRequest.getId());
 
